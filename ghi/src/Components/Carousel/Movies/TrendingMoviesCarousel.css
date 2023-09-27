@@ -1,0 +1,22 @@
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.carousel-img {
+  height: 350px;
+  width: 350px;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  border: 0px solid #ffffff;
+  transition: all ease-in-out 0.2s;
+}
+
+.carousel-img:hover {
+  transform-origin: center bottom;
+  padding: 5px;
+  border: 5px solid #ffffff;
+  transition: all ease-in-out 0.2s;
+}
