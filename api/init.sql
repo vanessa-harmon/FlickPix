@@ -1,5 +1,6 @@
 -- DROP TABLE IF EXISTS accounts;
 
+
 -- Accounts table
 CREATE TABLE IF NOT EXISTS accounts (
     id SERIAL PRIMARY KEY,

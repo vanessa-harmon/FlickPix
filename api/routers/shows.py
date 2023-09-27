@@ -82,3 +82,29 @@ def show_providers(series_id: int):
     return (
         json.loads(response.content)
     )
+
+
+@router.get('/genre')
+def show_genres(genre_id: int):
+    url = f'https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&sort_by=popularity.asc&with_genres={genre_id}'
+    headers = {
+        "accept": "applications/json",
+        "Authorization": TMDB_API_KEY
+    }
+    response = requests.get(url, headers=headers)
+    return (
+        json.loads(response.content)
+    )
+
+
+@router.get('/credits')
+def show_credits(series_id: int):
+    url = f'https://api.themoviedb.org/3/tv/{series_id}/credits?language=en-US'
+    headers = {
+        "accept": "applications/json",
+        "Authorization": TMDB_API_KEY
+    }
+    response = requests.get(url, headers=headers)
+    return (
+        json.loads(response.content)
+    )
