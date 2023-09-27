@@ -2,6 +2,7 @@ import Slider from "../Components/Carousel/Carousels";
 import "./MainPage.css"
 import TrendingMoviesCarousel from "../Components/Carousel/Movies/TrendingMoviesCarousel";
 import NewMoviesCarousel from "../Components/Carousel/Movies/NewMoviesCarousel";
+import ActionMoviesCarousel from "../Components/Carousel/Movies/ActionMoviesCarousel";
 
 
 function MainPage() {
@@ -16,7 +17,7 @@ function MainPage() {
                 <h1>Trending</h1>
                 <TrendingMoviesCarousel className="slider" />
                 <h1>Action</h1>
-                <Slider className="slider" />
+                <ActionMoviesCarousel className="slider" />
                 <h1>Comedy</h1>
                 <Slider className="slider" />
             </div>
