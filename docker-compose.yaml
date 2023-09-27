@@ -1,8 +1,18 @@
-# volumes:
+volumes:
+  flickpix:
+    external: true
+  pg-admin:
+    external: true
+
 services:
   fastapi:
     environment:
       CORS_HOST: http://localhost:3000
+      DATABASE_URL: postgresql://user:password@postgres:5432/flickpix
+      WAIT_HOSTS: postgres:5432
+      # WAIT_BEFORE: 5
+      # WAIT_TIMEOUT: 60
+      SIGNING_KEY: ${SIGNING_KEY}
     build:
       context: api
       dockerfile: Dockerfile.dev
@@ -10,6 +20,29 @@ services:
       - 8000:8000
     volumes:
       - ./api:/app
+
+  postgres:
+    image: postgres:14.5-bullseye
+    volumes:
+      # - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: flickpix
+    ports:
+      - 15432:5432
+
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: adminpass
+      PGADMIN_DISABLE_POSTFIX: 1
 
   ghi:
     image: node:lts-bullseye
