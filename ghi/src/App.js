@@ -5,6 +5,7 @@ import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./Pages/MainPage.jsx";
+// import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div>
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <Nav />
         {/* <ErrorNotification error={error} /> */}
@@ -39,6 +41,7 @@ function App() {
           {/* <Construct info={launchInfo} /> */}
         </Routes>
       </BrowserRouter>
+      {/* </AuthProvider> */}
     </div>
   );
 }
