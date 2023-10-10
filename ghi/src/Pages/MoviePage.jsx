@@ -19,7 +19,7 @@ import ThrillerMoviesCarousel from "../Components/Carousel/Movies/ThrillerMovies
 import WarMoviesCarousel from "../Components/Carousel/Movies/WarMoviesCarousel";
 
 
-function MainPage() {
+function MoviePage() {
 
     return (
         <>
@@ -66,4 +66,4 @@ function MainPage() {
     )
 }
 
-export default MainPage;
+export default MoviePage;
