@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
-import './Navbar.css';
-
+import { NavLink } from "react-router-dom";
+import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import "./Navbar.css";
 
 function Nav() {
 
@@ -14,10 +13,18 @@ function Nav() {
                 <div className="tab">
                     <Tabs position="relative" variant="unstyled">
                         <TabList>
-                            <Tab className='tab-item'>TV Shows</Tab>
-                            <Tab className='tab-item'>Movies</Tab>
-                            <Tab className='tab-item'>Watch Later</Tab>
-                            <Tab className='tab-item'>Seen It</Tab>
+                            <NavLink to="/movies" className="tab-item">
+                                <Tab>Movies</Tab>
+                            </NavLink>
+                            <NavLink to="/tv-shows" className="tab-item">
+                                <Tab>TV Shows</Tab>
+                            </NavLink>
+                            <NavLink to="/watch-later" className="tab-item">
+                                <Tab>Watch Later</Tab>
+                            </NavLink>
+                            <NavLink to="/seen-it" className="tab-item">
+                                <Tab>Seen It</Tab>
+                            </NavLink>
                         </TabList>
                         <TabIndicator
                             mt="-1px"

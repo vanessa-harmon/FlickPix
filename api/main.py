@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import movies, shows, movie_detail, show_detail
+from routers import movies, shows, movie_detail, show_detail, accounts
 from authenticator import authenticator
-from routers import accounts
-
 
 app = FastAPI()
 

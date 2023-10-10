@@ -1,7 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { responsive } from "./CarouselData";
-import "./Carousel.css"
 
 
 function Slider() {
