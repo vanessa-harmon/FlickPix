@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./detail.css";
+import { Link } from "react-router-dom";
+import "./MovieDetail.css";
 
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [credits, setCredits] = useState({ cast: [] });
-  const [providers, setProviders] = useState({ results: [] })
+  const [providers, setProviders] = useState({ results: [] });
 
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
-
 
   const fetchData = async () => {
     try {
@@ -27,22 +27,22 @@ function MovieDetail() {
   };
 
   const fetchCreditsData = async () => {
-        const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${id}`;
-        const response = await fetch(creditsUrl);
-        if (response.ok) {
-          const data = await response.json();
-          setCredits(data);
-        }
-  }
+    const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${id}`;
+    const response = await fetch(creditsUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setCredits(data);
+    }
+  };
 
-    const fetchProvidersData = async () => {
-      const providersUrl = `http://localhost:8000/movies/providers?movie_id=${id}`;
-      const response = await fetch(providersUrl);
-      if (response.ok) {
-        const data = await response.json();
-        setProviders(data);
-      }
-    };
+  const fetchProvidersData = async () => {
+    const providersUrl = `http://localhost:8000/movies/providers?movie_id=${id}`;
+    const response = await fetch(providersUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setProviders(data);
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -52,20 +52,20 @@ function MovieDetail() {
 
   return (
     <div
-      className="parent"
       style={{
-        height: "100%",
+        height: "100vh",
         width: "100%",
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
-
-        <div className="div1">
+      <div className="moviegrid">
+        <div className="moviediv1">
           <h1>{movie.original_title}</h1>
         </div>
-        <div className="div2">
+        <div className="moviediv2">
           Now streaming on:{" "}
           {providers.results.US?.rent?.map((provider, index) => (
             <span key={provider.provider_id}>
@@ -74,33 +74,32 @@ function MovieDetail() {
             </span>
           ))}
         </div>
-        <div className="div3">IMBD link </div>
-        <div className="div4">
-          <ul>
-            {filteredActors.map((actor) => (
-              <li key={actor.id}>{actor.name}</li>
-            ))}
-          </ul>
+        <div className="moviediv3">
+          Starring:{" "}
+          {filteredActors.slice(0, 15).map((actor, index) => (
+            <span key={actor.id}>
+              {index > 0 ? ", " : ""}
+              {actor.name}
+            </span>
+          ))}{" "}
+          <Link
+            className="btn btn-primary"
+            to={`https://www.imdb.com/title/${movie.imdb_id}`}
+            target="_blank"
+          >
+            More info
+          </Link>
         </div>
-        <div className="div5">
+        <div className="moviediv4">
+          <p style={{ textAlign: "right" }}>{movie.release_date}</p>
           <h2>Synopsis</h2>
           <p>{movie.overview}</p>
         </div>
-        <div className="div6">Rating {movie.vote_average}</div>
-        <div className="div7">
-          {/* <form>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Comments</label>
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-              ></textarea>
-            </div>
-          </form> */}
+        <div className="moviediv5">Rating: {movie.vote_average}</div>
+        <div className="moviediv6">
         </div>
-        <div className="div8"> </div>
-
+        <div className="moviediv7"></div>
+      </div>
     </div>
   );
 }
