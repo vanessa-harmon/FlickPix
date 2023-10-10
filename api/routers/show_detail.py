@@ -19,9 +19,8 @@ def show_detail(serie_id: int):
     show_data = json.loads(response.content)
 
     show_details = {
-        "title": show_data.get("original_title"),
-        "imdb_link": show_data.get("imdb_id"),
-        "year_produced": show_data.get("release_date"),
+        "title": show_data.get("name"),
+        "year_produced": show_data.get("first_air_date"),
         "synopsis": show_data.get("overview"),
         "poster": show_data.get("poster_path"),
         "ratings": show_data.get("vote_average"),
