@@ -27,7 +27,7 @@ function MovieModal({ movie, isOpen, onClose }) {
     };
 
     const handleAddClick = () => {
-        setAdded(!added); // Toggle the state
+        setAdded(!added);
     };
 
     return (
