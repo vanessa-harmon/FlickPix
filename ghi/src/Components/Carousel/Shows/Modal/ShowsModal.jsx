@@ -34,7 +34,7 @@ function ShowModal({ show, isOpen, onClose }) {
                     <Button className="modal-button-close" colorScheme="whiteAlpha" mr={3} onClick={onClose}>
                         Close
                     </Button>
-                    <NavLink to={`/shows/${show.id}`}>
+                    <NavLink to={`/tv-shows/${show.id}`}>
                         <Button colorScheme="whiteAlpha" >More...</Button>
                     </NavLink>
                 </ModalFooter>
