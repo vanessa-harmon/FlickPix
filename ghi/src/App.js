@@ -4,8 +4,8 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MovieDetail from "./Pages/MovieDetail.js";
-import ShowDetail from "./Pages/ShowDetail.js";
+import MovieDetail from "./Pages/MovieDetail.jsx";
+import ShowDetail from "./Pages/ShowDetail.jsx";
 // import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
@@ -43,8 +43,8 @@ function App() {
           <Route path="/movies" element={<MoviePage />} />
           <Route path="/tv-shows" element={<ShowsPage />} />
           {/* <Construct info={launchInfo} /> */}
-          <Route path="movies/:id" element={<MovieDetail />} />
-          <Route path="shows/:id" element={<ShowDetail />} />
+          <Route path="/movies/:id" element={<MovieDetail />} />
+          <Route path="/tv-shows/:id" element={<ShowDetail />} />
         </Routes>
       </BrowserRouter>
       {/* </AuthProvider> */}
