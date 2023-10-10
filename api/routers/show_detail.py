@@ -24,6 +24,7 @@ def show_detail(serie_id: int):
         "year_produced": show_data.get("release_date"),
         "synopsis": show_data.get("overview"),
         "poster": show_data.get("poster_path"),
+        "ratings": show_data.get("vote_average"),
     }
 
     service_providers = show_providers(serie_id)

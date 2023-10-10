@@ -24,6 +24,7 @@ def movie_detail(movie_id: int):
         "year_produced": movie_data.get("release_date"),
         "synopsis": movie_data.get("overview"),
         "poster": movie_data.get("poster_path"),
+        "ratings": movie_data.get("vote_average"),
     }
 
     service_providers = movie_providers(movie_id)
