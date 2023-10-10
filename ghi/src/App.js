@@ -6,6 +6,7 @@ import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieDetail from "./Pages/MovieDetail.js";
 import ShowDetail from "./Pages/ShowDetail.js";
+// import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <div>
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <Nav />
         {/* <ErrorNotification error={error} /> */}
@@ -45,6 +47,7 @@ function App() {
           <Route path="shows/:id" element={<ShowDetail />} />
         </Routes>
       </BrowserRouter>
+      {/* </AuthProvider> */}
     </div>
   );
 }

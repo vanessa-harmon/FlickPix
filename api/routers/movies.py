@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-import os
 import requests
+import os
 import json
 from keys.keys import TMDB_API_KEY
 

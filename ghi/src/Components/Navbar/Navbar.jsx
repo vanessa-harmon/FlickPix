@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
-import './Navbar.css';
-
+import { NavLink } from "react-router-dom";
+import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import "./Navbar.css";
 
 function Nav() {
 
