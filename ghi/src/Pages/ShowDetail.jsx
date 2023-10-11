@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./detail.css";
+import "./ShowDetail.css";
 
 function ShowDetail() {
   const { id } = useParams();
@@ -39,7 +39,7 @@ function ShowDetail() {
     const response = await fetch(providersUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log("data: ", data)
+      console.log("data: ", data);
       setProviders(data);
     }
   };
@@ -51,20 +51,21 @@ function ShowDetail() {
   }, [id]);
 
   return (
-      <div
-        class="parent"
-        style={{
-          height: "100%",
-          width: "100%",
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${show.poster_path})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div class="div1">
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${show.poster_path})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      <div className="moviegrid">
+        <div className="showdiv1">
           <h1>{show.original_name}</h1>
         </div>
-        <div class="div2">
+        <div className="showdiv2">
           {" "}
           Now streaming on:{" "}
           {providers.results.US?.flatrate?.map((provider, index) => (
@@ -74,34 +75,25 @@ function ShowDetail() {
             </span>
           ))}
         </div>
-        <div class="div3">imbd link</div>
-        <div class="div4">
-          {" "}
-          <ul>
-            {filteredActors.map((actor) => (
-              <li key={actor.id}>{actor.name}</li>
-            ))}
-          </ul>
+        <div className="showdiv3">
+          Starring:{" "}
+          {filteredActors.map((actor, index) => (
+            <span key={actor.id}>
+              {index > 0 ? ", " : ""}
+              {actor.name}
+            </span>
+          ))}
         </div>
-        <div class="div5">
+        <div className="showdiv4">
+          <p style={{ textAlign: "right" }}>{show.first_air_date}</p>
           <h2>Synopsis</h2>
           <p>{show.overview}</p>
         </div>
-        <div class="div6">Rating {show.vote_average}</div>
-        <div class="div7">
-          {/* <form>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Comments</label>
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-              ></textarea>
-            </div>
-          </form> */}
-        </div>
-        <div class="div8"> </div>
+        <div className="showdiv5">Rating: {show.vote_average}</div>
+        <div className="showdiv6"></div>
+        <div className="showdiv7"></div>
       </div>
+    </div>
   );
 }
 
