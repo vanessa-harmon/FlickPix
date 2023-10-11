@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./Pages/MainPage.jsx";
+import MovieDetail from "./Pages/MovieDetail.js";
+import ShowDetail from "./Pages/ShowDetail.js";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MovieDetail from "./Pages/MovieDetail.jsx";
 import ShowDetail from "./Pages/ShowDetail.jsx";
 // import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
@@ -35,8 +39,17 @@ function App() {
 
   return (
     <div>
-      {/* <AuthProvider> */}
       <BrowserRouter>
+        <AuthProvider baseUrl={"http://localhost:8000"}>
+          <Nav />
+          {/* <ErrorNotification error={error} /> */}
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* <Construct info={launchInfo} /> */}
+            <Route path="movies/:id" element={<MovieDetail />} />
+            <Route path="shows/:id" element={<ShowDetail />} />
+          </Routes>
+        </AuthProvider>
         <Nav />
         {/* <ErrorNotification error={error} /> */}
         <Routes>
@@ -47,7 +60,6 @@ function App() {
           <Route path="/tv-shows/:id" element={<ShowDetail />} />
         </Routes>
       </BrowserRouter>
-      {/* </AuthProvider> */}
     </div>
   );
 }
