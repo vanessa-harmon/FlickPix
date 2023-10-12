@@ -2,38 +2,26 @@ import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import SignupModal from "../Authentication/SignupModal";
 import LoginModal from "../Authentication/LoginModal";
-import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, Button, ButtonGroup, useDisclosure, ButtonGroup, Button, useDisclosure } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
-import { useState } from "react";
-import LoginModal from "../Carousel/Movies/Modal/LoginModal";
+
 
 function Nav() {
     const [isOpenLogin, setIsOpenLogin] = useState(false);
     const openLoginModal = () => setIsOpenLogin(true);
     const closeLoginModal = () => setIsOpenLogin(false);
-
     const [isOpenSignup, setIsOpenSignup] = useState(false);
     const openSignupModal = () => setIsOpenSignup(true);
     const closeSignupModal = () => setIsOpenSignup(false);
     const [searchResults, setSearchResults] = useState([]);
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
-
     const navigate = useNavigate();
 
-    const openLoginModal = () => {
-        onOpen();
-    };
-
-    const closeLoginModal = () => {
-        onClose();
-    };
 
     const handleSearch = (query) => {
         if (query) {
             const searchUrl = `http://localhost:8000/search/results?query=${query}`;
-
             fetch(searchUrl)
                 .then((response) => response.json())
                 .then((data) => {
@@ -57,32 +45,40 @@ function Nav() {
                     <div className="tab">
                         <Tabs position="relative" variant="unstyled">
                             <TabList>
-                                <Tab className="tab-item">TV Shows</Tab>
-                                <Tab className="tab-item">Movies</Tab>
-                                <Tab className="tab-item">Watch Later</Tab>
-                                <Tab className="tab-item">Seen It</Tab>
+                                <NavLink to="/movies" className="tab-item">
+                                    <Tab>Movies</Tab>
+                                </NavLink>
+                                <NavLink to="/tv-shows" className="tab-item">
+                                    <Tab>TV Shows</Tab>
+                                </NavLink>
+                                <NavLink to="/watch-later" className="tab-item">
+                                    <Tab>Watch Later</Tab>
+                                </NavLink>
+                                <NavLink to="/seen-it" className="tab-item">
+                                    <Tab>Seen It</Tab>
+                                </NavLink>
                             </TabList>
-                            <TabIndicator mt="-1px" height="2px" bg="blue.500" borderRadius="2px" />
+                            <TabIndicator
+                                mt="-1px"
+                                height="2px"
+                                bg="blue.500"
+                                borderRadius="2px"
+                            />
                         </Tabs>
                     </div>
                     <div className="search">
-                        <input type="search" className="search-box" placeholder="Search..." />
-                        <span className="search-button">
-                            <span className="search-icon"></span>
-                        </span>
+                        <SearchBar onSearch={handleSearch} />
                     </div>
-
+                    <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
+                    <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
                     <ButtonGroup spacing="6">
                         <Button colorScheme="cyan" onClick={openSignupModal}>
-                            <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
                             Register
                         </Button>
                         <Button colorScheme="whitealpha" variant="outline" onClick={openLoginModal}>
-                            <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
                             Login
                         </Button>
                     </ButtonGroup>
-
                     <Menu>
                         <MenuButton className="avatar-center" as={Avatar} name="Andrew" src="/link.png" cursor="pointer"></MenuButton>
                         <MenuList>

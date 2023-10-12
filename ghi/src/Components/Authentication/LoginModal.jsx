@@ -28,8 +28,8 @@ function LoginModal({ isOpenLogin, onCloseLogin }) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     login(usernamelogin, passwordlogin);
-    e.target.reset();
-    navigates("/");
+    onCloseLogin();
+    navigates("/movies");
   };
 
   return (
