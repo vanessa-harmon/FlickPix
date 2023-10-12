@@ -5,6 +5,7 @@ import LoginModal from "../Authentication/LoginModal";
 import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Nav() {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
