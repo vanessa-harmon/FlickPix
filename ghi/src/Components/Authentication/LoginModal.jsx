@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -24,12 +24,13 @@ function LoginModal({ isOpenLogin, onCloseLogin }) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const { login } = useToken();
-  const navigates = useNavigate();
+  const navigate = useNavigate();
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     login(usernamelogin, passwordlogin);
-    e.target.reset();
-    navigates("/");
+    // e.target.reset();
+    onCloseLogin();
+    navigate("/");
   };
 
   return (
