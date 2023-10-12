@@ -39,6 +39,7 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+  color: black;
 }
 
 .menu-item-black-text {
