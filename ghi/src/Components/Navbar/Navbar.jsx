@@ -1,8 +1,41 @@
-import { NavLink } from "react-router-dom";
-import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, ButtonGroup, Button, useDisclosure } from "@chakra-ui/react";
 import "./Navbar.css";
+import SearchBar from "../SearchBar/SearchBar";
+import { useState } from "react";
+import LoginModal from "../Carousel/Movies/Modal/LoginModal";
 
 function Nav() {
+    const [searchResults, setSearchResults] = useState([]);
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const navigate = useNavigate();
+
+    const openLoginModal = () => {
+        onOpen();
+    };
+
+    const closeLoginModal = () => {
+        onClose();
+    };
+
+    const handleSearch = (query) => {
+        if (query) {
+            const searchUrl = `http://localhost:8000/search/results?query=${query}`;
+
+            fetch(searchUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    setSearchResults(data.results);
+                    // navigate('/search-results');
+                })
+                .catch((error) => {
+                    console.error('Search failed:', error);
+                });
+        }
+    };
+
 
     return (
         <header>
@@ -35,11 +68,14 @@ function Nav() {
                     </Tabs>
                 </div>
                 <div className="search">
-                    <input type="search" className="search-box" placeholder="Search..." />
-                    <span className="search-button">
-                        <span className="search-icon"></span>
-                    </span>
+                    <SearchBar onSearch={handleSearch} />
                 </div>
+                <ButtonGroup spacing="6">
+                    <Button colorScheme="whitealpha" variant="outline" onClick={openLoginModal}>
+                        Login
+                    </Button>
+                    <LoginModal isOpen={isOpen} onClose={onClose} />
+                </ButtonGroup>
                 <Menu>
                     <MenuButton className="avatar-center" as={Avatar} name="Andrew" src="/link.png" cursor="pointer" >
                     </MenuButton>

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import movies, shows, accounts
+from routers import movies, shows, accounts, search
 from authenticator import authenticator
 
 app = FastAPI()
@@ -44,4 +44,11 @@ app.include_router(
     shows.router,
     prefix='/shows',
     tags=['shows']
+)
+
+
+app.include_router(
+    search.router,
+    prefix='/search',
+    tags=['search']
 )
