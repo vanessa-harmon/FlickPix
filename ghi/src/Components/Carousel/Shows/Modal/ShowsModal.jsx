@@ -65,7 +65,7 @@ function ShowModal({ show, isOpen, onClose }) {
                             isActive={added}
                             isRound={true}
                         />
-                        <NavLink to={`/shows/${show.id}`}>
+                        <NavLink to={`/tv-shows/${show.id}`}>
                             <Button colorScheme='twitter' variant='outline' borderRadius="24px">More...</Button>
                         </NavLink>
                         <Button className="modal-button-close" borderRadius="24px" colorScheme='red' variant='outline' mr={3} onClick={onClose}>

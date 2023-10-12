@@ -52,13 +52,9 @@ function MovieDetail() {
 
   return (
     <div
+      className="movie-container"
       style={{
-        height: "100vh",
-        width: "100%",
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
       }}
     >
       <div className="moviegrid">
@@ -96,8 +92,7 @@ function MovieDetail() {
           <p>{movie.overview}</p>
         </div>
         <div className="moviediv5">Rating: {movie.vote_average}</div>
-        <div className="moviediv6">
-        </div>
+        <div className="moviediv6"></div>
         <div className="moviediv7"></div>
       </div>
     </div>
