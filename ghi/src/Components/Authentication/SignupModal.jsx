@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -17,8 +16,6 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
 function SignupModal({ isOpenSignup, onCloseSignup }) {
-  //   const { isOpen: isOpenSignup, onOpen: onOpenSignup, onClose: onCloseSignup } = useDisclosure();
-
   const [first_name, setFirstName] = useState();
   const [last_name, setLastName] = useState();
   const [username, setUsername] = useState();
@@ -40,7 +37,8 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
     };
 
     register(userData, "http://localhost:8000/api/accounts/");
-    e.target.reset();
+    // e.target.reset();
+    onCloseSignup();
     navigate("/");
   };
 
