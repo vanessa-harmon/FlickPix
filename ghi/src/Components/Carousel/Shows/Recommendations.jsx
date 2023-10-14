@@ -4,12 +4,13 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../Movies/TrendingMoviesCarousel.css";
+import { Link } from "react-router-dom";
 
 function ShowRecommendationsCarousel() {
-  const [showRecommendations, setShowRecommendations] = useState([]);
   const { id } = useParams();
+  const [showRecommendations, setShowRecommendations] = useState([]);
 
-  const fetchRecommendations = async () => {
+  const fetchRecommendations = async (id) => {
     const url = `http://localhost:8000/shows/recommendations/?series_id=${id}`;
     const response = await fetch(url);
 
@@ -23,8 +24,12 @@ function ShowRecommendationsCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
-    fetchRecommendations();
-  }, []);
+    fetchRecommendations(id);
+  }, [id]);
+
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div>
@@ -36,11 +41,13 @@ function ShowRecommendationsCarousel() {
       >
         {showRecommendations.map((show, id) => (
           <div key={id} className="custom-carousel-item">
-            <img
-              src={imgUrlPrefix + show.poster_path}
-              alt={show.title}
-              className="carousel-img"
-            />
+            <Link to={`/tv-shows/${show.id}`} onClick={handleLinkClick}>
+              <img
+                src={imgUrlPrefix + show.poster_path}
+                alt={show.title}
+                className="carousel-img"
+              />
+            </Link>
           </div>
         ))}
       </Carousel>

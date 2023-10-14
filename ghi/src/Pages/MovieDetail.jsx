@@ -73,9 +73,9 @@ function MovieDetail() {
         </div>
         <div className="moviediv3">
           Starring:{" "}
-          {filteredActors.slice(0, 15).map((actor, index) => (
+          {filteredActors.slice(0, 10).map((actor, index) => (
             <span key={actor.id}>
-              {index > 0 ? ", " : ""}
+              {index > 0 ? " - " : ""}
               {actor.name}
             </span>
           ))}{" "}
@@ -92,7 +92,10 @@ function MovieDetail() {
           <h2>Synopsis</h2>
           <p>{movie.overview}</p>
         </div>
-        <div className="moviediv5">Rating: {movie.vote_average}</div>
+        <div className="moviediv5">
+          <p>RATING</p>
+          <p>{movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}/10</p>
+        </div>
         <div className="moviediv6">
           <h1>Recommendations</h1>
           <MovieRecommendationsCarousel className="slider" />

@@ -2,15 +2,17 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import "./TrendingMoviesCarousel.css";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 function MovieRecommendationsCarousel() {
-  const [movieRecommendations, setMovieRecommendations] = useState([]);
   const { id } = useParams();
+  const [movieRecommendations, setMovieRecommendations] = useState([]);
 
-  const fetchRecommendations = async () => {
-    const url = `http://localhost:8000/movies/recommendations/?movie_id=${id}`;
+  const fetchRecommendations = async (id) => {
+    const url = `http://localhost:8000/movies/recommendations?movie_id=${id}`;
     const response = await fetch(url);
 
     if (response.ok) {
@@ -23,8 +25,12 @@ function MovieRecommendationsCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
-    fetchRecommendations();
-  }, []);
+    fetchRecommendations(id);
+  }, [id]);
+
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div>
@@ -36,11 +42,15 @@ function MovieRecommendationsCarousel() {
       >
         {movieRecommendations.map((movie, id) => (
           <div key={id} className="custom-carousel-item">
-            <img
-              src={imgUrlPrefix + movie.poster_path}
-              alt={movie.title}
-              className="carousel-img"
-            />
+            <Link to={`/movies/${movie.id}`}
+            onClick={handleLinkClick}
+            >
+              <img
+                src={imgUrlPrefix + movie.poster_path}
+                alt={movie.title}
+                className="carousel-img"
+              />
+            </Link>
           </div>
         ))}
       </Carousel>

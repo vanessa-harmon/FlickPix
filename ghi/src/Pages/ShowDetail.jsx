@@ -90,9 +90,13 @@ function ShowDetail() {
           <h2>Synopsis</h2>
           <p>{show.overview}</p>
         </div>
-        <div className="showdiv5">Rating: {show.vote_average}</div>
+        <div className="showdiv5">
+          <p>RATING</p>
+          <p>
+            {show.vote_average ? show.vote_average.toFixed(1) : "Not Rated"}/10
+          </p>
+        </div>
         <div className="showdiv6">
-          {" "}
           <h1>Recommendations</h1>
           <ShowRecommendationsCarousel className="slider" />
         </div>
