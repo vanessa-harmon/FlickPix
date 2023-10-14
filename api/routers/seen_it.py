@@ -1,34 +1,26 @@
-from fastapi import APIRouter, Depends, Response, Request, HTTPException
+from fastapi import APIRouter, Depends, Response, Request, HTTPException, status
 from queries.seen_it import SeenItQueries
-from models.seen_it import SeenItOut, SeenItIn
-from routers.accounts import get_token
+from models.seen_it import SeenItIn
+from authenticator import authenticator
+
 
 router = APIRouter()
 
 
-@router.get("/api/seen-it", response_model=SeenItOut)
-def get_seen_it(token: str = Depends(get_token)):
-    try:
-        account_id = get_token(token)
-        seen_it_queries = SeenItQueries()
-        seen_it_movies = seen_it_queries.get(account_id)
-        return seen_it_movies
-    except Exception:
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-
-
 @router.post("/api/seen-it", response_model=SeenItIn)
 async def create_seen_it(
-    info: SeenItIn,
+    data: SeenItIn,
     request: Request,
     response: Response,
-    seen_it: SeenItQueries = Depends()
+    seen_it_queries: SeenItQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
-        seen_it_movies = seen_it.create(info)
+        account_id = account_data['id']
+        seen_it_id = seen_it_queries.create(data, account_id)
+        return seen_it_id
     except Exception:
         raise HTTPException(
-            status_code=500,
-            detail="Internal Server Error"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot add to Watch List",
         )
-    return SeenItIn(seen_it_movies=seen_it_movies)

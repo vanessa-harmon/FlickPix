@@ -1,34 +1,26 @@
-from fastapi import APIRouter, Depends, Response, Request, HTTPException
+from fastapi import APIRouter, Depends, Response, Request, HTTPException, status
 from queries.watch_later import WatchLaterQueries
-from models.watch_later import WatchLaterOut, DuplicateWatchLaterError
-from routers.accounts import get_token
+from models.watch_later import WatchLaterIn
+from authenticator import authenticator
 
 
 router = APIRouter()
 
 
-@router.get("/api/watch-later", response_model=WatchLaterOut)
-def get_watch_later(token: str = Depends(get_token)):
-    try:
-        account_id = get_token(token)
-        watch_later_queries = WatchLaterQueries()
-        watch_later_movies = watch_later_queries.get(account_id)
-        return watch_later_movies
-    except Exception:
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-
-
-@router.post("/api/watch-later", response_model=WatchLaterOut)
-async def create_watch_later(
-    info: WatchLaterOut,
+@router.post("/api/watch_later", response_model=WatchLaterIn)
+async def create_seen_it(
+    data: WatchLaterIn,
     request: Request,
     response: Response,
-    watch_later_list: WatchLaterQueries = Depends(),
+    seen_it_queries: WatchLaterQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
-        watch_later = watch_later_list.create(info)
-    except DuplicateWatchLaterError:
+        account_id = account_data['id']
+        seen_it_id = seen_it_queries.create(data, account_id)
+        return seen_it_id
+    except Exception:
         raise HTTPException(
-            status_code=400,
-            detail="Item has already been added to list"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot add to Watch List",
         )
