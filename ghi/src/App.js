@@ -9,6 +9,7 @@ import ShowDetail from "./Pages/ShowDetail.jsx";
 // import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
+import SeenIt from "./Pages/SeenIt.jsx";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -45,6 +46,7 @@ function App() {
           {/* <Construct info={launchInfo} /> */}
           <Route path="/movies/:id" element={<MovieDetail />} />
           <Route path="/tv-shows/:id" element={<ShowDetail />} />
+          <Route path="/seen-it" element={<SeenIt />} />
         </Routes>
       </BrowserRouter>
       {/* </AuthProvider> */}
