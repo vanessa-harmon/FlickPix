@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 CREATE TABLE IF NOT EXISTS watch_later(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(50) NOT NULL,
-    synopsis VARCHAR(250),
-    actors VARCHAR(250),
+    title VARCHAR(500) NOT NULL,
+    synopsis VARCHAR(1500),
+    actors VARCHAR(1500),
     backdrop_img VARCHAR(150),
     poster_img VARCHAR(150),
     account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS watch_later(
 
 CREATE TABLE IF NOT EXISTS seen_it(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(50) NOT NULL,
-    synopsis VARCHAR(250),
-    actors VARCHAR(250),
+    title VARCHAR(500) NOT NULL,
+    synopsis VARCHAR(1500),
+    actors VARCHAR(1500),
     backdrop_img VARCHAR(150),
     poster_img VARCHAR(150),
     account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE

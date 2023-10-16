@@ -46,8 +46,7 @@ class WatchLaterQueries():
                     SELECT title, synopsis, actors, backdrop_img,
                     poster_img, account_id
                     FROM watch_later
-                    INNER JOIN accounts
-                    ON (%s) = accounts.id;
+                    WHERE account_id = (%s);
                     """,
                     [account_id]
                 )

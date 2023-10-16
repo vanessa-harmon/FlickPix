@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 
 class SeenItIn(BaseModel):
@@ -8,3 +9,16 @@ class SeenItIn(BaseModel):
     backdrop_img: str
     poster_img: str
     account_id: int
+
+
+class SeenItItem(BaseModel):
+    title: str
+    synopsis: str
+    actors: str
+    backdrop_img: str
+    poster_img: str
+    account_id: int
+
+
+class SeenItOut(BaseModel):
+    items: List[SeenItItem]
