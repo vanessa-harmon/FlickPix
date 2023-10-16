@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SignupModal from "../Authentication/SignupModal";
 import LoginModal from "../Authentication/LoginModal";
+// import Logout from "../Authentication/Logout";
 import {
   Tabs,
   TabList,
@@ -17,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import "./Navbar.css";
-import SearchBar from "../SearchBar/SearchBar";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function Nav() {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
@@ -29,6 +30,14 @@ function Nav() {
   const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
+  const { logout } = useToken();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    navigate("/");
+  };
+
+  // const navigate = useNavigate();
 
   const handleSearch = (query) => {
     if (query) {
@@ -92,6 +101,7 @@ function Nav() {
             isOpenSignup={isOpenSignup}
             onCloseSignup={closeSignupModal}
           />
+          {/* <Logout onClick={handleLogout} /> */}
           <ButtonGroup spacing="6">
             <Button colorScheme="cyan" onClick={openSignupModal}>
               Register
@@ -114,7 +124,9 @@ function Nav() {
             ></MenuButton>
             <MenuList>
               <MenuItem className="menu-item-black-text">Settings</MenuItem>
-              <MenuItem className="menu-item-black-text">Log Out</MenuItem>
+              <MenuItem className="menu-item-black-text" onClick={handleLogout}>
+                Log Out
+              </MenuItem>
             </MenuList>
           </Menu>
         </nav>

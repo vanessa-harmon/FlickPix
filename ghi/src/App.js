@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
@@ -38,6 +38,7 @@ function App() {
 
   return (
     <div>
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <AuthProvider baseUrl={"http://localhost:8000"}>
           <Nav />
@@ -46,12 +47,13 @@ function App() {
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
             {/* <Construct info={launchInfo} /> */}
-            <Route path="movies/:id" element={<MovieDetail />} />
-            <Route path="shows/:id" element={<ShowDetail />} />
+            <Route path="/movies/:id" element={<MovieDetail />} />
+            <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/search-results" element={<SearchResultsPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
+      {/* </AuthProvider> */}
     </div>
   );
 }

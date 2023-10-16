@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./MovieDetail.css";
+import MovieRecommendationsCarousel from "../Components/Carousel/Movies/Recommendations";
 
 function MovieDetail() {
   const { id } = useParams();
@@ -52,13 +53,9 @@ function MovieDetail() {
 
   return (
     <div
+      className="movie-container"
       style={{
-        height: "100vh",
-        width: "100%",
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
       }}
     >
       <div className="moviegrid">
@@ -76,9 +73,9 @@ function MovieDetail() {
         </div>
         <div className="moviediv3">
           Starring:{" "}
-          {filteredActors.slice(0, 15).map((actor, index) => (
+          {filteredActors.slice(0, 10).map((actor, index) => (
             <span key={actor.id}>
-              {index > 0 ? ", " : ""}
+              {index > 0 ? " - " : ""}
               {actor.name}
             </span>
           ))}{" "}
@@ -95,8 +92,13 @@ function MovieDetail() {
           <h2>Synopsis</h2>
           <p>{movie.overview}</p>
         </div>
-        <div className="moviediv5">Rating: {movie.vote_average}</div>
+        <div className="moviediv5">
+          <p>RATING</p>
+          <p>{movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}/10</p>
+        </div>
         <div className="moviediv6">
+          <h1>Recommendations</h1>
+          <MovieRecommendationsCarousel className="slider" />
         </div>
         <div className="moviediv7"></div>
       </div>
