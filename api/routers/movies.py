@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.get('/trending')
 def trending_movie_list():
-    url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
+    url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US&region=United%20States"
     headers = {
         "accept": "applications/json",
         "Authorization": TMDB_API_KEY

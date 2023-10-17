@@ -5,6 +5,7 @@ import LoginModal from "../Authentication/LoginModal";
 import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function Nav() {
     const [isOpenLogin, setIsOpenLogin] = useState(false);
@@ -15,13 +16,26 @@ function Nav() {
     const closeSignupModal = () => setIsOpenSignup(false);
 
     const navigate = useNavigate();
+    const { logout } = useToken();
+    const handleLogout = (e) => {
+        e.preventDefault();
+        logout();
+        navigate("/");
+    };
+
+    // const navigate = useNavigate();
 
     return (
         <>
             <header>
                 <nav className="navbar">
                     <NavLink to="/" className="navbar-brand">
-                        <img src="Flickpix Logo.png" alt="Flickpix Logo" width="70" height="50" />
+                        <img
+                            src="Flickpix Logo.png"
+                            alt="Flickpix Logo"
+                            width="70"
+                            height="50"
+                        />
                     </NavLink>
                     <div className="tab">
                         <Tabs position="relative" variant="unstyled">
@@ -39,27 +53,51 @@ function Nav() {
                                     <Tab>Seen It</Tab>
                                 </NavLink>
                             </TabList>
-                            <TabIndicator mt="-1px" height="2px" bg="blue.500" borderRadius="2px" />
+                            <TabIndicator
+                                mt="-1px"
+                                height="2px"
+                                bg="blue.500"
+                                borderRadius="2px"
+                            />
                         </Tabs>
                     </div>
-                    <div className="search">
+                    {/* <div className="search">
                         <SearchBar />
-                    </div>
-                    <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
-                    <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
+                    </div> */}
+                    <LoginModal
+                        isOpenLogin={isOpenLogin}
+                        onCloseLogin={closeLoginModal}
+                    />
+                    <SignupModal
+                        isOpenSignup={isOpenSignup}
+                        onCloseSignup={closeSignupModal}
+                    />
+                    {/* <Logout onClick={handleLogout} /> */}
                     <ButtonGroup spacing="6">
                         <Button colorScheme="cyan" onClick={openSignupModal}>
                             Register
                         </Button>
-                        <Button colorScheme="whitealpha" variant="outline" onClick={openLoginModal}>
+                        <Button
+                            colorScheme="whitealpha"
+                            variant="outline"
+                            onClick={openLoginModal}
+                        >
                             Login
                         </Button>
                     </ButtonGroup>
                     <Menu>
-                        <MenuButton className="avatar-center" as={Avatar} name="Andrew" src="/link.png" cursor="pointer"></MenuButton>
+                        <MenuButton
+                            className="avatar-center"
+                            as={Avatar}
+                            name="Andrew"
+                            src="/link.png"
+                            cursor="pointer"
+                        ></MenuButton>
                         <MenuList>
                             <MenuItem className="menu-item-black-text">Settings</MenuItem>
-                            <MenuItem className="menu-item-black-text">Log Out</MenuItem>
+                            <MenuItem className="menu-item-black-text" onClick={handleLogout}>
+                                Log Out
+                            </MenuItem>
                         </MenuList>
                     </Menu>
                 </nav>

@@ -13,3 +13,25 @@ CREATE TABLE IF NOT EXISTS accounts (
     date_joined TIMESTAMP WITH TIME ZONE,
     last_login TIMESTAMP WITH TIME ZONE
 );
+
+
+CREATE TABLE IF NOT EXISTS watch_later(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    synopsis VARCHAR(1500),
+    actors VARCHAR(1500),
+    backdrop_img VARCHAR(150),
+    poster_img VARCHAR(150),
+    account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS seen_it(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    synopsis VARCHAR(1500),
+    actors VARCHAR(1500),
+    backdrop_img VARCHAR(150),
+    poster_img VARCHAR(150),
+    account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
+);
