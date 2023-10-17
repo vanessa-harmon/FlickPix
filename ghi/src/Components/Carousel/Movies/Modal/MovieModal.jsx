@@ -16,6 +16,7 @@ import './MovieModal.css'
 import { NavLink } from "react-router-dom";
 import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
+
 function MovieModal({ movie, isOpen, onClose }) {
     const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
@@ -24,7 +25,26 @@ function MovieModal({ movie, isOpen, onClose }) {
 
     const handleSeenItClick = () => {
         setSeenIt(!seenIt);
+
+        fetch("/api/seen_it", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Added to 'Seen It'!");
+                } else {
+                    throw new Error("Request failed");
+                }
+            })
+            .catch(error => {
+                console.error("An error occurred:", error);
+            });
     };
+
 
     const handleAddClick = () => {
         setAdded(!added);

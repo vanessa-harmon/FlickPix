@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import "./Navbar.css";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Nav() {
   const [isOpenLogin, setIsOpenLogin] = useState(false);

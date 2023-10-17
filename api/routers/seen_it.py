@@ -7,7 +7,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.post("/api/seen-it", response_model=SeenItIn)
+@router.post("/api/seen_it", response_model=SeenItIn)
 async def create_seen_it(
     data: SeenItIn,
     request: Request,
