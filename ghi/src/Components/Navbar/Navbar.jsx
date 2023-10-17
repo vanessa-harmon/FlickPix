@@ -16,6 +16,7 @@ function Nav() {
     const closeSignupModal = () => setIsOpenSignup(false);
 
     const navigate = useNavigate();
+
     const { logout } = useToken();
     const handleLogout = (e) => {
         e.preventDefault();
@@ -23,7 +24,6 @@ function Nav() {
         navigate("/");
     };
 
-    // const navigate = useNavigate();
 
     return (
         <>
@@ -61,9 +61,9 @@ function Nav() {
                             />
                         </Tabs>
                     </div>
-                    {/* <div className="search">
+                    <div className="search">
                         <SearchBar />
-                    </div> */}
+                    </div>
                     <LoginModal
                         isOpenLogin={isOpenLogin}
                         onCloseLogin={closeLoginModal}
