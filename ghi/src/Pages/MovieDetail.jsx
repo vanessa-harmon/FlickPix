@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  IconButton,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import "./MovieDetail.css";
 import MovieRecommendationsCarousel from "../Components/Carousel/Movies/Recommendations";
+import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
 function MovieDetail() {
   const { id } = useParams();
@@ -51,6 +64,40 @@ function MovieDetail() {
     fetchProvidersData();
   }, [id]);
 
+  const [seenIt, setSeenIt] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  const handleSeenItClick = () => {
+    setSeenIt(!seenIt);
+  };
+
+   const handleAddClick = async () => {
+     try {
+       const response = await fetch("/api/watch_later", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+            title,
+            synopsis,
+            actors,
+            backdrop_img,
+            poster_img,
+            account_id: accountId
+         }),
+       });
+
+       if (response.ok) {
+         setAdded(true);
+       } else {
+         console.error("Failed to add to Watch Later list");
+       }
+     } catch (error) {
+       console.error("Error occurred while processing the request:", error);
+     }
+   };
+
   return (
     <div
       className="movie-container"
@@ -60,7 +107,27 @@ function MovieDetail() {
     >
       <div className="moviegrid">
         <div className="moviediv1">
-          <h1>{movie.original_title}</h1>
+          <h1>
+            {movie.original_title}
+            <IconButton
+              icon={<MdOutlineLibraryAddCheck />}
+              colorScheme={seenIt ? "green" : "green"}
+              variant="outline"
+              aria-label="Seen It"
+              onClick={handleSeenItClick}
+              isActive={seenIt}
+              isRound={true}
+            />
+            <IconButton
+              icon={<MdOutlineAddToQueue />}
+              colorScheme={added ? "yellow" : "yellow"}
+              variant="outline"
+              aria-label="Add"
+              onClick={handleAddClick}
+              isActive={added}
+              isRound={true}
+            />
+          </h1>
         </div>
         <div className="moviediv2">
           Now streaming on:{" "}
@@ -75,7 +142,7 @@ function MovieDetail() {
           Starring:{" "}
           {filteredActors.slice(0, 10).map((actor, index) => (
             <span key={actor.id}>
-              {index > 0 ? " - " : ""}
+              {index > 0 ? " • " : ""}
               {actor.name}
             </span>
           ))}{" "}
@@ -94,7 +161,10 @@ function MovieDetail() {
         </div>
         <div className="moviediv5">
           <p>RATING</p>
-          <p>{movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}/10</p>
+          <p>
+            {movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}
+            /10
+          </p>
         </div>
         <div className="moviediv6">
           <h1>Recommendations</h1>

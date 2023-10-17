@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ShowDetail.css";
 import ShowRecommendationsCarousel from "../Components/Carousel/Shows/Recommendations";
+import { IconButton } from "@chakra-ui/react";
+import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
 function ShowDetail() {
   const { id } = useParams();
@@ -51,6 +53,17 @@ function ShowDetail() {
     fetchProvidersData();
   }, [id]);
 
+  const [seenIt, setSeenIt] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  const handleSeenItClick = () => {
+    setSeenIt(!seenIt);
+  };
+
+  const handleAddClick = async () => {
+    setAdded(!added);
+  };
+
   return (
     <div
       style={{
@@ -64,7 +77,27 @@ function ShowDetail() {
     >
       <div className="moviegrid">
         <div className="showdiv1">
-          <h1>{show.original_name}</h1>
+          <h1>
+            {show.original_name}
+            <IconButton
+              icon={<MdOutlineLibraryAddCheck />}
+              colorScheme={seenIt ? "green" : "green"}
+              variant="outline"
+              aria-label="Seen It"
+              onClick={handleSeenItClick}
+              isActive={seenIt}
+              isRound={true}
+            />
+            <IconButton
+              icon={<MdOutlineAddToQueue />}
+              colorScheme={added ? "yellow" : "yellow"}
+              variant="outline"
+              aria-label="Add"
+              onClick={handleAddClick}
+              isActive={added}
+              isRound={true}
+            />
+          </h1>
         </div>
         <div className="showdiv2">
           {" "}
@@ -80,7 +113,7 @@ function ShowDetail() {
           Starring:{" "}
           {filteredActors.map((actor, index) => (
             <span key={actor.id}>
-              {index > 0 ? ", " : ""}
+              {index > 0 ? " • " : ""}
               {actor.name}
             </span>
           ))}
