@@ -43,3 +43,17 @@ async def get_watch_later(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Could not get record for this account",
         )
+
+
+@router.delete("/api/watch_later")
+async def delete_watch_later(
+    title: str,
+    watch_later_queries: WatchLaterQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
+):
+    account_id = account_data['id']
+    watch_later_delete = watch_later_queries.delete(title, account_id)
+    if watch_later_delete:
+        return "Item was deleted."
+    else:
+        return "Item could not be deleted."

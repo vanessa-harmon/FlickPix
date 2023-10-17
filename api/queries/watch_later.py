@@ -62,3 +62,19 @@ class WatchLaterQueries():
                     return WatchLaterOut(items=records)
                 except Exception:
                     return WatchLaterOut(items=[])
+
+    def delete(self, title, account_id) -> WatchLaterOut:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM watch_later
+                    WHERE title = (%s)
+                    AND account_id = (%s)
+                    """,
+                    [title, account_id]
+                )
+                if cur.rowcount > 0:
+                    return ("Item was deleted")
+                else:
+                    return None

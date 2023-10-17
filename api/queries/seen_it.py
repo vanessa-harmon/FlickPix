@@ -63,3 +63,19 @@ class SeenItQueries():
                     return SeenItOut(items=records)
                 except Exception:
                     return SeenItOut(items=[])
+
+    def delete(self, title, account_id) -> SeenItOut:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM seen_it
+                    WHERE title = (%s)
+                    AND account_id = (%s)
+                    """,
+                    [title, account_id]
+                )
+                if cur.rowcount > 0:
+                    return ("Item was deleted")
+                else:
+                    return None
