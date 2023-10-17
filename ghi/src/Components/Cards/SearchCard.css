@@ -1,0 +1,26 @@
+.search-card {
+  background-color: #212529 !important;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease-in-out;
+  color: white !important;
+  width: 250px;
+  height: 400px !important;
+}
+
+.search-card .card-title {
+  font-size: 16px;
+}
+
+.search-img {
+  height: 300px;
+}
+
+.search-card:hover {
+  transform: scale(1.05);
+  box-shadow: 3px 3px 0px #2196f3;
+}
+
+.white-text {
+  color: silver;
+  font-size: 12px;
+}
