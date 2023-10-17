@@ -11,10 +11,12 @@ import ShowDetail from "./Pages/ShowDetail.jsx";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
+import SearchBar from "./Components/SearchBar/SearchBar.jsx";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -48,7 +50,10 @@ function App() {
             {/* <Construct info={launchInfo} /> */}
             <Route path="movies/:id" element={<MovieDetail />} />
             <Route path="shows/:id" element={<ShowDetail />} />
-            <Route path="/search-results" element={<SearchResultsPage />} />
+            <Route
+              path="/search-results"
+              element={<SearchResultsPage movies={movies} />}
+            />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
