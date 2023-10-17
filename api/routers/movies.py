@@ -8,20 +8,22 @@ from keys.keys import TMDB_API_KEY
 router = APIRouter()
 
 @router.get('/trending')
-def trending_movie_list():
+async def trending_movie_list():
     url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US&region=United%20States"
     headers = {
         "accept": "applications/json",
         "Authorization": TMDB_API_KEY
     }
     response = requests.get(url, headers=headers)
+    movie_info = json.loads(response.content)
+    print(movie_info)
     return (
-        json.loads(response.content)
+        movie_info
     )
 
 
 @router.get("/popular")
-def popular_movie_list():
+async def popular_movie_list():
     url = "https://api.themoviedb.org/3/movie/popular?language=en-US"
     headers = {
         "accept": "applications/json",
@@ -34,7 +36,7 @@ def popular_movie_list():
 
 
 @router.get('/latest')
-def latest_movie_list():
+async def latest_movie_list():
     url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US"
     headers = {
         "accept": "applications/json",
@@ -47,7 +49,7 @@ def latest_movie_list():
 
 
 @router.get('/details/')
-def movie_details(movie_id: int):
+async def movie_details(movie_id: int):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}?language=en-US'
     headers = {
         "accept": "applications/json",
@@ -60,7 +62,7 @@ def movie_details(movie_id: int):
 
 
 @router.get('/recommendations')
-def movie_recommendations(movie_id: int):
+async def movie_recommendations(movie_id: int):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=en-US'
     headers = {
         "accept": "applications/json",
@@ -73,7 +75,7 @@ def movie_recommendations(movie_id: int):
 
 
 @router.get('/providers')
-def movie_providers(movie_id: int):
+async def movie_providers(movie_id: int):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/watch/providers'
     headers = {
         "accept": "applications/json",
@@ -86,7 +88,7 @@ def movie_providers(movie_id: int):
 
 
 @router.get('/genre')
-def movie_genres(genre_id: int):
+async def movie_genres(genre_id: int):
     url = f'https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&with_genres={genre_id}'
     headers = {
         "accept": "applications/json",
@@ -99,7 +101,7 @@ def movie_genres(genre_id: int):
 
 
 @router.get('/credits')
-def movie_credits(movie_id: int):
+async def movie_credits(movie_id: int):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/credits?language=en-US'
     headers = {
         "accept": "applications/json",
