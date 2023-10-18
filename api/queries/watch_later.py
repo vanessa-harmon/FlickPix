@@ -31,6 +31,7 @@ class WatchLaterQueries():
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
+                    print("record:", record)
                 else:
                     print("No records found in the database")
                 if record:

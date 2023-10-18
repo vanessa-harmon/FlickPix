@@ -10,10 +10,17 @@ function ShowDetail() {
   const [show, setShow] = useState([]);
   const [credits, setCredits] = useState({ cast: [] });
   const [providers, setProviders] = useState({ results: [] });
+  const [seenIt, setSeenIt] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
+
+  let actors = "";
+  for (let actor of filteredActors.slice(0, 15)) {
+    actors = actors + actor["name"] + ", ";
+  }
 
   const fetchData = async () => {
     try {
@@ -42,8 +49,43 @@ function ShowDetail() {
     const response = await fetch(providersUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log("data: ", data);
       setProviders(data);
+    }
+  };
+
+  const handleSeenItClick = () => {
+    setSeenIt(!seenIt);
+  };
+
+  const handleAddClick = async (event) => {
+    setAdded(!added);
+
+    event.preventDefault();
+    const data = {
+      title: show.original_name,
+      synopsis: show.overview,
+      actors: actors,
+      backdrop_img: show.backdrop_path,
+      poster_img: show.poster_path,
+      account_id: 0,
+    };
+    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/watch_later";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item added to watch later list!");
+    } else {
+      console.error("Failed to add item to watch later list.");
     }
   };
 
@@ -53,23 +95,13 @@ function ShowDetail() {
     fetchProvidersData();
   }, [id]);
 
-  const [seenIt, setSeenIt] = useState(false);
-  const [added, setAdded] = useState(false);
-
-  const handleSeenItClick = () => {
-    setSeenIt(!seenIt);
-  };
-
-  const handleAddClick = async () => {
-    setAdded(!added);
-  };
 
   return (
     <div
       style={{
         height: "100vh",
         width: "100%",
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${show.poster_path})`,
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${show.backdrop_path})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",

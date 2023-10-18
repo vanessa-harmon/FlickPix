@@ -22,10 +22,17 @@ function MovieDetail() {
   const [movie, setMovie] = useState([]);
   const [credits, setCredits] = useState({ cast: [] });
   const [providers, setProviders] = useState({ results: [] });
+  const [seenIt, setSeenIt] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
+
+  let actors = "";
+  for (let actor of filteredActors.slice(0, 15)) {
+    actors = actors + actor["name"] + ", ";
+  }
 
   const fetchData = async () => {
     try {
@@ -58,45 +65,48 @@ function MovieDetail() {
     }
   };
 
+  const handleSeenItClick = () => {
+    setSeenIt(!seenIt);
+  };
+
+  const handleAddClick = async (event) => {
+    setAdded(!added);
+
+    event.preventDefault();
+    const data = {
+      title: movie.title,
+      synopsis: movie.overview,
+      actors: actors,
+      backdrop_img: movie.backdrop_path,
+      poster_img: movie.poster_path,
+      account_id: 0,
+    };
+    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/watch_later";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item added to watch later list!");
+    } else {
+      console.error("Failed to add item to watch later list.");
+    }
+  };
+
   useEffect(() => {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
   }, [id]);
 
-  const [seenIt, setSeenIt] = useState(false);
-  const [added, setAdded] = useState(false);
-
-  const handleSeenItClick = () => {
-    setSeenIt(!seenIt);
-  };
-
-   const handleAddClick = async () => {
-     try {
-       const response = await fetch("/api/watch_later", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-            title,
-            synopsis,
-            actors,
-            backdrop_img,
-            poster_img,
-            account_id: accountId
-         }),
-       });
-
-       if (response.ok) {
-         setAdded(true);
-       } else {
-         console.error("Failed to add to Watch Later list");
-       }
-     } catch (error) {
-       console.error("Error occurred while processing the request:", error);
-     }
-   };
 
   return (
     <div
@@ -162,8 +172,7 @@ function MovieDetail() {
         <div className="moviediv5">
           <p>RATING</p>
           <p>
-            {movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}
-            /10
+            {movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}/10
           </p>
         </div>
         <div className="moviediv6">

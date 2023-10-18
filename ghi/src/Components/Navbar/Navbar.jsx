@@ -6,7 +6,7 @@ import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, M
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import SearchBar from "../SearchBar/SearchBar";
+
 
 function Nav() {
     const [isOpenLogin, setIsOpenLogin] = useState(false);
