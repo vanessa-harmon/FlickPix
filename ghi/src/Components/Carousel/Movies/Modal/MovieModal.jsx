@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -18,17 +17,67 @@ import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
 function MovieModal({ movie, isOpen, onClose }) {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
+  const [credits, setCredits] = useState({ cast: [] });
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
+
+  const filteredActors = credits.cast.filter(
+    (actor) => actor.known_for_department === "Acting"
+  );
+
+  let actors = "";
+  for (let actor of filteredActors.slice(0, 15)) {
+    actors = actors + actor["name"] + ", ";
+  }
+
+  const fetchCreditsData = async () => {
+    const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${movie.id}`;
+    const response = await fetch(creditsUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setCredits(data);
+    }
+  };
 
   const handleSeenItClick = () => {
     setSeenIt(!seenIt);
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = async (event) => {
     setAdded(!added);
+
+    event.preventDefault();
+    const data = {
+      title: movie.title,
+      synopsis: movie.overview,
+      actors: actors,
+      backdrop_img: movie.backdrop_path,
+      poster_img: movie.poster_path,
+      account_id: 0,
+    };
+    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/watch_later";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item added to watch later list!");
+    } else {
+      console.error("Failed to add item to watch later list.");
+    }
   };
+
+  useEffect(() => {
+    fetchCreditsData();
+  }, []);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

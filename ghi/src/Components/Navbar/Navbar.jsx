@@ -21,6 +21,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Randomizer from "../Randomizer/Randomizer";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
+
 function Nav() {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const openLoginModal = () => setIsOpenLogin(true);

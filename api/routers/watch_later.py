@@ -18,6 +18,7 @@ async def create_watch_later(
     try:
         account_id = account_data['id']
         watch_later_id = watch_later_queries.create(data, account_id)
+        print("watchlaterid:", watch_later_id)
         return watch_later_id
     except Exception:
         raise HTTPException(
