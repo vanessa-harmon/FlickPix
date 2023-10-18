@@ -87,7 +87,7 @@ function Nav() {
             </Tabs>
           </div>
           <div className="search">
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar />
           </div>
           <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
           <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
