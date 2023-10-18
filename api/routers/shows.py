@@ -86,7 +86,7 @@ def show_providers(series_id: int):
 
 @router.get('/genre')
 def show_genres(genre_id: int):
-    url = f'https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&sort_by=popularity.asc&with_genres={genre_id}'
+    url = f'https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&sort_by=popularity.desc&with_genres={genre_id}&with_origin_country=US'
     headers = {
         "accept": "applications/json",
         "Authorization": TMDB_API_KEY

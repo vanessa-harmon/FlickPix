@@ -1,5 +1,5 @@
 import Slider from "../Components/Carousel/Carousels";
-import "./MainPage.css"
+import "./MainPage.css";
 import TrendingMoviesCarousel from "../Components/Carousel/Movies/TrendingMoviesCarousel";
 import NewMoviesCarousel from "../Components/Carousel/Movies/NewMoviesCarousel";
 import ActionMoviesCarousel from "../Components/Carousel/Movies/ActionMoviesCarousel";
@@ -18,9 +18,7 @@ import ScienceFictionMoviesCarousel from "../Components/Carousel/Movies/ScienceF
 import ThrillerMoviesCarousel from "../Components/Carousel/Movies/ThrillerMoviesCarousel";
 import WarMoviesCarousel from "../Components/Carousel/Movies/WarMoviesCarousel";
 
-
 function MoviePage() {
-
   return (
     <>
       <div className="main-container">
@@ -61,9 +59,8 @@ function MoviePage() {
         <h1>War</h1>
         <WarMoviesCarousel className="slider" />
       </div>
-
     </>
-  )
+  );
 }
 
 export default MoviePage;

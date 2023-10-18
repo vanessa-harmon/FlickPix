@@ -1,18 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  IconButton,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import "./MovieDetail.css";
 import MovieRecommendationsCarousel from "../Components/Carousel/Movies/Recommendations";
+import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [credits, setCredits] = useState({ cast: [] });
   const [providers, setProviders] = useState({ results: [] });
+  const [seenIt, setSeenIt] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
+
+  let actors = "";
+  for (let actor of filteredActors.slice(0, 15)) {
+    actors = actors + actor["name"] + ", ";
+  }
 
   const fetchData = async () => {
     try {
@@ -45,11 +65,48 @@ function MovieDetail() {
     }
   };
 
+  const handleSeenItClick = () => {
+    setSeenIt(!seenIt);
+  };
+
+  const handleAddClick = async (event) => {
+    setAdded(!added);
+
+    event.preventDefault();
+    const data = {
+      title: movie.title,
+      synopsis: movie.overview,
+      actors: actors,
+      backdrop_img: movie.backdrop_path,
+      poster_img: movie.poster_path,
+      account_id: 0,
+    };
+    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/watch_later";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item added to watch later list!");
+    } else {
+      console.error("Failed to add item to watch later list.");
+    }
+  };
+
   useEffect(() => {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
   }, [id]);
+
 
   return (
     <div
@@ -60,7 +117,27 @@ function MovieDetail() {
     >
       <div className="moviegrid">
         <div className="moviediv1">
-          <h1>{movie.original_title}</h1>
+          <h1>
+            {movie.original_title}
+            <IconButton
+              icon={<MdOutlineLibraryAddCheck />}
+              colorScheme={seenIt ? "green" : "green"}
+              variant="outline"
+              aria-label="Seen It"
+              onClick={handleSeenItClick}
+              isActive={seenIt}
+              isRound={true}
+            />
+            <IconButton
+              icon={<MdOutlineAddToQueue />}
+              colorScheme={added ? "yellow" : "yellow"}
+              variant="outline"
+              aria-label="Add"
+              onClick={handleAddClick}
+              isActive={added}
+              isRound={true}
+            />
+          </h1>
         </div>
         <div className="moviediv2">
           Now streaming on:{" "}
@@ -73,9 +150,9 @@ function MovieDetail() {
         </div>
         <div className="moviediv3">
           Starring:{" "}
-          {filteredActors.slice(0, 15).map((actor, index) => (
+          {filteredActors.slice(0, 10).map((actor, index) => (
             <span key={actor.id}>
-              {index > 0 ? ", " : ""}
+              {index > 0 ? " • " : ""}
               {actor.name}
             </span>
           ))}{" "}
@@ -92,7 +169,12 @@ function MovieDetail() {
           <h2>Synopsis</h2>
           <p>{movie.overview}</p>
         </div>
-        <div className="moviediv5">Rating: {movie.vote_average}</div>
+        <div className="moviediv5">
+          <p>RATING</p>
+          <p>
+            {movie.vote_average ? movie.vote_average.toFixed(1) : "Not Rated"}/10
+          </p>
+        </div>
         <div className="moviediv6">
           <h1>Recommendations</h1>
           <MovieRecommendationsCarousel className="slider" />

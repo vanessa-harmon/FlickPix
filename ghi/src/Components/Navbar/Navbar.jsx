@@ -50,35 +50,14 @@ function Nav() {
   const closeSignupModal = () => setIsOpenSignup(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [avatar, setAvatar] = useState(Pic4);
-  const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
+
   const { logout } = useToken();
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
     navigate("/");
-  };
-
-  // const navigate = useNavigate();
-
-  // const handleAvatarChange = (avatar) => {
-  //   avatar();
-  // };
-
-  const handleSearch = (query) => {
-    if (query) {
-      const searchUrl = `http://localhost:8000/search/results?query=${query}`;
-      fetch(searchUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          setSearchResults(data.results);
-          // navigate('/search-results');
-        })
-        .catch((error) => {
-          console.error("Search failed:", error);
-        });
-    }
   };
 
   return (
