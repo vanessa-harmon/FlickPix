@@ -1,0 +1,15 @@
+.shuffle-container {
+    height: 3rem;
+    width: 3rem;
+    margin-left: 5rem;
+}
+
+.shuffle-button {
+    transition: transform .7s ease-in-out;
+    border-radius: 100vw;
+}
+
+.shuffle-button:hover {
+    transform: rotate(360deg);
+    box-shadow: 0 0 10px 5px #48abe0;
+}
