@@ -11,5 +11,43 @@
 
 .shuffle-button:hover {
     transform: rotate(360deg);
-    box-shadow: 0 0 10px 5px #48abe0;
+    box-shadow: 0 0 20px 5px #48abe0;
+}
+
+
+.modal-shuffle-button {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    left: 46%;
+    bottom: 0.4rem;
+    transition: transform .7s ease-in-out;
+    border-radius: 100vw;
+}
+
+.modal-shuffle-button:hover {
+    transform: rotate(360deg);
+    box-shadow: 0 0 20px 5px #48abe0;
+}
+
+.random-footer {
+    border: 1px solid red;
+    width: 100%;
+}
+
+.random-footer button {
+    border: 1px solid red;
+}
+
+.random-modal {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-image {
+    height: 350px;
+    max-width: auto;
 }
