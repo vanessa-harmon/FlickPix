@@ -34,6 +34,8 @@ function Randomizer() {
     handleClick();
   }, []);
 
+  const trailer_url = "https://www.youtube.com/embed/DhlaBO-SwVE";
+
   useEffect(() => {}, [random]);
   console.log("RANDOM: ", random);
   return (
