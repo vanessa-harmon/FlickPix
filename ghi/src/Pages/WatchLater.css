@@ -1,0 +1,24 @@
+.content-container {
+  background-color: #00132D !important;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.watchlater-card {
+  background-color: #212529 !important;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease-in-out;
+  color: white !important;
+  width: 250px;
+}
+
+.watchlater-card:hover {
+  transform: scale(1.05);
+  box-shadow: 3px 3px 0px #2196f3;
+}
+
+.g-4 .col:nth-child(3n+1) {
+  page-break-before: always;
+}
