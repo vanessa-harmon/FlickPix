@@ -29,6 +29,7 @@ import {
 } from "@chakra-ui/react";
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
+import Randomizer from "../Randomizer/Randomizer";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import Pic1 from "../AvatarPics/1.jpeg";
 import Pic2 from "../AvatarPics/2.jpg";
@@ -65,7 +66,12 @@ function Nav() {
       <header>
         <nav className="navbar">
           <NavLink to="/" className="navbar-brand">
-            <img src="Flickpix Logo.png" alt="Flickpix Logo" width="70" height="50" />
+            <img
+              src="Flickpix Logo.png"
+              alt="Flickpix Logo"
+              width="70"
+              height="50"
+            />
           </NavLink>
           <div className="tab">
             <Tabs position="relative" variant="unstyled">
@@ -83,21 +89,41 @@ function Nav() {
                   <Tab>Seen It</Tab>
                 </NavLink>
               </TabList>
-              <TabIndicator mt="-1px" height="2px" bg="blue.500" borderRadius="2px" />
+              <TabIndicator
+                mt="-1px"
+                height="2px"
+                bg="blue.500"
+                borderRadius="2px"
+              />
             </Tabs>
+          </div>
+          <div>
+            <button>
+              <Randomizer />
+            </button>
           </div>
           <div className="search">
             <SearchBar />
           </div>
-          <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
-          <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
+          <LoginModal
+            isOpenLogin={isOpenLogin}
+            onCloseLogin={closeLoginModal}
+          />
+          <SignupModal
+            isOpenSignup={isOpenSignup}
+            onCloseSignup={closeSignupModal}
+          />
           {/* <Logout onClick={handleLogout} /> */}
 
           <ButtonGroup spacing="6">
             <Button colorScheme="cyan" onClick={openSignupModal}>
               Register
             </Button>
-            <Button colorScheme="whitealpha" variant="outline" onClick={openLoginModal}>
+            <Button
+              colorScheme="whitealpha"
+              variant="outline"
+              onClick={openLoginModal}
+            >
               Login
             </Button>
           </ButtonGroup>
@@ -122,52 +148,112 @@ function Nav() {
                 <Wrap spacing="30px">
                   <WrapItem>
                     <button>
-                      <Image src={Pic1} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic1)} />
+                      <Image
+                        src={Pic1}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic1)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic2} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic2)} />
+                      <Image
+                        src={Pic2}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic2)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic3} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic3)} />
+                      <Image
+                        src={Pic3}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic3)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic4} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic4)} />
+                      <Image
+                        src={Pic4}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic4)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic5} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic5)} />
+                      <Image
+                        src={Pic5}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic5)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic6} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic6)} />
+                      <Image
+                        src={Pic6}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic6)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic7} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic7)} />
+                      <Image
+                        src={Pic7}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic7)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic8} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic8)} />
+                      <Image
+                        src={Pic8}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic8)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic9} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic9)} />
+                      <Image
+                        src={Pic9}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic9)}
+                      />
                     </button>
                   </WrapItem>
                   <WrapItem>
                     <button>
-                      <Image src={Pic10} borderRadius="base" objectFit="fill" boxSize="180px" onClick={() => setAvatar(Pic10)} />
+                      <Image
+                        src={Pic10}
+                        borderRadius="base"
+                        objectFit="fill"
+                        boxSize="180px"
+                        onClick={() => setAvatar(Pic10)}
+                      />
                     </button>
                   </WrapItem>
                 </Wrap>
