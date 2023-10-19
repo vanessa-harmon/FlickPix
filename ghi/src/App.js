@@ -14,6 +14,7 @@ import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
 import SearchBar from "./Components/SearchBar/SearchBar.jsx";
 import SeenIt from "./Pages/SeenIt.jsx";
+import WatchLater from "./Pages/WatchLater.jsx";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -57,6 +58,8 @@ function App() {
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/seen-it" element={<SeenIt />} />
+            {/* <Route path="/search-results" element={<SearchResultsPage />} /> */}
+            <Route path="/watch-later" element={<WatchLater />} />
         </Routes>
         </AuthProvider>
       </BrowserRouter>
