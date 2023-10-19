@@ -18,6 +18,15 @@ import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
 
 function MovieModal({ movie, isOpen, onClose }) {
+    let seenItPost = {
+        movieId: movie.id,
+        title: movie.title,
+        synopsis: movie.synopsis,
+        actors: "",
+        backdrop_img: movie.backdrop_path,
+        poster_img: movie.poster_path,
+    };
+
     const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
     const [seenIt, setSeenIt] = useState(false);
@@ -30,8 +39,9 @@ function MovieModal({ movie, isOpen, onClose }) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+
             },
-            body: JSON.stringify({}),
+            body: JSON.stringify({ seenItPost}),
         })
             .then(response => {
                 if (response.ok) {
