@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import "./WatchLater.css";
 
 
 function WatchLater() {
   const [watchLater, setWatchLater] = useState([]);
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/watch_later", {
@@ -15,8 +21,6 @@ function WatchLater() {
     }
   };
 
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchData().finally(() => {
@@ -25,10 +29,7 @@ function WatchLater() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <h1>Watch Later</h1>
-      </div>
+    <div className="content-container">
       {isLoading ? (
         <div>Loading...</div>
       ) : !watchLater.items || watchLater.items.length === 0 ? (
@@ -36,24 +37,19 @@ function WatchLater() {
           <h1>There is currently nothing saved to your watch later list.</h1>
         </div>
       ) : (
-        <div className="row row-cols-1 row-cols-md-5 g-4">
+        <Row xs={1} md={6} className="g-4">
           {watchLater.items.map((media) => (
-            <div className="col" key={media.id}>
-              <div className="card h-100">
-                <img
-                  src={imgUrlPrefix + media.poster_img}
-                  className="card-img-top"
-                  alt={media.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{media.title}</h5>
-                  {/* <p>Starring: {media.actors}</p> */}
-                  <p className="card-text">{media.synopsis}</p>
-                </div>
-              </div>
-            </div>
+            <Col key={media.title}>
+              <Card className="watchlater-card" style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
+                <Card.Body>
+                  <Card.Title>{media.title}</Card.Title>
+                  <Card.Text>{media.synopsis}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </div>
+        </Row>
       )}
     </div>
   );
