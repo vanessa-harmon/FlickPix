@@ -55,9 +55,30 @@ function MovieDetail() {
     }
   };
 
-  const handleSeenItClick = () => {
-    setSeenIt(!seenIt);
-  };
+  const handleSeenItClick = async () => {
+        setSeenIt(!seenIt);
+
+        const data = {
+            title: movie.title,
+            synopsis: movie.overview,
+            actors: actors,
+            backdrop_img: movie.backdrop_path,
+            poster_img: movie.poster_path,
+            account_id: 0,
+        };
+
+        const url = "http://localhost:8000/api/seen_it";
+        const fetchConfig = {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+        };
+
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {alert("Added to 'Seen It'!");}
+            else {throw new Error("Request failed");}
+    };
 
   const handleAddClick = async (event) => {
     setAdded(!added);

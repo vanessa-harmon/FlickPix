@@ -54,8 +54,29 @@ function ShowDetail() {
     }
   };
 
-  const handleSeenItClick = () => {
+  const handleSeenItClick = async () => {
     setSeenIt(!seenIt);
+
+    const data = {
+      title: show.original_name,
+      synopsis: show.overview,
+      actors: actors,
+      backdrop_img: show.backdrop_path,
+      poster_img: show.poster_path,
+      account_id: 0,
+    };
+
+    const url = "http://localhost:8000/api/seen_it";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"},
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+      if (response.ok) {alert("Added to 'Seen It'!");}
+        else {throw new Error("Request failed");}
   };
 
   const handleAddClick = async (event) => {
