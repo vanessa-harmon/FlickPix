@@ -1,6 +1,6 @@
 .shuffle-container {
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
     margin-left: 5rem;
 }
 
@@ -50,6 +50,7 @@
 .movie-image {
     height: 300px;
     width: 200px;
+    margin-bottom: 10px;
 }
 
 .random-header {

@@ -97,6 +97,11 @@ function Nav() {
               />
             </Tabs>
           </div>
+          <div>
+            <button>
+              <Randomizer />
+            </button>
+          </div>
           <div className="search">
             <SearchBar />
           </div>
