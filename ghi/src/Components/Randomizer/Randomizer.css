@@ -16,38 +16,71 @@
 
 
 .modal-shuffle-button {
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
     position: absolute;
     left: 46%;
-    bottom: 0.4rem;
-    transition: transform .7s ease-in-out;
+    bottom: 1.8rem;
+    transition: transform .3s ease-in-out;
     border-radius: 100vw;
 }
 
 .modal-shuffle-button:hover {
-    transform: rotate(360deg);
-    box-shadow: 0 0 20px 5px #48abe0;
+    box-shadow: 0 0 7px 3px #48abe0;
 }
 
 .random-footer {
-    border: 1px solid red;
     width: 100%;
+    background-color: #002657;
+    border-top: solid 3px #2196f3 !important;
+    height: 100px;
 }
 
-.random-footer button {
-    border: 1px solid red;
-}
 
 .random-modal {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: auto;
+    background-color: #00132d !important;
+    color: white !important;
 }
 
 .movie-image {
-    height: 350px;
-    max-width: auto;
+    height: 300px;
+    width: 200px;
+}
+
+.random-header {
+    background-color: #002657;
+    color: white;
+    border-bottom: solid 3px #2196f3 !important;
+    width: 100%;
+}
+
+.random-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.random-close-btn {
+    border: 1px solid red;
+    width: 4.5rem;
+    height: 2.7rem;
+    border-radius: 100vw;
+    color: red;
+    transition: all 0.4ms ease-in-out;
+}
+
+
+.random-close-btn:hover {
+    background-color: white;
+}
+
+.modal-close:hover {
+    background-color: white;
+    color: red;
 }

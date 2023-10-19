@@ -29,9 +29,7 @@ function Randomizer() {
     handleClick();
   }, []);
 
-  useEffect(() => {
-    console.log("RANDOM INSTANCE: ", random);
-  }, [random]);
+  useEffect(() => {}, [random]);
 
   return (
     <>
@@ -48,9 +46,11 @@ function Randomizer() {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent className="random-modal">
-            <ModalHeader>{random.name || random.title}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            <ModalHeader className="random-header">
+              {random.name || random.title}
+            </ModalHeader>
+            <ModalCloseButton className="modal-close" />
+            <ModalBody className="random-body">
               <img
                 src={imgUrlPrefix + random.poster_path}
                 alt={random.name || random.title}
@@ -61,7 +61,9 @@ function Randomizer() {
             </ModalBody>
 
             <ModalFooter className="random-footer">
-              <button onClick={onClose}>Close</button>
+              <button onClick={onClose} className="random-close-btn">
+                Close
+              </button>
               <button onClick={onOpen} onClickCapture={handleClick}>
                 <img
                   src="shuffle.png"
