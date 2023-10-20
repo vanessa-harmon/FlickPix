@@ -12,7 +12,7 @@ function SearchCard({ title, imageUrl, rating, id, mediaType }) {
         if (mediaType === 'movie') {
             route = `/movies/${id}`;
         } else if (mediaType === 'tv') {
-            route = `/shows/${id}`;
+            route = `/tv-shows/${id}`;
         }
 
         if (route) {

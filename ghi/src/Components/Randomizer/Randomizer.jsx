@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Randomizer.css";
 import {
+  Button,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -10,11 +11,14 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Randomizer() {
+function Randomizer({ id, mediaType }) {
   const [random, setRandom] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+  const navigate = useNavigate();
 
   const handleClick = async (event) => {
     const randomUrl = "http://localhost:8000/movies/random";
@@ -27,6 +31,21 @@ function Randomizer() {
       } else {
         handleClick();
       }
+    }
+  };
+
+  const handleMoreClick = () => {
+    let route;
+
+    if ("original_title" in random) {
+      route = `/movies/${random.id}`;
+    } else if ("original_name" in random) {
+      route = `/tv-shows/${random.id}`;
+    }
+
+    if (route) {
+      navigate(route);
+      onClose();
     }
   };
 
@@ -66,6 +85,9 @@ function Randomizer() {
             </ModalBody>
 
             <ModalFooter className="random-footer">
+              <button onClick={handleMoreClick} className="more-btn">
+                More...
+              </button>
               <button onClick={onClose} className="random-close-btn">
                 Close
               </button>
