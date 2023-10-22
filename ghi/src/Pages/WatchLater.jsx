@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./WatchLater.css";
-
 
 function WatchLater() {
   const [watchLater, setWatchLater] = useState([]);
@@ -20,7 +19,6 @@ function WatchLater() {
       setWatchLater(data);
     }
   };
-
 
   useEffect(() => {
     fetchData().finally(() => {
@@ -55,4 +53,4 @@ function WatchLater() {
   );
 }
 
-export default WatchLater
+export default WatchLater;

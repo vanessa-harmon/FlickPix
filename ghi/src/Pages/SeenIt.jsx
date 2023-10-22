@@ -1,43 +1,56 @@
-import React, {useState, useEffect} from 'react'
-
+import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import "./WatchLater.css";
 
 function SeenIt() {
-
-  const [seenList, setSeenIt] = useState([]);
+  const [seenIt, setSeenIt] = useState([]);
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    const url = `http://localhost:8000/api/seen_it`;
-    const response = await fetch(url, {
+    const response = await fetch("http://localhost:8000/api/seen_it", {
       credentials: "include",
-      });
+    });
+
     if (response.ok) {
       const data = await response.json();
       setSeenIt(data);
     }
   };
 
+  useEffect(() => {
+    fetchData().finally(() => {
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
-    <div className="row row-cols-1 row-cols-md-3 g-4">
-        {seenList.length === 0 ? (
-            <h1>No media saved to Seen It.</h1>
-        ):(
-        seenList.map((media) => (
-        <div className="col">
-            <div className="card h-100">
-                <img
-                    src=''
-                    className="card-img-top"
-                    alt="..."
-                />
-                <div className="card-body">
-                    <h5 className="card-title">Title{}</h5>
-                    <p className="card-text">{}</p>
-                </div>
-            </div>
+    <div className="content-container">
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : !seenIt.items || seenIt.items.length === 0 ? (
+        <div>
+          <h1>There is currently nothing saved to your watch later list.</h1>
         </div>
-        )))}
+      ) : (
+        <Row xs={1} md={6} className="g-4">
+          {seenIt.items.map((media) => (
+            <Col key={media.title}>
+              <Card className="watchlater-card" style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
+                <Card.Body>
+                  <Card.Title>{media.title}</Card.Title>
+                  <Card.Text>{media.synopsis}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
 
-export default SeenIt
+export default SeenIt;
