@@ -22,3 +22,17 @@
 .g-4 .col:nth-child(3n+1) {
   page-break-before: always;
 }
+
+
+.remove-watchlater-btn {
+  border: 1px solid red;
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  width: 100%;
+  height: 2.5rem;
+}
+
+.remove-watchlater-btn:hover {
+  border: 3px solid white;
+}
