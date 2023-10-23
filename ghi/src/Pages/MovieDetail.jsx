@@ -59,31 +59,35 @@ function MovieDetail() {
   };
 
   const handleSeenItClick = async () => {
-        setSeenIt(!seenIt);
+    setSeenIt(!seenIt);
 
-        const data = {
-            title: movie.title,
-            synopsis: movie.overview,
-            actors: actors,
-            backdrop_img: movie.backdrop_path,
-            poster_img: movie.poster_path,
-            account_id: 0,
-        };
-
-        const url = "http://localhost:8000/api/seen_it";
-        const fetchConfig = {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {"Content-Type": "application/json"},
-            credentials: "include",
-        };
-
-        const response = await fetch(url, fetchConfig);
-        if (response.ok) {alert("Added to 'Seen It'!");}
-            else {throw new Error("Request failed");}
+    const data = {
+      title: movie.title,
+      tmdb_id: movie.id,
+      synopsis: movie.overview,
+      actors: actors,
+      backdrop_img: movie.backdrop_path,
+      poster_img: movie.poster_path,
+      account_id: 0,
     };
 
-  const handleAddClick = async () => {
+    const url = "http://localhost:8000/api/seen_it";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
+  };
+
+  const handleAddClick = async (event) => {
     if (added) {
       await deleteFromWatchLater();
     } else {
@@ -95,6 +99,7 @@ function MovieDetail() {
   const addToWatchLater = async (event) => {
     const data = {
       title: movie.title,
+      tmdb_id: movie.id,
       synopsis: movie.overview,
       actors: actors,
       backdrop_img: movie.backdrop_path,
@@ -121,9 +126,7 @@ function MovieDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?title=${encodeURIComponent(
-      movie.title
-    )}`;
+    const url = `http://localhost:8000/api/watch_later?title=${encodeURIComponent(movie.title)}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -146,7 +149,6 @@ function MovieDetail() {
     fetchCreditsData();
     fetchProvidersData();
   }, [id]);
-
 
   return (
     <div

@@ -44,6 +44,7 @@ function ShowModal({ show, isOpen, onClose }) {
 
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
@@ -55,33 +56,31 @@ function ShowModal({ show, isOpen, onClose }) {
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     };
 
     const response = await fetch(url, fetchConfig);
-      if (response.ok) {alert("Added to 'Seen It'!");}
-        else {throw new Error("Request failed");}
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
   };
 
-
-  const handleAddClick = async () => {
-    if (added) {
-      await deleteFromWatchLater();
-    } else {
-      await addToWatchLater();
-    }
+  const handleAddClick = async (event) => {
     setAdded(!added);
   };
 
   const addToWatchLater = async (event) => {
     const data = {
-      title: show.name,
+      title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
       poster_img: show.poster_path,
-      account_id: 0, 
+      account_id: 0,
     };
 
     const url = "http://localhost:8000/api/watch_later";
