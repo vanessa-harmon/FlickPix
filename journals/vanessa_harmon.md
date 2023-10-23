@@ -33,4 +33,4 @@ the details.
 
 A major a-ha moment was trying to get the page to scroll
 to the top when a recommended show/movie was selected.
-I had to add a click handle to the link as well for this redirect. 
+I had to add a click handle to the link as well for this redirect.
