@@ -19,3 +19,7 @@ body {
   transform: scale(1.05);
   box-shadow: 3px 3px 0px #2196f3;
 }
+
+.g-4 .col:nth-child(3n+1) {
+  page-break-before: always;
+}

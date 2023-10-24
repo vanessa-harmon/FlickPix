@@ -20,6 +20,26 @@ function SeenIt() {
     }
   };
 
+  const handleDeleteClick = async (tmdbId) => {
+    console.log("CLICKED DELETE ON: ", tmdbId);
+    const url = `http://localhost:8000/api/seen_it?tmdb_id=${tmdbId}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item was deleted from Watch Later");
+      fetchData();
+    } else {
+      console.error("Failed to delete item");
+    }
+  };
+
   useEffect(() => {
     fetchData().finally(() => {
       setIsLoading(false);
@@ -43,6 +63,12 @@ function SeenIt() {
                 <Card.Body>
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>
+                  <button
+                    className="remove-watchlater-btn"
+                    onClick={() => handleDeleteClick(media.tmdb_id)}
+                  >
+                    Remove
+                  </button>
                 </Card.Body>
               </Card>
             </Col>
