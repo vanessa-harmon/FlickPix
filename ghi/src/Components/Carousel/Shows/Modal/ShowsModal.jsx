@@ -39,9 +39,15 @@ function ShowModal({ show, isOpen, onClose }) {
     }
   };
 
+  //Seen It
   const handleSeenItClick = async () => {
+    if (seenIt) {await deleteFromSeenIt();}
+      else {await addToSeenIt();}
     setSeenIt(!seenIt);
+  };
 
+  const addToSeenIt = async () => {
+    const url = "http://localhost:8000/api/seen_it";
     const data = {
       title: show.original_name,
       synopsis: show.overview,
@@ -50,8 +56,6 @@ function ShowModal({ show, isOpen, onClose }) {
       poster_img: show.poster_path,
       account_id: 0,
     };
-
-    const url = "http://localhost:8000/api/seen_it";
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -60,11 +64,29 @@ function ShowModal({ show, isOpen, onClose }) {
     };
 
     const response = await fetch(url, fetchConfig);
-      if (response.ok) {alert("Added to 'Seen It'!");}
-        else {throw new Error("Request failed");}
+    if (response.ok) {alert("Added to 'Seen It'!");}
+      else {throw new Error("Request failed");}
+  };
+
+  const deleteFromSeenIt = async () => {
+    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(show.original_name)}`;
+    const fetchConfig = {
+      method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Removed from 'Seen It'!");
+      setSeenIt(!seenIt);
+    }   else {throw new Error("Request failed");}
   };
 
 
+  //Watch Later
   const handleAddClick = async (event) => {
     setAdded(!added);
 
