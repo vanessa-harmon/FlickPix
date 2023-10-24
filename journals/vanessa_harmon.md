@@ -34,3 +34,22 @@ the details.
 A major a-ha moment was trying to get the page to scroll
 to the top when a recommended show/movie was selected.
 I had to add a click handle to the link as well for this redirect.
+
+
+## October 20, 2023
+
+This week, I worked on:
+
+* Ade and I worked on the watch-later and seen-it pages.
+
+I coded the watch-later component and Ade coded the seen-it
+component. Added the watch-later/seen-it buttons to the
+show/movie detail page so user could add to their list when
+viewing a specific show/movie. Chris helped as well, it getting
+the add buttons to work. I finsihed up the CSS for the detail
+pages. I added a "more.." button to the randomizer that will guide
+user to the detail page.
+
+A major-aha moment was reviewing the data returned when adding
+to the watch-later list. Working with Chris we realized the
+character limitations preventing a show/movie from being added.

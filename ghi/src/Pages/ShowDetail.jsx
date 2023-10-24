@@ -79,7 +79,7 @@ function ShowDetail() {
         else {throw new Error("Request failed");}
   };
 
-  const handleAddClick = async () => {
+  const handleAddClick = async (event) => {
     if (added) {
       await deleteFromWatchLater();
     } else {
@@ -91,6 +91,7 @@ function ShowDetail() {
   const addToWatchLater = async (event) => {
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
@@ -117,8 +118,8 @@ function ShowDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?title=${encodeURIComponent(
-      show.title
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      show.id
     )}`;
     const fetchConfig = {
       method: "DELETE",

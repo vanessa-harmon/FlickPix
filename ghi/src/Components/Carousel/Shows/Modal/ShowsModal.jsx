@@ -69,6 +69,11 @@ function ShowModal({ show, isOpen, onClose }) {
   };
 
   const handleAddClick = async (event) => {
+    if (added) {
+      await deleteFromWatchLater();
+    } else {
+      await addToWatchLater();
+    }
     setAdded(!added);
   };
 
@@ -102,8 +107,8 @@ function ShowModal({ show, isOpen, onClose }) {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?title=${encodeURIComponent(
-      show.title
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      show.id
     )}`;
     const fetchConfig = {
       method: "DELETE",

@@ -2,12 +2,8 @@ body {
   background-color: #00132D !important;
 }
 
-.content-container {
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  color: white;
+.watchlater-img {
+  height: 300px;
 }
 
 .watchlater-card {
@@ -16,7 +12,6 @@ body {
   transition: 0.2s ease-in-out;
   color: white !important;
   margin: 10px;
-  overflow: scroll;
 }
 
 

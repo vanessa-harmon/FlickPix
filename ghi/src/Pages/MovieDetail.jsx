@@ -126,7 +126,9 @@ function MovieDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?title=${encodeURIComponent(movie.title)}`;
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      movie.id
+    )}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
