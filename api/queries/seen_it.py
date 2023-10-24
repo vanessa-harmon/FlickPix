@@ -8,8 +8,21 @@ class SeenItQueries():
     def create(self, data, account_id) -> SeenItIn:
         with pool.connection() as conn:
             with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id
+                    FROM seen_it
+                    WHERE tmdb_id = (%s)
+                    AND account_id = (%s)
+                    """,
+                    [data.tmdb_id, account_id]
+                )
+                existing_entry = cur.fetchone()
+                if existing_entry:
+                    return "MOVIE ALREADY IN LIST"
                 params = [
                     data.title,
+                    data.tmdb_id,
                     data.synopsis,
                     data.actors,
                     data.backdrop_img,
@@ -18,32 +31,30 @@ class SeenItQueries():
                 ]
                 cur.execute(
                     """
-                    INSERT INTO seen_it (title, synopsis, actors, backdrop_img, poster_img, account_id)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                    RETURNING id, title, synopsis, actors, backdrop_img, poster_img, account_id;
+                    INSERT INTO seen_it (title, tmdb_id,  synopsis, actors, backdrop_img, poster_img, account_id)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id, title, tmdb_id, synopsis, actors, backdrop_img, poster_img, account_id;
                     """,
                     params
                 )
-
                 record = None
                 row = cur.fetchone()
                 if row is not None:
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
-                else:
-                    print("No records found in the database")
+
                 if record:
                     return SeenItIn(**record)
                 else:
-                    print('FAILED TO RETRIEVE DATA FROM DB')
+                    print("FAILED TO RETRIEVE FROM DATABASE")
 
     def get(self, account_id) -> SeenItOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT title, synopsis, actors, backdrop_img,
+                    SELECT title, tmdb_id, synopsis, actors, backdrop_img,
                     poster_img, account_id
                     FROM seen_it
                     WHERE account_id = (%s);
@@ -64,16 +75,16 @@ class SeenItQueries():
                 except Exception:
                     return SeenItOut(items=[])
 
-    def delete(self, title, account_id) -> SeenItOut:
+    def delete(self, tmdb_id, account_id) -> SeenItOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
                     DELETE FROM seen_it
-                    WHERE title = (%s)
+                    WHERE tmdb_id = (%s)
                     AND account_id = (%s)
                     """,
-                    [title, account_id]
+                    [tmdb_id, account_id]
                 )
                 if cur.rowcount > 0:
                     return ("Item was deleted")
