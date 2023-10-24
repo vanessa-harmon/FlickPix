@@ -6,6 +6,7 @@ import TrendingShowsCarousel from "../Components/Carousel/Shows/TrendingShows";
 import NewShowsCarousel from "../Components/Carousel/Shows/NewShows";
 
 
+
 function MainPage() {
   return (
     <>
