@@ -108,3 +108,16 @@ def show_credits(series_id: int):
     return (
         json.loads(response.content)
     )
+
+
+@router.get('/similar')
+async def similar_shows(series_id: int):
+    url = f'https://api.themoviedb.org/3/tv/{series_id}/similar?language=en-US&page=1'
+    headers = {
+        "accept": "applications/json",
+        "Authorization": TMDB_API_KEY
+    }
+    response = requests.get(url, headers=headers)
+    return (
+        json.loads(response.content)
+    )
