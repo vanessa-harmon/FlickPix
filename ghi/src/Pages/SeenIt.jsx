@@ -1,22 +1,44 @@
-import React, {useState, useEffect} from 'react'
-
+import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import "./WatchLater.css";
 
 function SeenIt() {
-  const [seenList, setSeenIt] = useState([]);
+  const [seenIt, setSeenIt] = useState([]);
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    const url = `http://localhost:8000/api/seen_it`;
-    const response = await fetch(url, {
+    const response = await fetch("http://localhost:8000/api/seen_it", {
       credentials: "include",
-      });
+    });
+
     if (response.ok) {
       const data = await response.json();
       setSeenIt(data);
     }
   };
 
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-  const [isLoading, setIsLoading] = useState(true);
+  const handleDeleteClick = async (tmdbId) => {
+    console.log("CLICKED DELETE ON: ", tmdbId);
+    const url = `http://localhost:8000/api/seen_it?tmdb_id=${tmdbId}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      console.log("Item was deleted from Watch Later");
+      fetchData();
+    } else {
+      console.error("Failed to delete item");
+    }
+  };
 
   useEffect(() => {
     fetchData().finally(() => {
@@ -24,39 +46,37 @@ function SeenIt() {
     });
   }, []);
 
-
   return (
-    <div>
-      <div>
-        <h1>Seen It</h1>
-      </div>
+    <div className="content-container">
       {isLoading ? (
         <div>Loading...</div>
-      ) : !seenList.items || seenList.items.length === 0 ? (
+      ) : !seenIt.items || seenIt.items.length === 0 ? (
         <div>
-          <h1>There is currently nothing saved to your seen it list.</h1>
+          <h1>There is currently nothing saved to your watch later list.</h1>
         </div>
       ) : (
-        <div className="row row-cols-1 row-cols-md-5 g-4">
-          {seenList.items.map((media) => (
-            <div className="col" key={media.id}>
-              <div className="card h-100">
-                <img
-                  src={imgUrlPrefix + media.poster_img}
-                  className="card-img-top"
-                  alt={media.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{media.title}</h5>
-                  <p className="card-text">{media.synopsis}</p>
-                </div>
-              </div>
-            </div>
+        <Row xs={1} md={6} className="g-4">
+          {seenIt.items.map((media) => (
+            <Col key={media.title}>
+              <Card className="watchlater-card" style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
+                <Card.Body>
+                  <Card.Title>{media.title}</Card.Title>
+                  <Card.Text>{media.synopsis}</Card.Text>
+                  <button
+                    className="remove-watchlater-btn"
+                    onClick={() => handleDeleteClick(media.tmdb_id)}
+                  >
+                    Remove
+                  </button>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </div>
+        </Row>
       )}
     </div>
   );
 }
 
-export default SeenIt
+export default SeenIt;

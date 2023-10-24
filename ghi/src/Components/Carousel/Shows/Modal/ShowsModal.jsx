@@ -50,6 +50,7 @@ function ShowModal({ show, isOpen, onClose }) {
     const url = "http://localhost:8000/api/seen_it";
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
@@ -59,13 +60,18 @@ function ShowModal({ show, isOpen, onClose }) {
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     };
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {alert("Added to 'Seen It'!");}
       else {throw new Error("Request failed");}
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
   };
 
   const deleteFromSeenIt = async () => {
@@ -93,6 +99,7 @@ function ShowModal({ show, isOpen, onClose }) {
     event.preventDefault();
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,

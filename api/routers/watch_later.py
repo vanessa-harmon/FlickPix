@@ -18,7 +18,6 @@ async def create_watch_later(
     try:
         account_id = account_data['id']
         watch_later_id = watch_later_queries.create(data, account_id)
-        print("watchlaterid:", watch_later_id)
         return watch_later_id
     except Exception:
         raise HTTPException(
@@ -48,12 +47,12 @@ async def get_watch_later(
 
 @router.delete("/api/watch_later")
 async def delete_watch_later(
-    title: str,
+    tmdb_id: int,
     watch_later_queries: WatchLaterQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
 ):
     account_id = account_data['id']
-    watch_later_delete = watch_later_queries.delete(title, account_id)
+    watch_later_delete = watch_later_queries.delete(tmdb_id, account_id)
     if watch_later_delete:
         return "Item was deleted."
     else:
