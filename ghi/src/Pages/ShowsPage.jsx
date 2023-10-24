@@ -14,6 +14,8 @@ import SoapOperaShowCarousel from "../Components/Carousel/Shows/SoapOperaShowCar
 import TalkShowCarousel from "../Components/Carousel/Shows/TalkShowCarousel";
 import WarShowCarousel from "../Components/Carousel/Shows/WarPoliticsShowCarousel";
 import WesternShowCarousel from "../Components/Carousel/Shows/WesternShowCarousel";
+import NewShowsCarousel from "../Components/Carousel/Shows/NewShows";
+import TrendingShowsCarousel from "../Components/Carousel/Shows/TrendingShows";
 import "./MainPage.css"
 
 
@@ -25,10 +27,10 @@ function ShowsPage() {
             <div className="main-container">
                 <h1>Top Pix for You</h1>
                 <Slider className="slider" />
-                {/* <h1>New Releases</h1>
-                <NewMoviesCarousel className="slider" />
-                <h1>Trending</h1>
-                <TrendingMoviesCarousel className="slider" /> */}
+                <h1>New Shows</h1>
+                <NewShowsCarousel className="slider" />
+                <h1>Trending Shows</h1>
+                <TrendingShowsCarousel className="slider" />
                 <h1>Action/Adventure</h1>
                 <ActionAdventureShowCarousel className="slider" />
                 <h1>Animation</h1>
