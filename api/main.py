@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import movies, shows, movie_detail, show_detail, accounts, search
+from routers import movies, shows, movie_detail, show_detail, accounts, search, popular, trailer
 from authenticator import authenticator
 from routers import watch_later, seen_it
 
@@ -12,6 +12,7 @@ app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(watch_later.router, tags=['watch_later'])
 app.include_router(seen_it.router, tags=['seen_it'])
+# app.include_router(profile.router, tags=['profile'])
 
 app.add_middleware(
     CORSMiddleware,
@@ -69,4 +70,22 @@ app.include_router(
     search.router,
     prefix='/search',
     tags=['search']
+)
+
+
+# app.include_router(
+#     profile.router,
+#     tags=['profile']
+# )
+
+app.include_router(
+    popular.router,
+    prefix='/popular',
+    tags=['popular']
+)
+
+app.include_router(
+    trailer.router,
+    prefix='/trailer',
+    tags=['trailer']
 )

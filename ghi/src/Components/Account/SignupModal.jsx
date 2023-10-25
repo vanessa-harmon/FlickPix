@@ -46,7 +46,7 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
     <Modal isOpen={isOpenSignup} onClose={onCloseSignup} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create your account</ModalHeader>
+        <ModalHeader>Create your Account</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl isRequired onSubmit={handleSignupSubmit} mt={4}>
