@@ -76,6 +76,9 @@ function Nav() {
           <div className="tab">
             <Tabs position="relative" variant="unstyled">
               <TabList>
+                <NavLink to="/" className="tab-item">
+                  <Tab>Home</Tab>
+                </NavLink>
                 <NavLink to="/movies" className="tab-item">
                   <Tab>Movies</Tab>
                 </NavLink>
@@ -97,12 +100,10 @@ function Nav() {
               />
             </Tabs>
           </div>
-          <div>
+          <div className="search" padding="10px">
             <button>
               <Randomizer />
             </button>
-          </div>
-          <div className="search">
             <SearchBar />
           </div>
           <LoginModal
@@ -115,7 +116,7 @@ function Nav() {
           />
           {/* <Logout onClick={handleLogout} /> */}
 
-          <ButtonGroup spacing="6">
+          <ButtonGroup spacing="2">
             <Button colorScheme="cyan" onClick={openSignupModal}>
               Register
             </Button>

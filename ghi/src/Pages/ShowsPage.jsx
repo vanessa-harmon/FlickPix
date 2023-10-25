@@ -1,4 +1,3 @@
-import Slider from "../Components/Carousel/Carousels";
 import ActionAdventureShowCarousel from "../Components/Carousel/Shows/ActionAdventureShowCarousel";
 import AnimationShowCarousel from "../Components/Carousel/Shows/AnimationShowCarousel";
 import ComedyShowCarousel from "../Components/Carousel/Shows/ComedyShowCarousel";
@@ -17,6 +16,7 @@ import WesternShowCarousel from "../Components/Carousel/Shows/WesternShowCarouse
 import NewShowsCarousel from "../Components/Carousel/Shows/NewShows";
 import TrendingShowsCarousel from "../Components/Carousel/Shows/TrendingShows";
 import "./MainPage.css"
+import CarouselSlider from "../Components/Carousel/Carousels";
 
 
 
@@ -26,7 +26,7 @@ function ShowsPage() {
         <>
             <div className="main-container">
                 <h1>Top Pix for You</h1>
-                <Slider className="slider" />
+                <CarouselSlider className="slider" />
                 <h1>New Shows</h1>
                 <NewShowsCarousel className="slider" />
                 <h1>Trending Shows</h1>

@@ -1,4 +1,3 @@
-import Slider from "../Components/Carousel/Carousels";
 import "./MainPage.css";
 import TrendingMoviesCarousel from "../Components/Carousel/Movies/TrendingMoviesCarousel";
 import NewMoviesCarousel from "../Components/Carousel/Movies/NewMoviesCarousel";
@@ -17,13 +16,14 @@ import RomanceMoviesCarousel from "../Components/Carousel/Movies/RomanceMoviesCa
 import ScienceFictionMoviesCarousel from "../Components/Carousel/Movies/ScienceFictionMoviesCarousel";
 import ThrillerMoviesCarousel from "../Components/Carousel/Movies/ThrillerMoviesCarousel";
 import WarMoviesCarousel from "../Components/Carousel/Movies/WarMoviesCarousel";
+import CarouselSlider from "../Components/Carousel/Carousels";
 
 function MoviePage() {
   return (
     <>
       <div className="main-container">
         <h1>Top Pix for You</h1>
-        <Slider className="slider" />
+        <CarouselSlider className="slider" />
         <h1>New Releases</h1>
         <NewMoviesCarousel className="slider" />
         <h1>Trending</h1>
