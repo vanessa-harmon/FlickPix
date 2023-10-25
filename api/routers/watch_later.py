@@ -34,7 +34,9 @@ async def get_watch_later(
 ):
     try:
         account_id = account_data['id']
+        print("ACCOUNT ID:    ", account_id)
         watch_later = watch_later_queries.get(account_id)
+        print("WATCH LATER:           ", watch_later)
         return watch_later
     except Exception:
         raise HTTPException(

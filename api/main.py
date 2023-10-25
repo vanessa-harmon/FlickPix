@@ -12,6 +12,7 @@ app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(watch_later.router, tags=['watch_later'])
 app.include_router(seen_it.router, tags=['seen_it'])
+# app.include_router(profile.router, tags=['profile'])
 
 app.add_middleware(
     CORSMiddleware,
@@ -70,6 +71,12 @@ app.include_router(
     prefix='/search',
     tags=['search']
 )
+
+
+# app.include_router(
+#     profile.router,
+#     tags=['profile']
+# )
 
 app.include_router(
     popular.router,

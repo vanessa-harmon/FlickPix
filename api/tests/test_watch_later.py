@@ -9,16 +9,12 @@ client = TestClient(app)
 def fake_get_current_account_data():
     return {
         "id": 123,
-        "username": "string",
-        # "first_name": "string",
-        # "last_name": "string",
-        # "email": "string"
-        "password": "string"
+        "username": "string"
+        # "password": "string"
     }
 
 
 class FakeWatchLaterQueries:
-    # get_watch_later function
     def get(self, account_id):
         fake_watch_later_list = [
             {
@@ -36,20 +32,19 @@ class FakeWatchLaterQueries:
 
 def test_get_all_watch_later():
     # Arrange/Setup
-    # account_id = 123
-    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
     app.dependency_overrides[WatchLaterQueries] = FakeWatchLaterQueries
+    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
 
-    access_token = "valid_access_token"
-    headers = {"Authorization": f"Bearer {access_token}"}
+    # access_token = "valid_access_token"
+    # headers = {"Authorization": f"Bearer {access_token}"}
 
 
     # Act/Enact
-    response = client.get("/api/watch_later", headers=headers)
+    response = client.get("/api/watch_later/")
+    app.dependency_overrides = {}
     print("RESPONSE: ", response)
 
     data = response.json()
-    print("DATA: ", data) 
     # Assert
 
     # expected_response = {
