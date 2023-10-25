@@ -16,6 +16,7 @@ import RomanceMoviesCarousel from "../Components/Carousel/Movies/RomanceMoviesCa
 import ScienceFictionMoviesCarousel from "../Components/Carousel/Movies/ScienceFictionMoviesCarousel";
 import ThrillerMoviesCarousel from "../Components/Carousel/Movies/ThrillerMoviesCarousel";
 import WarMoviesCarousel from "../Components/Carousel/Movies/WarMoviesCarousel";
+import TopPixCarousel from "../Components/Carousel/Movies/TopPixCarousel";
 import CarouselSlider from "../Components/Carousel/Carousels";
 
 function MoviePage() {
@@ -23,7 +24,7 @@ function MoviePage() {
     <>
       <div className="main-container">
         <h1>Top Pix for You</h1>
-        <CarouselSlider className="slider" />
+        <TopPixCarousel className="slider" />
         <h1>New Releases</h1>
         <NewMoviesCarousel className="slider" />
         <h1>Trending</h1>

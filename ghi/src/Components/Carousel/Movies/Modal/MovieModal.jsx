@@ -86,7 +86,7 @@ function MovieModal({ movie, isOpen, onClose }) {
       poster_img: movie.poster_path,
       account_id: 0,
     };
-    console.log("SEEN IT: ", data);
+
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -103,8 +103,8 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(
-      movie.title
+    const url = `http://localhost:8000/api/seen_it?tmdb_id=${encodeURIComponent(
+      movie.id
     )}`;
     const fetchConfig = {
       method: "DELETE",
@@ -124,9 +124,15 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const handleAddClick = async (event) => {
+    if (added) {
+      await deleteFromWatchLater();
+    } else {
+      await addToWatchLater();
+    }
     setAdded(!added);
+  };
 
-    event.preventDefault();
+  const addToWatchLater = async (event) => {
     const data = {
       title: movie.title,
       tmdb_id: movie.id,
@@ -136,7 +142,7 @@ function MovieModal({ movie, isOpen, onClose }) {
       poster_img: movie.poster_path,
       account_id: 0,
     };
-    console.log("data:", data);
+
 
     const url = "http://localhost:8000/api/watch_later";
     const fetchConfig = {
@@ -150,9 +156,30 @@ function MovieModal({ movie, isOpen, onClose }) {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      console.log("Item added to watch later list!");
+      alert("Added to 'Watch Later'!");
     } else {
       console.error("Failed to add item to watch later list.");
+    }
+  };
+
+  const deleteFromWatchLater = async () => {
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      movie.id
+    )}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Removed from 'Watch Later'!");
+      setAdded(!added);
+    } else {
+      console.error("Failed to remove item from watch later list.");
     }
   };
 

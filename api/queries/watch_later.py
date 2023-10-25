@@ -64,12 +64,10 @@ class WatchLaterQueries():
                 try:
                     records = []
                     for row in cur.fetchall():
-                        print("ROW:   ", row)
                         record = {}
                         for i, column in enumerate(cur.description):
                             record[column.name] = row[i]
                         records.append(WatchLaterItem(**record))
-                        print("RECORD:               ", record)
                     return WatchLaterOut(items=records)
                 except Exception:
                     return WatchLaterOut(items=[])
