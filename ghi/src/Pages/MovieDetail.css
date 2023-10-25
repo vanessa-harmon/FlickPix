@@ -1,7 +1,7 @@
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   background-size: cover;
@@ -35,6 +35,7 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
   overflow: auto;
+  padding: 20px;
 }
 
 .imbd-link {

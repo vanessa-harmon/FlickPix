@@ -55,12 +55,12 @@ function WatchLater() {
           <h1>There is currently nothing saved to your watch later list.</h1>
         </div>
       ) : (
-        <Row xs={1} md={6} className="g-4">
+        <Row xs={1} md={5} className="g-4">
           {watchLater.items.map((media) => (
             <Col key={media.title}>
               <Card className="watchlater-card" style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
-                <Card.Body>
+                <Card.Body className="watchlater-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>
                   <button

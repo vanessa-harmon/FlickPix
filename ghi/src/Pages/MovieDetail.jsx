@@ -62,6 +62,7 @@ function MovieDetail() {
         setSeenIt(!seenIt);
     };
 
+  const addToSeenIt = async () => {
     const data = {
       title: movie.title,
       tmdb_id: movie.id,

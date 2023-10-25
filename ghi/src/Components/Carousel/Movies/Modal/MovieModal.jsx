@@ -40,11 +40,11 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
     //Seen It
-    const handleSeenItClick = async () => {
-        if (seenIt) {await deleteFromSeenIt();}
-            else {await addToSeenIt();}
-        setSeenIt(!seenIt);
-    };
+  const handleSeenItClick = async () => {
+    if (seenIt) {await deleteFromSeenIt();}
+      else {await addToSeenIt();}
+    setSeenIt(!seenIt);
+  };
 
   const addToSeenIt = async () => {
     const url = "http://localhost:8000/api/seen_it";
@@ -57,7 +57,6 @@ function MovieModal({ movie, isOpen, onClose }) {
       poster_img: movie.poster_path,
       account_id: 0,
     };
-    console.log("SEEN IT: ", data);
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -74,9 +73,7 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(
-      movie.title
-    )}`;
+    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(movie.id)}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -121,9 +118,9 @@ function MovieModal({ movie, isOpen, onClose }) {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      console.log("Item added to watch later list!");
+      alert("Item added to watch later list!");
     } else {
-      console.error("Failed to add item to watch later list.");
+      alert("Item in watch later list.");
     }
   };
 

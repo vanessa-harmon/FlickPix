@@ -8,7 +8,7 @@
   padding-left: 20px;
 }
 
-.watchlater-card {
+.seenit-card {
   background-color: #212529 !important;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   transition: 0.2s ease-in-out;
@@ -18,12 +18,12 @@
   height: auto;
 }
 
-.watchlater-card-body {
+.seenit-card-body {
   height: 175px;
   overflow: auto;
 }
 
-.watchlater-card:hover {
+.seenit-card:hover {
   transform: scale(1.05);
   box-shadow: 3px 3px 0px #2196f3;
 }
@@ -33,7 +33,7 @@
 }
 
 
-.remove-watchlater-btn {
+.remove-seenit-btn {
   border: 1px solid red;
   color: white;
   background-color: red;
@@ -42,6 +42,6 @@
   height: 2.5rem;
 }
 
-.remove-watchlater-btn:hover {
+.remove-seenit-btn:hover {
   border: 3px solid white;
 }

@@ -65,8 +65,6 @@ function ShowModal({ show, isOpen, onClose }) {
     };
 
     const response = await fetch(url, fetchConfig);
-    if (response.ok) {alert("Added to 'Seen It'!");}
-      else {throw new Error("Request failed");}
     if (response.ok) {
       alert("Added to 'Seen It'!");
     } else {
