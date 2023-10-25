@@ -38,4 +38,5 @@ class Authenticator(Authenticator):
         return account.email, account.dict()
 
 
-authenticator = Authenticator(os.environ["SIGNING_KEY"])
+# authenticator = Authenticator(os.environ["SIGNING_KEY"])
+authenticator = Authenticator(os.environ.get("SIGNING_KEY"))

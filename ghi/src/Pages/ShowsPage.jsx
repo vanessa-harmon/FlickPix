@@ -1,4 +1,3 @@
-import Slider from "../Components/Carousel/Carousels";
 import ActionAdventureShowCarousel from "../Components/Carousel/Shows/ActionAdventureShowCarousel";
 import AnimationShowCarousel from "../Components/Carousel/Shows/AnimationShowCarousel";
 import ComedyShowCarousel from "../Components/Carousel/Shows/ComedyShowCarousel";
@@ -15,7 +14,10 @@ import TalkShowCarousel from "../Components/Carousel/Shows/TalkShowCarousel";
 import TopPixShows from "../Components/Carousel/Shows/TopPixShows";
 import WarShowCarousel from "../Components/Carousel/Shows/WarPoliticsShowCarousel";
 import WesternShowCarousel from "../Components/Carousel/Shows/WesternShowCarousel";
+import NewShowsCarousel from "../Components/Carousel/Shows/NewShows";
+import TrendingShowsCarousel from "../Components/Carousel/Shows/TrendingShows";
 import "./MainPage.css";
+import CarouselSlider from "../Components/Carousel/Carousels";
 
 function ShowsPage() {
   return (
@@ -23,6 +25,10 @@ function ShowsPage() {
       <div className="main-container">
         <h1>Top Pix for You</h1>
         <TopPixShows className="slider" />
+        <h1>New Shows</h1>
+        <NewShowsCarousel className="slider" />
+        <h1>Trending Shows</h1>
+        <TrendingShowsCarousel className="slider" />
         <h1>Action/Adventure</h1>
         <ActionAdventureShowCarousel className="slider" />
         <h1>Animation</h1>

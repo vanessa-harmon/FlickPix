@@ -17,6 +17,7 @@ import ScienceFictionMoviesCarousel from "../Components/Carousel/Movies/ScienceF
 import ThrillerMoviesCarousel from "../Components/Carousel/Movies/ThrillerMoviesCarousel";
 import WarMoviesCarousel from "../Components/Carousel/Movies/WarMoviesCarousel";
 import TopPixCarousel from "../Components/Carousel/Movies/TopPixCarousel";
+import CarouselSlider from "../Components/Carousel/Carousels";
 
 function MoviePage() {
   return (

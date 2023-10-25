@@ -1,5 +1,4 @@
--- DROP TABLE IF EXISTS accounts;
-
+DROP TABLE IF EXISTS accounts;
 
 -- Accounts table
 CREATE TABLE IF NOT EXISTS accounts (

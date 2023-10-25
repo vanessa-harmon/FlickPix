@@ -1,29 +1,23 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.watch_later import WatchLaterQueries
+from queries.seen_it import SeenItQueries
 from authenticator import authenticator
 
 client = TestClient(app)
+
 
 def fake_get_current_account_data():
     return {
         "id": 123,
         "username": "string",
-        "password": "string"
-    }
-
-
-def fake_get_current_account_data():
-    return {
-        "id": 123,
-        "username": "string"
         # "password": "string"
     }
 
 
-class FakeWatchLaterQueries:
+class FakeSeenItQueries:
+    # get_watch_later function
     def get(self, account_id):
-        fake_watch_later_list = [
+        fake_seen_it_list = [
             {
                 "title": "Movie 1",
                 "tmdb_id": 9999,
@@ -34,24 +28,21 @@ class FakeWatchLaterQueries:
                 "account_id": 123
             }
         ]
-        return {"items": fake_watch_later_list}
+        return {"items": fake_seen_it_list}
 
 
-def test_get_all_watch_later():
+def test_get_all_seen_it():
     # Arrange/Setup
-    app.dependency_overrides[WatchLaterQueries] = FakeWatchLaterQueries
+    app.dependency_overrides[SeenItQueries] = FakeSeenItQueries
     app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
 
-    # access_token = "valid_access_token"
-    # headers = {"Authorization": f"Bearer {access_token}"}
-
-
     # Act/Enact
-    response = client.get("/api/watch_later/")
+    response = client.get("/api/seen_it")
     app.dependency_overrides = {}
     print("RESPONSE: ", response)
 
     data = response.json()
+
     # Assert
     assert response.status_code == 200
     assert isinstance(data, dict)
