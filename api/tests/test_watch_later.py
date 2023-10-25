@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 from main import app
-
 from queries.watch_later import WatchLaterQueries
 from authenticator import authenticator
 
@@ -10,23 +9,26 @@ client = TestClient(app)
 class FakeWatchLaterQueries:
     # get_watch_later function
     def get_watch_later(self, account_id):
-        fake_watch_later_list = [
-            {
-                "title": "Movie 1",
-                "tmdb_id": 123,
-                "synopsis": "Synopsis 1",
-                "actors": "Actor 1",
-                "backdrop_img": "backdrop_url_1",
-                "poster_img": "poster_url_1",
-                "account_id": account_id
-            },
-        ]
-        return {"items": fake_watch_later_list}
+        return []
+        # fake_watch_later_list = [
+        #     {
+        #         "title": "Movie 1",
+        #         "tmdb_id": 123,
+        #         "synopsis": "Synopsis 1",
+        #         "actors": "Actor 1",
+        #         "backdrop_img": "backdrop_url_1",
+        #         "poster_img": "poster_url_1",
+        #         "account_id": account_id
+        #     },
+        # ]
+        # return {"items": fake_watch_later_list}
 
 
 class FakeAccountData:
     def get_current_account_data(self):
-        return {"id": 123}
+        return {
+            "id": 123
+            }
 
 
 def test_get_all_watch_later():
@@ -53,4 +55,5 @@ def test_get_all_watch_later():
             },
         ]
     }
+
     assert response.json() == expected_response
