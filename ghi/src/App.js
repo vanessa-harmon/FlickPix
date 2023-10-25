@@ -50,10 +50,7 @@ function App() {
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
             {/* <Construct info={launchInfo} /> */}
-            <Route
-              path="/search-results"
-              element={<SearchResultsPage movies={movies} />}
-            />
+            <Route path="/search-results" element={<SearchResultsPage movies={movies} />} />
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/search-results" element={<SearchResultsPage />} />

@@ -14,6 +14,13 @@ CREATE TABLE IF NOT EXISTS accounts (
     last_login TIMESTAMP WITH TIME ZONE
 );
 
+CREATE TABLE IF NOT EXISTS profiles (
+    id SERIAL PRIMARY KEY,
+    nickname VARCHAR(100),
+    avatar TEXT,
+    account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
+);
+
 
 CREATE TABLE IF NOT EXISTS watch_later(
     id SERIAL PRIMARY KEY,
