@@ -150,7 +150,13 @@ function TopPixShows() {
   );
 
   return (
-    <>{combined.length === 0 ? addItemsComponent() : <TopPixComponent />}</>
+    <>
+      {topPicksCarousel.length === 0 ? (
+        addItemsComponent()
+      ) : (
+        <TopPixComponent />
+      )}
+    </>
   );
 }
 

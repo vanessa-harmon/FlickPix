@@ -109,8 +109,6 @@ function TopPixCarousel() {
     Math.random() * (selectedTopPicks.length - maxMovies + 1)
   );
   const topPicksCarousel = selectedTopPicks.slice(randIdx, randIdx + maxMovies);
-  console.log("INDX", randIdx);
-  console.log("TOP PIX", topPicksCarousel);
 
   const addItemsComponent = () => (
     <div className="add-item-container">
@@ -157,7 +155,13 @@ function TopPixCarousel() {
   );
 
   return (
-    <>{combined.length === 0 ? addItemsComponent() : <TopPixComponent />}</>
+    <>
+      {topPicksCarousel.length === 0 ? (
+        addItemsComponent()
+      ) : (
+        <TopPixComponent />
+      )}
+    </>
   );
 }
 
