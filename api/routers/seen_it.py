@@ -19,7 +19,6 @@ async def create_seen_it(
     try:
         account_id = account_data['id']
         seen_it_id = seen_it_queries.create(data, account_id)
-        print("This is what is going in:", seen_it_id)
         return seen_it_id
     except Exception:
         raise HTTPException(
@@ -36,7 +35,6 @@ async def get_seen_it(
 ):
     try:
         account_id = account_data['id']
-        print("ACCOUNT ID:          ", account_id)
         seen_it = seen_it_queries.get(account_id)
         return seen_it
     except Exception:

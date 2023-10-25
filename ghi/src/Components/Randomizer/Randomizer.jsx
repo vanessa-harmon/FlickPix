@@ -25,7 +25,6 @@ function Randomizer({ id, mediaType }) {
     const response = await fetch(randomUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log("DATA: ", data);
       if (data.poster_path !== null) {
         setRandom(data);
       } else {
@@ -56,7 +55,7 @@ function Randomizer({ id, mediaType }) {
   const trailer_url = "https://www.youtube.com/embed/DhlaBO-SwVE";
 
   useEffect(() => {}, [random]);
-  console.log("RANDOM: ", random);
+
   return (
     <>
       <div className="shuffle-container">
