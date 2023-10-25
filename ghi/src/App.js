@@ -13,7 +13,9 @@ import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
 import SearchBar from "./Components/SearchBar/SearchBar.jsx";
+import SeenIt from "./Pages/SeenIt.jsx";
 import WatchLater from "./Pages/WatchLater.jsx";
+import MainPage from "./Pages/MainPage.jsx";
 
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
@@ -46,16 +48,16 @@ function App() {
         <AuthProvider baseUrl={"http://localhost:8000"}>
           <Nav />
           <Routes>
-            {/* <Route path="/" element={<MainPage />} /> */}
+            <Route path="/" element={<MainPage />} />
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
             {/* <Construct info={launchInfo} /> */}
             <Route path="/search-results" element={<SearchResultsPage movies={movies} />} />
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
-            <Route path="/search-results" element={<SearchResultsPage />} />
+            <Route path="/seen-it" element={<SeenIt />} />
             <Route path="/watch-later" element={<WatchLater />} />
-          </Routes>
+        </Routes>
         </AuthProvider>
       </BrowserRouter>
       {/* </AuthProvider> */}

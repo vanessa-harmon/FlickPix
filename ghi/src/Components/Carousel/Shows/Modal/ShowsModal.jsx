@@ -39,23 +39,54 @@ function ShowModal({ show, isOpen, onClose }) {
     }
   };
 
-  const handleSeenItClick = () => {
+  const handleSeenItClick = async () => {
     setSeenIt(!seenIt);
-  };
 
-  const handleAddClick = async (event) => {
-    setAdded(!added);
-
-    event.preventDefault();
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
       poster_img: show.poster_path,
       account_id: 0,
     };
-    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/seen_it";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
+  };
+
+  const handleAddClick = async (event) => {
+    if (added) {
+      await deleteFromWatchLater();
+    } else {
+      await addToWatchLater();
+    }
+    setAdded(!added);
+  };
+
+  const addToWatchLater = async (event) => {
+    const data = {
+      title: show.original_name,
+      tmdb_id: show.id,
+      synopsis: show.overview,
+      actors: actors,
+      backdrop_img: show.backdrop_path,
+      poster_img: show.poster_path,
+      account_id: 0,
+    };
 
     const url = "http://localhost:8000/api/watch_later";
     const fetchConfig = {
@@ -69,9 +100,30 @@ function ShowModal({ show, isOpen, onClose }) {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      console.log("Item added to watch later list!");
+      alert("Added to 'Watch Later'!");
     } else {
       console.error("Failed to add item to watch later list.");
+    }
+  };
+
+  const deleteFromWatchLater = async () => {
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      show.id
+    )}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Removed from 'Watch Later'!");
+      setAdded(!added);
+    } else {
+      console.error("Failed to remove item from watch later list.");
     }
   };
 

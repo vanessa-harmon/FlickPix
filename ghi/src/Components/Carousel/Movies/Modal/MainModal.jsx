@@ -13,58 +13,68 @@ import {
 } from "@chakra-ui/react";
 import "./MovieModal.css";
 import { NavLink } from "react-router-dom";
+import TrailerPlayer from "../../../Trailer/Trailer";
 import { MdOutlineLibraryAddCheck, MdOutlineAddToQueue } from "react-icons/md";
 
-function MovieModal({ movie, isOpen, onClose }) {
+function MovieOrShowModal({ item, isOpen, onClose }) {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
   const [credits, setCredits] = useState({ cast: [] });
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
+  const [trailerUrl, setTrailerUrl] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
-  const filteredActors = credits.cast.filter(
-    (actor) => actor.known_for_department === "Acting"
-  );
+  const type = item.media_type;
+  console.log("Type:", type);
+
+  const filteredActors =
+    credits && credits.cast
+      ? credits.cast.filter((actor) => actor.known_for_department === "Acting")
+      : [];
 
   let actors = "";
   for (let actor of filteredActors.slice(0, 15)) {
     actors = actors + actor["name"] + ", ";
   }
 
+  const handleImageHover = (hovered) => {
+    setIsHovered(hovered);
+  };
+
+  const fetchTrailers = async (item_type, item_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/trailer/videos/${item_type}/${item_id}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("API Response:", data);
+
+        const trailerKey = data.videos[0].key;
+        console.log("Video Key:", trailerKey);
+
+        if (trailerKey) {
+          const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`;
+          return trailerUrl;
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch trailer:", error);
+    }
+    return null;
+  };
+
   const fetchCreditsData = async () => {
-    const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${movie.id}`;
+    const creditsUrl =
+      type === "movie"
+        ? `http://localhost:8000/movies/credits?movie_id=${item.id}`
+        : `http://localhost:8000/shows/credits?series_id=${item.id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
       setCredits(data);
     }
   };
-
-  // const handleSeenItClick = async () => {
-  //     setSeenIt(!seenIt);
-
-  //     const data = {
-  //         title: movie.title,
-  //         synopsis: movie.overview,
-  //         actors: actors,
-  //         backdrop_img: movie.backdrop_path,
-  //         poster_img: movie.poster_path,
-  //         account_id: 0,
-  //     };
-
-  //     const url = "http://localhost:8000/api/seen_it";
-  //     const fetchConfig = {
-  //         method: "POST",
-  //         body: JSON.stringify(data),
-  //         headers: {"Content-Type": "application/json"},
-  //         credentials: "include",
-  //     };
-
-  //     const response = await fetch(url, fetchConfig);
-  //     if (response.ok) {alert("Added to 'Seen It'!");}
-  //         else {throw new Error("Request failed");}
-
-  //     // if item in list delete media
-  // };
 
   const handleSeenItClick = async () => {
     if (seenIt) {
@@ -78,15 +88,15 @@ function MovieModal({ movie, isOpen, onClose }) {
   const addToSeenIt = async () => {
     const url = "http://localhost:8000/api/seen_it";
     const data = {
-      title: movie.title,
-      tmdb_id: movie.id,
-      synopsis: movie.overview,
+      title: item.title,
+      tmdb_id: item.id,
+      synopsis: item.overview,
       actors: actors,
-      backdrop_img: movie.backdrop_path,
-      poster_img: movie.poster_path,
+      backdrop_img: item.backdrop_path,
+      poster_img: item.poster_path,
       account_id: 0,
     };
-
+    console.log("SEEN IT: ", data);
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -103,8 +113,8 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?tmdb_id=${encodeURIComponent(
-      movie.id
+    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(
+      item.title
     )}`;
     const fetchConfig = {
       method: "DELETE",
@@ -124,25 +134,19 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const handleAddClick = async (event) => {
-    if (added) {
-      await deleteFromWatchLater();
-    } else {
-      await addToWatchLater();
-    }
     setAdded(!added);
-  };
 
-  const addToWatchLater = async (event) => {
+    event.preventDefault();
     const data = {
-      title: movie.title,
-      tmdb_id: movie.id,
-      synopsis: movie.overview,
+      title: item.title,
+      tmdb_id: item.id,
+      synopsis: item.overview,
       actors: actors,
-      backdrop_img: movie.backdrop_path,
-      poster_img: movie.poster_path,
+      backdrop_img: item.backdrop_path,
+      poster_img: item.poster_path,
       account_id: 0,
     };
-
+    console.log("data:", data);
 
     const url = "http://localhost:8000/api/watch_later";
     const fetchConfig = {
@@ -156,54 +160,49 @@ function MovieModal({ movie, isOpen, onClose }) {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      alert("Added to 'Watch Later'!");
+      console.log("Item added to watch later list!");
     } else {
       console.error("Failed to add item to watch later list.");
     }
   };
 
-  const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
-      movie.id
-    )}`;
-    const fetchConfig = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      alert("Removed from 'Watch Later'!");
-      setAdded(!added);
-    } else {
-      console.error("Failed to remove item from watch later list.");
+  useEffect(() => {
+    async function fetchTrailerUrl() {
+      const url = await fetchTrailers(item.media_type, item.id);
+      if (url) {
+        setTrailerUrl(url);
+      }
     }
-  };
+    fetchTrailerUrl();
+  }, [item.media_type, item.id]);
 
   useEffect(() => {
     fetchCreditsData();
   }, []);
 
+  console.log("Type:", type);
+  console.log("Item ID:", item.id);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader className="modal-header">{movie.title}</ModalHeader>
+        <ModalHeader className="modal-header">
+          {item.title || item.name}
+        </ModalHeader>
         <ModalCloseButton className="close-button" />
         <ModalBody className="modal-content">
           <img
-            src={imgUrlPrefix + movie.poster_path}
-            alt={movie.title}
+            src={imgUrlPrefix + item.poster_path}
+            alt={item.title}
             className="modal-img"
           />
-          <p>{movie.overview}</p>
-          <p>Rating: {movie.vote_average}</p>
+          <p>{item.overview}</p>
+          <p>Rating: {item.vote_average}</p>
+          <TrailerPlayer trailerUrl={trailerUrl} />
         </ModalBody>
         <ModalFooter className="modal-footer">
-          <SimpleGrid gap={4} p={4} columns={4}>
+          <SimpleGrid gap={2} p={4} columns={4}>
             <IconButton
               icon={<MdOutlineLibraryAddCheck />}
               colorScheme={seenIt ? "green" : "green"}
@@ -222,7 +221,15 @@ function MovieModal({ movie, isOpen, onClose }) {
               isActive={added}
               isRound={true}
             />
-            <NavLink to={`/movies/${movie.id}`}>
+            <NavLink
+              to={
+                type === "movie"
+                  ? `/movies/${item.id}`
+                  : type === "tv"
+                  ? `/tv-shows/${item.id}`
+                  : "/"
+              }
+            >
               <Button
                 colorScheme="twitter"
                 variant="outline"
@@ -231,6 +238,7 @@ function MovieModal({ movie, isOpen, onClose }) {
                 More...
               </Button>
             </NavLink>
+
             <Button
               className="modal-button-close"
               borderRadius="24px"
@@ -248,4 +256,4 @@ function MovieModal({ movie, isOpen, onClose }) {
   );
 }
 
-export default MovieModal;
+export default MovieOrShowModal;

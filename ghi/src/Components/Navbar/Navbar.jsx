@@ -5,6 +5,7 @@ import LoginModal from "../Account/LoginModal";
 import { Tabs, TabList, Tab, TabIndicator, Avatar, Menu, MenuButton, MenuList, MenuItem, Button, ButtonGroup } from "@chakra-ui/react";
 import "./Navbar.css";
 import SearchBar from "../SearchBar/SearchBar";
+import Randomizer from "../Randomizer/Randomizer";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function Nav() {
@@ -35,6 +36,9 @@ function Nav() {
           <div className="tab">
             <Tabs position="relative" variant="unstyled">
               <TabList>
+                <NavLink to="/" className="tab-item">
+                  <Tab>Home</Tab>
+                </NavLink>
                 <NavLink to="/movies" className="tab-item">
                   <Tab>Movies</Tab>
                 </NavLink>
@@ -51,13 +55,16 @@ function Nav() {
               <TabIndicator mt="-1px" height="2px" bg="blue.500" borderRadius="2px" />
             </Tabs>
           </div>
-          <div className="search">
+          <div className="search" padding="10px">
+            <button>
+              <Randomizer />
+            </button>
             <SearchBar />
           </div>
           <LoginModal isOpenLogin={isOpenLogin} onCloseLogin={closeLoginModal} />
           <SignupModal isOpenSignup={isOpenSignup} onCloseSignup={closeSignupModal} />
 
-          <ButtonGroup spacing="6">
+          <ButtonGroup spacing="2">
             <Button colorScheme="cyan" onClick={openSignupModal}>
               Sign Up
             </Button>

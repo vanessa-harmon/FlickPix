@@ -4,6 +4,7 @@ from typing import List
 
 class WatchLaterIn(BaseModel):
     title: str
+    tmdb_id: int
     synopsis: str
     actors: str
     backdrop_img: str
@@ -13,6 +14,7 @@ class WatchLaterIn(BaseModel):
 
 class WatchLaterItem(BaseModel):
     title: str
+    tmdb_id: int
     synopsis: str
     actors: str
     backdrop_img: str

@@ -24,9 +24,10 @@ CREATE TABLE IF NOT EXISTS profiles (
 
 CREATE TABLE IF NOT EXISTS watch_later(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(50) NOT NULL,
-    synopsis VARCHAR(250),
-    actors VARCHAR(250),
+    title TEXT NOT NULL,
+    tmdb_id INTEGER NOT NULL,
+    synopsis TEXT,
+    actors TEXT,
     backdrop_img VARCHAR(150),
     poster_img VARCHAR(150),
     account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
@@ -35,9 +36,10 @@ CREATE TABLE IF NOT EXISTS watch_later(
 
 CREATE TABLE IF NOT EXISTS seen_it(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(50) NOT NULL,
-    synopsis VARCHAR(250),
-    actors VARCHAR(250),
+    title TEXT NOT NULL,
+    tmdb_id INTEGER NOT NULL,
+    synopsis TEXT,
+    actors TEXT,
     backdrop_img VARCHAR(150),
     poster_img VARCHAR(150),
     account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE

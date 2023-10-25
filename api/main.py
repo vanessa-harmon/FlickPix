@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import movies, shows, movie_detail, show_detail, accounts, search
+from routers import movies, shows, movie_detail, show_detail, accounts, search, popular, trailer
 from authenticator import authenticator
-from routers import accounts, watch_later, seen_it
-from routers import profile
+from routers import watch_later, seen_it
 
 
 app = FastAPI()
@@ -78,3 +77,15 @@ app.include_router(
 #     profile.router,
 #     tags=['profile']
 # )
+
+app.include_router(
+    popular.router,
+    prefix='/popular',
+    tags=['popular']
+)
+
+app.include_router(
+    trailer.router,
+    prefix='/trailer',
+    tags=['trailer']
+)

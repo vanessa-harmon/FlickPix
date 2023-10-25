@@ -7,3 +7,10 @@
   padding: 15px 10px 5px;
   margin-left: 8px;
 }
+
+.centered-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}

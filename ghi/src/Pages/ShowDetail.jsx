@@ -12,6 +12,7 @@ function ShowDetail() {
   const [providers, setProviders] = useState({ results: [] });
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
@@ -53,14 +54,9 @@ function ShowDetail() {
     }
   };
 
-  const handleSeenItClick = () => {
+  const handleSeenItClick = async () => {
     setSeenIt(!seenIt);
-  };
 
-  const handleAddClick = async (event) => {
-    setAdded(!added);
-
-    event.preventDefault();
     const data = {
       title: show.original_name,
       synopsis: show.overview,
@@ -69,7 +65,39 @@ function ShowDetail() {
       poster_img: show.poster_path,
       account_id: 0,
     };
-    console.log("data:", data);
+
+    const url = "http://localhost:8000/api/seen_it";
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"},
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+      if (response.ok) {alert("Added to 'Seen It'!");}
+        else {throw new Error("Request failed");}
+  };
+
+  const handleAddClick = async (event) => {
+    if (added) {
+      await deleteFromWatchLater();
+    } else {
+      await addToWatchLater();
+    }
+    setAdded(!added);
+  };
+
+  const addToWatchLater = async (event) => {
+    const data = {
+      title: show.original_name,
+      tmdb_id: show.id,
+      synopsis: show.overview,
+      actors: actors,
+      backdrop_img: show.backdrop_path,
+      poster_img: show.poster_path,
+      account_id: 0,
+    };
 
     const url = "http://localhost:8000/api/watch_later";
     const fetchConfig = {
@@ -83,9 +111,30 @@ function ShowDetail() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      console.log("Item added to watch later list!");
+      alert("Added to 'Watch Later'!");
     } else {
       console.error("Failed to add item to watch later list.");
+    }
+  };
+
+  const deleteFromWatchLater = async () => {
+    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+      show.id
+    )}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Removed from 'Watch Later'!");
+      setAdded(!added);
+    } else {
+      console.error("Failed to remove item from watch later list.");
     }
   };
 
@@ -98,74 +147,85 @@ function ShowDetail() {
 
   return (
     <div
+      className="show-grid"
       style={{
-        height: "100vh",
-        width: "100%",
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${show.backdrop_path})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
       }}
     >
-      <div className="moviegrid">
-        <div className="showdiv1">
-          <h1>
-            {show.original_name}
-            <IconButton
-              icon={<MdOutlineLibraryAddCheck />}
-              colorScheme={seenIt ? "green" : "green"}
-              variant="outline"
-              aria-label="Seen It"
-              onClick={handleSeenItClick}
-              isActive={seenIt}
-              isRound={true}
-            />
-            <IconButton
-              icon={<MdOutlineAddToQueue />}
-              colorScheme={added ? "yellow" : "yellow"}
-              variant="outline"
-              aria-label="Add"
-              onClick={handleAddClick}
-              isActive={added}
-              isRound={true}
-            />
-          </h1>
-        </div>
-        <div className="showdiv2">
-          {" "}
-          Now streaming on:{" "}
-          {providers.results.US?.flatrate?.map((provider, index) => (
-            <span key={provider.provider_id}>
-              {index > 0 ? ", " : ""}
-              {provider.provider_name}
+      <div className="show-poster">
+        <img src={imgUrlPrefix + show.poster_path} />
+      </div>
+      <div className="show-details">
+        <h1>
+          {show.original_name} (
+          {show.first_air_date && show.first_air_date.slice(0, 4)})
+          <IconButton
+            icon={<MdOutlineLibraryAddCheck />}
+            colorScheme={seenIt ? "green" : "green"}
+            variant="outline"
+            aria-label="Seen It"
+            onClick={handleSeenItClick}
+            isActive={seenIt}
+            isRound={true}
+          />
+          <IconButton
+            icon={<MdOutlineAddToQueue />}
+            colorScheme={added ? "yellow" : "yellow"}
+            variant="outline"
+            aria-label="Add"
+            onClick={handleAddClick}
+            isActive={added}
+            isRound={true}
+          />
+        </h1>
+        <h6>
+          {new Date(show.first_air_date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })}
+          {" • "}
+          {show.genres && (
+            <span>
+              Genres: {show.genres.map((genre) => genre.name).join(", ")}
             </span>
-          ))}
-        </div>
-        <div className="showdiv3">
-          Starring:{" "}
-          {filteredActors.map((actor, index) => (
+          )}
+        </h6>
+        <h6>
+          <div class="circle">
+            <span class="percentage">
+              {show.vote_average
+                ? (show.vote_average * 10).toFixed(0) + "%"
+                : "NR"}
+            </span>
+          </div>
+        </h6>
+        <p>Overview: {show.overview} </p>
+        <p>
+          Cast:{" "}
+          {filteredActors.slice(0, 15).map((actor, index) => (
             <span key={actor.id}>
               {index > 0 ? " • " : ""}
               {actor.name}
             </span>
           ))}
-        </div>
-        <div className="showdiv4">
-          <p style={{ textAlign: "right" }}>{show.first_air_date}</p>
-          <h2>Synopsis</h2>
-          <p>{show.overview}</p>
-        </div>
-        <div className="showdiv5">
-          <p>RATING</p>
-          <p>
-            {show.vote_average ? show.vote_average.toFixed(1) : "Not Rated"}/10
-          </p>
-        </div>
-        <div className="showdiv6">
-          <h1>Recommendations</h1>
-          <ShowRecommendationsCarousel className="slider" />
-        </div>
-        <div className="showdiv7"></div>
+        </p>
+        {providers.results.US?.flatrate &&
+          providers.results.US.flatrate.length > 0 && (
+            <p>
+              Now streaming on:{" "}
+              {providers.results.US.flatrate.map((provider, index) => (
+                <span key={provider.provider_id}>
+                  {index > 0 ? ", " : ""}
+                  {provider.provider_name}
+                </span>
+              ))}
+            </p>
+          )}
+      </div>
+      <div className="show-recommendations">
+        <h1>More Like This</h1>
+        <ShowRecommendationsCarousel className="slider" />
       </div>
     </div>
   );

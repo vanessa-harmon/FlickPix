@@ -3,7 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import { responsive } from "./CarouselData";
 
 
-function Slider() {
+function CarouselSlider() {
 
     return (
         <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
@@ -23,4 +23,4 @@ function Slider() {
     );
 }
 
-export default Slider;
+export default CarouselSlider;
