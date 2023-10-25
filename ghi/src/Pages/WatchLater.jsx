@@ -47,7 +47,7 @@ function WatchLater() {
   }, []);
 
   return (
-    <div className="content-container">
+    <div>
       {isLoading ? (
         <div>Loading...</div>
       ) : !watchLater.items || watchLater.items.length === 0 ? (
@@ -59,7 +59,7 @@ function WatchLater() {
           {watchLater.items.map((media) => (
             <Col key={media.title}>
               <Card className="watchlater-card" style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
+                <Card.Img className="watchlater-img" variant="top" src={imgUrlPrefix + media.poster_img} />
                 <Card.Body className="watchlater-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>

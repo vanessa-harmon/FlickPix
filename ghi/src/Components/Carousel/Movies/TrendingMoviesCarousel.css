@@ -20,3 +20,40 @@
   border: 5px solid #ffffff;
   transition: all ease-in-out 0.2s;
 }
+
+
+.add-item-container {
+  height: 25vh;
+  background: rgb(33, 150, 243);
+  background: linear-gradient(90deg, rgba(33, 150, 243, 1) 0%, rgba(0, 18, 69, 1) 72%);
+  border-top: 2px solid #2196f3;
+  border-bottom: 2px solid #2196f3;
+}
+
+
+.add-item-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-item-card img {
+  height: 100%;
+  width: 40%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  z-index: 0;
+  opacity: 80%;
+}
+
+.add-text-box {
+  width: 40%;
+  height: 100%;
+  margin-right: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}

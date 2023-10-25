@@ -64,13 +64,10 @@ class SeenItQueries():
                 try:
                     records = []
                     for row in cur.fetchall():
-                        print("ROW:   ", row)
                         record = {}
-
                         for i, column in enumerate(cur.description):
                             record[column.name] = row[i]
                         records.append(SeenItItem(**record))
-                        print("RECORD:               ", record)
                     return SeenItOut(items=records)
                 except Exception:
                     return SeenItOut(items=[])

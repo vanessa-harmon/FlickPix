@@ -132,3 +132,16 @@ async def random_item():
     return (
         items[items_idx]
     )
+
+
+@router.get('/similar')
+async def similar_movies(movie_id: int):
+    url = f'https://api.themoviedb.org/3/movie/{movie_id}/similar?language=en-US&page=1'
+    headers = {
+        "accept": "applications/json",
+        "Authorization": TMDB_API_KEY
+    }
+    response = requests.get(url, headers=headers)
+    return (
+        json.loads(response.content)
+    )
