@@ -1,5 +1,4 @@
--- DROP TABLE IF EXISTS accounts;
-
+DROP TABLE IF EXISTS accounts;
 
 -- Accounts table
 CREATE TABLE IF NOT EXISTS accounts (
@@ -12,13 +11,6 @@ CREATE TABLE IF NOT EXISTS accounts (
     hashed_password VARCHAR(128),
     date_joined TIMESTAMP WITH TIME ZONE,
     last_login TIMESTAMP WITH TIME ZONE
-);
-
-CREATE TABLE IF NOT EXISTS profiles (
-    id SERIAL PRIMARY KEY,
-    nickname VARCHAR(100),
-    avatar TEXT,
-    account_id INTEGER NOT NULL REFERENCES accounts("id") ON DELETE CASCADE
 );
 
 
