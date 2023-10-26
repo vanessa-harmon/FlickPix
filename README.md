@@ -48,7 +48,7 @@ Aimed at show/movie enjoyers and binge watchers who want recommendations based o
 install dependencies via `npm install`
 1. Sign up for an account on https://www.themoviedb.org/si
 2. Fork and clone the repo
-3. Get Get your API Read Access Token from the settings/api page and paste it within the api/keys.py
+3. Get Get your API Read Access Token from the settings/api page and paste it within the .env file 
   TMDB_API_KEY = "Bearer 'ENTER YOUR TOKEN'"
 4. CD into the new project directory
 5. run `docker volume create flickpix`
@@ -65,8 +65,8 @@ install dependencies via `npm install`
 
 ## Documentation: Attach DB schemas, wireframes, and API contracts. :clipboard:
 
--E.g.: point to the documents dir
-![IMAGE_DESCRIPTION](https://imgur.com/a/HqxsfXe)
+- Excalidraw https://excalidraw.com/#json=x1jCbFZfzLjxUU7piWUql,Q4nWxzqKx2Kw1pIMJF_SEA
+![Excalidraw](https://live.staticflickr.com/65535/53288377385_4d68f3db22.jpg)
 
 
 ## Issue Tracking: Link to your Linear or JIRA board for bug tracking.
