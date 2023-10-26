@@ -4,11 +4,9 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import MainPage from "./Pages/MainPage.jsx";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MovieDetail from "./Pages/MovieDetail.jsx";
 import ShowDetail from "./Pages/ShowDetail.jsx";
-// import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
@@ -57,7 +55,7 @@ function App() {
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/seen-it" element={<SeenIt />} />
             <Route path="/watch-later" element={<WatchLater />} />
-        </Routes>
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
       {/* </AuthProvider> */}
