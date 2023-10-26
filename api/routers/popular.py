@@ -1,12 +1,12 @@
-from fastapi import FastAPI, APIRouter
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 import requests
 import os
 import json
-from keys.keys import TMDB_API_KEY
-import random
 
 router = APIRouter()
+
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
+
 
 @router.get("/all")
 async def popular_list():
@@ -19,4 +19,3 @@ async def popular_list():
     return (
         json.loads(response.content)
     )
-
