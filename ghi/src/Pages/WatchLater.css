@@ -5,7 +5,8 @@ body {
 }
 
 .watchlater-img {
-  height: 300px;
+  height: 100%;
+  width: auto;
 }
 
 .watchlater-card {
@@ -16,6 +17,7 @@ body {
   max-width: 100%;
   width: 100%;
   height: auto;
+  margin-top: 1.5rem;
 }
 
 .watchlater-card-body {
@@ -46,4 +48,24 @@ body {
 
 .remove-watchlater-btn:hover {
   border: 3px solid white;
+}
+
+
+.watchlater-card-body::-webkit-scrollbar {
+  width: 8px;
+  background-color: #F5F5F5;
+  border-radius: 100vw;
+}
+
+.watchlater-card-body::-webkit-scrollbar-thumb {
+  border-radius: 100vw;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #2196f3;
+  border: 1px solid #F5F5F5;
+}
+
+.watchlater-card-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 100vw;
+  background-color: #F5F5F5;
 }

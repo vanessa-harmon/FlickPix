@@ -4,9 +4,10 @@ import os
 import json
 import random
 
+
 router = APIRouter()
 
-TMDB_API_KEY = os.environ["TMDB_API_KEY"]
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
 
 
 @router.get('/trending')
