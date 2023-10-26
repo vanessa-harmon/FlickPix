@@ -18,7 +18,6 @@ async def trending_movie_list():
     }
     response = requests.get(url, headers=headers)
     movie_info = json.loads(response.content)
-    print("MOVIE INFO:    ", movie_info['results'][0])
     return (
         movie_info
     )
