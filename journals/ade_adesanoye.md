@@ -20,7 +20,7 @@ This week I worked on:
 
 I started working on the front-end for the seen it page, while Vanessa worked on the front-end for the watch later page. We were able to use the back-end that Chris provided to fetch data from the API. Users would be able to use these pages once they created an account to add to these lists, by using a POST method.
 
-Had trouble when testing the fastAPI for adding movies to the lists beause of a 422 unproccessible entity. We were able to solve this by changing the limit of how many characters were allowed for the descriptions of the medi posted.
+Had trouble when testing the fastAPI for adding movies to the lists beause of a 422 unproccessible entity. We were able to solve this by changing the limit of how many characters were allowed for the descriptions of the media was posted.
 
 ## OCT 20, 2023
 
