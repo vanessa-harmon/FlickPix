@@ -1,5 +1,4 @@
-from fastapi import FastAPI, APIRouter
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 import requests
 import os
 import json
@@ -8,6 +7,9 @@ import random
 TMDB_API_KEY = os.environ.get('API_KEY')
 
 router = APIRouter()
+
+TMDB_API_KEY = os.environ["TMDB_API_KEY"]
+
 
 @router.get('/trending')
 async def trending_movie_list():

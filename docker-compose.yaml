@@ -13,7 +13,7 @@ services:
       # WAIT_BEFORE: 5
       # WAIT_TIMEOUT: 60
       SIGNING_KEY: ${SIGNING_KEY}
-      API_KEY: ${TMDB_API_KEY}
+      TMDB_API_KEY: ${TMDB_API_KEY}
     build:
       context: api
       dockerfile: Dockerfile.dev

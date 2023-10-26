@@ -1,11 +1,11 @@
 import requests
-from fastapi import FastAPI, APIRouter
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 import os
 
 router = APIRouter()
 
-TMDB_API_KEY = os.environ.get('API_KEY')
+TMDB_API_KEY = os.environ["TMDB_API_KEY"]
+
 
 @router.get("/videos/{item_type}/{item_id}")
 def get_videos(item_type: str, item_id: int):

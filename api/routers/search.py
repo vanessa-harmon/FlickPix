@@ -1,14 +1,12 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Query
+from fastapi import APIRouter, Query
 import requests
 import os
-from fastapi.middleware.cors import CORSMiddleware
 import json
 
 
 router = APIRouter()
 
-
-TMDB_API_KEY = os.environ.get('API_KEY')
+TMDB_API_KEY = os.environ["TMDB_API_KEY"]
 
 
 @router.get("/results")
