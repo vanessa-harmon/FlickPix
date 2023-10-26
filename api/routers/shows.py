@@ -1,10 +1,12 @@
 from fastapi import APIRouter
 import requests
 import json
-from keys.keys import TMDB_API_KEY
+import os
 
 router = APIRouter()
 
+
+TMDB_API_KEY = os.environ.get('API_KEY')
 
 @router.get("/trending")
 def trending_show_list():

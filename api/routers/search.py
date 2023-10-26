@@ -3,9 +3,12 @@ import requests
 import os
 from fastapi.middleware.cors import CORSMiddleware
 import json
-from keys.keys import TMDB_API_KEY
+
 
 router = APIRouter()
+
+
+TMDB_API_KEY = os.environ.get('API_KEY')
 
 
 @router.get("/results")
