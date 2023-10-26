@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, Request, HTTPException, status, Body
+from fastapi import APIRouter, Depends, Response, Request, HTTPException, status
 from queries.profile import ProfileQueries
 from models.profile import Profile
 from authenticator import authenticator
