@@ -10,7 +10,6 @@ def fake_get_current_account_data():
     return {
         "id": 123,
         "username": "string"
-        # "password": "string"
     }
 
 
@@ -34,9 +33,6 @@ def test_get_all_watch_later():
     # Arrange/Setup
     app.dependency_overrides[WatchLaterQueries] = FakeWatchLaterQueries
     app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
-
-    # access_token = "valid_access_token"
-    # headers = {"Authorization": f"Bearer {access_token}"}
 
 
     # Act/Enact
