@@ -1,63 +1,37 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.accounts import AccountQueries
+from authenticator import authenticator
 
 client = TestClient(app)
 
-
-def fake_get_current_account_data():
-    return {
-        "id": 123,
-        "username": "string",
-        "password": "string"
-    }
+client.cookies[authenticator.cookie_name] = "TOKEN!"
 
 
 class FakeAccountQueries:
     def get(self):
-        fake_account = [
-            {
-                "access_token": "string",
-                "token_type": "Bearer",
-                "account": {
-                    "id": 0,
-                    "username": "string",
-                    "first_name": "string",
-                    "last_name": "string",
-                    "email": "string"
-                }
-            }
-        ]
-        return {fake_account}
+        return {
+            "id": 1,
+            "username": "user1",
+            "first_name": "Test",
+            "last_name": "User",
+            "email": "user1@email.com",
+            "date_of_birth": "10-26-2023",
+            "hashed_password": "password"
+        }
 
 
-def test_create_account():
+def test_get_token():
     # Arrange/Setup
-    app.dependency_overrides[AccountQueries] = FakeAccountQueries
-
-
-    # access_token = "valid_access_token"
-    # headers = {"Authorization": f"Bearer {access_token}"}
-
+    app.dependency_overrides[authenticator.try_get_current_account_data] = FakeAccountQueries().get
 
     # Act/Enact
-    response = client.post("/api/accounts/")
-    print("RESPONSE: ", response)
+    response = client.get("/token")
 
     data = response.json()
     # Assert
     assert response.status_code == 200
-    assert isinstance(data, dict)
+    assert data["access_token"] == "TOKEN!"
+    assert data["token_type"] == "Bearer"
 
-# def test_create_account(client):
-#     data = {
-#         "username":"testuser",
-#         "first_name": "string",
-#         "last_name": "string",
-#         "email":"testuser@nofoobar.com",
-#         "date_of_birth": "2023-10-25",
-#         "password":"testing"}
-#     response = client.post("/api/accounts/",json.dumps(data))
-#     assert response.status_code == 200
-#     assert response.json()["email"] == "testuser@nofoobar.com"
-#     assert response.json()["is_active"] == True
+    # Teardown
+    app.dependency_overrides = {}
