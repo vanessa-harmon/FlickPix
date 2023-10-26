@@ -7,7 +7,6 @@ import MovieModal from "./Modal/MovieModal";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 
 function TopPixCarousel() {
-  const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [seenIt, setSeenIt] = useState([]);
