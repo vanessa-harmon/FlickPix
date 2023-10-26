@@ -10,12 +10,19 @@ FlickPix - Movie and tv show recommendation website
 
 ## Functionality
 
-- Articulate the capabilities of your app or service.
-- E.g.: Our RESTful API enables CRUD operations for movie reviews.
+- Acess a vast collection of movies and TV shows from  reliable third-party API.
+- Watch-Later List: Add shows and movies to your watch-later list.
+- Seen-It List: Keep track of the shows and movies you've watched.
+- Utilize the "Seen-It List" data to generate personalized recommendations based on your viewing history.
+- Get spontaneous entertainment recommendations by using the randomizer feature, providing you with a random show or movie from the API.
 
-## User Stories/Scenarios`: Outline key use-cases, ideally using Gherkin syntax. :cucumber:
+## User Stories/Scenarios :cucumber:
 
-- E.g.: `Given` a user is logged in, `When` they post a review, `Then` it appears on their profile.
+- `Given` a user is logged in, `When` they add a show or movie to their watch-later list, `Then` the show or movie should be added to their watch-later list
+- `Given` a user is logged in, `When` they add a show or movie to their seen-it list, `Then` the show or movie should be added to their seen-it list
+- `Given` a user is logged in and they have shows or movies in their seen-it list, `When` the system generates recommendations, `Then` the recommendations should be based on the user's seen-it list
+- `Given` a user is logged in, `When` they use the randomizer feature, `Then` a random show or movie should be provided from the API
+- `Given` a user is logged in and they have a show or movie in their watch-later or seen-it list, `When` they remove the show or movie from the list, `Then` the show or movie should be removed from the respective list
 
 ## Intended Market
 
@@ -37,9 +44,8 @@ Aimed at show/movie enjoyers and binge watchers who want recommendations based o
 
 ## Onboarding
 
-- E.g.: Fork the repo, clone locally, install dependencies via `npm install`, and checkout to a feature branch.
-To use the application the way it was intended make sure to follow the steps below.
-
+- To use the application the way it was intended make sure to follow the steps below.
+install dependencies via `npm install`
 1. Sign up for an account on https://www.themoviedb.org/si
 2. Fork and clone the repo
 3. Get Get your API Read Access Token from the settings/api page and paste it within the api/keys.py
@@ -52,18 +58,22 @@ To use the application the way it was intended make sure to follow the steps bel
 
 ## Tech Stack: Specify technologies, libraries, and frameworks. :books:
 
-- E.g.: React, FastAPI, PostgreSQL, Docker.
+- React
+- FastAPI
+- PostgreSQL
+- Docker
 
-## Documentation`: Attach DB schemas, wireframes, and API contracts. :clipboard:
+## Documentation: Attach DB schemas, wireframes, and API contracts. :clipboard:
 
 -E.g.: point to the documents dir
+![IMAGE_DESCRIPTION](https://imgur.com/a/HqxsfXe)
 
 
-## Issue Tracking`: Link to your Linear or JIRA board for bug tracking. :ladybug:
+## Issue Tracking: Link to your Linear or JIRA board for bug tracking.
 
 -E.g. - links or screenshoots, could be included in the doc’s dir
 
-## Testing`: Describe unit tests. :white_check_mark:
+## Testing: Describe unit tests. :white_check_mark:
 
 - Ade Adesanoye : Tested get seen it list
 - Andrew Garcia : Tested create item for seen it list
