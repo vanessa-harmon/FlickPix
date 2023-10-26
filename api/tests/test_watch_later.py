@@ -5,6 +5,13 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+def fake_get_current_account_data():
+    return {
+        "id": 123,
+        "username": "string",
+        "password": "string"
+    }
+
 
 def fake_get_current_account_data():
     return {
