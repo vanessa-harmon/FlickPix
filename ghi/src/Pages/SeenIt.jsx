@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "./WatchLater.css";
+import "./SeenIt.css";
 
 function SeenIt() {
   const [seenIt, setSeenIt] = useState([]);
@@ -33,7 +33,7 @@ function SeenIt() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      console.log("Item was deleted from Watch Later");
+      console.log("Item was deleted from Seen It");
       fetchData();
     } else {
       console.error("Failed to delete item");
@@ -52,19 +52,19 @@ function SeenIt() {
         <div>Loading...</div>
       ) : !seenIt.items || seenIt.items.length === 0 ? (
         <div>
-          <h1>There is currently nothing saved to your watch later list.</h1>
+          <h1>There is currently nothing saved to your seen it list.</h1>
         </div>
       ) : (
-        <Row xs={1} md={6} className="g-4">
+        <Row xs={1} md={5} className="g-4">
           {seenIt.items.map((media) => (
             <Col key={media.title}>
-              <Card className="watchlater-card" style={{ width: "18rem" }}>
+              <Card className="seenit-card" style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={imgUrlPrefix + media.poster_img} />
-                <Card.Body>
+                <Card.Body className="seenit-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>
                   <button
-                    className="remove-watchlater-btn"
+                    className="remove-seenit-btn"
                     onClick={() => handleDeleteClick(media.tmdb_id)}
                   >
                     Remove
