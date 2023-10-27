@@ -16,7 +16,9 @@ function ShowDetail() {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const filteredActors = credits.cast.filter((actor) => actor.known_for_department === "Acting");
+  const filteredActors = credits.cast.filter(
+    (actor) => actor.known_for_department === "Acting"
+  );
 
   let actors = "";
   for (let actor of filteredActors.slice(0, 15)) {
@@ -90,7 +92,9 @@ function ShowDetail() {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(show.original_name)}`;
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
+      show.original_name
+    )}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -147,7 +151,9 @@ function ShowDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(show.id)}`;
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
+      show.id
+    )}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -179,11 +185,12 @@ function ShowDetail() {
       }}
     >
       <div className="show-poster">
-        <img src={imgUrlPrefix + show.poster_path} />
+        <img src={imgUrlPrefix + show.poster_path} alt="show detail" />
       </div>
       <div className="show-details">
         <h1>
-          {show.original_name} ({show.first_air_date && show.first_air_date.slice(0, 4)})
+          {show.original_name} (
+          {show.first_air_date && show.first_air_date.slice(0, 4)})
           <IconButton
             icon={<MdOutlineLibraryAddCheck />}
             colorScheme={seenIt ? "green" : "green"}
@@ -211,11 +218,19 @@ function ShowDetail() {
             day: "2-digit",
           })}
           {" • "}
-          {show.genres && <span>Genres: {show.genres.map((genre) => genre.name).join(", ")}</span>}
+          {show.genres && (
+            <span>
+              Genres: {show.genres.map((genre) => genre.name).join(", ")}
+            </span>
+          )}
         </h6>
         <h6>
           <div class="circle">
-            <span class="percentage">{show.vote_average ? (show.vote_average * 10).toFixed(0) + "%" : "NR"}</span>
+            <span class="percentage">
+              {show.vote_average
+                ? (show.vote_average * 10).toFixed(0) + "%"
+                : "NR"}
+            </span>
           </div>
         </h6>
         <p>Overview: {show.overview} </p>
@@ -228,17 +243,18 @@ function ShowDetail() {
             </span>
           ))}
         </p>
-        {providers.results.US?.flatrate && providers.results.US.flatrate.length > 0 && (
-          <p>
-            Now streaming on:{" "}
-            {providers.results.US.flatrate.map((provider, index) => (
-              <span key={provider.provider_id}>
-                {index > 0 ? ", " : ""}
-                {provider.provider_name}
-              </span>
-            ))}
-          </p>
-        )}
+        {providers.results.US?.flatrate &&
+          providers.results.US.flatrate.length > 0 && (
+            <p>
+              Now streaming on:{" "}
+              {providers.results.US.flatrate.map((provider, index) => (
+                <span key={provider.provider_id}>
+                  {index > 0 ? ", " : ""}
+                  {provider.provider_name}
+                </span>
+              ))}
+            </p>
+          )}
       </div>
       <div className="show-recommendations">
         <h1>More Like This</h1>
