@@ -14,6 +14,8 @@ function ShowDetail() {
   const [added, setAdded] = useState(false);
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
@@ -25,7 +27,7 @@ function ShowDetail() {
 
   const fetchData = async () => {
     try {
-      const url = `http://localhost:8000/shows/details?series_id=${id}`;
+      const url = `${ACCOUNTS_API}/shows/details?series_id=${id}`;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
@@ -37,7 +39,7 @@ function ShowDetail() {
   };
 
   const fetchCreditsData = async () => {
-    const creditsUrl = `http://localhost:8000/shows/credits?series_id=${id}`;
+    const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
@@ -46,7 +48,7 @@ function ShowDetail() {
   };
 
   const fetchProvidersData = async () => {
-    const providersUrl = `http://localhost:8000/shows/providers?series_id=${id}`;
+    const providersUrl = `${ACCOUNTS_API}/shows/providers?series_id=${id}`;
     const response = await fetch(providersUrl);
     if (response.ok) {
       const data = await response.json();
@@ -54,15 +56,18 @@ function ShowDetail() {
     }
   };
 
-    //Seen It
+  //Seen It
   const handleSeenItClick = async () => {
-    if (seenIt) {await deleteFromSeenIt();}
-      else {await addToSeenIt();}
+    if (seenIt) {
+      await deleteFromSeenIt();
+    } else {
+      await addToSeenIt();
+    }
     setSeenIt(!seenIt);
   };
 
   const addToSeenIt = async () => {
-    const url = "http://localhost:8000/api/seen_it";
+    const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: show.original_name,
       synopsis: show.overview,
@@ -74,32 +79,38 @@ function ShowDetail() {
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     };
 
     const response = await fetch(url, fetchConfig);
-    if (response.ok) {alert("Added to 'Seen It'!");}
-      else {throw new Error("Request failed");}
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(show.original_name)}`;
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
+      show.original_name
+    )}`;
     const fetchConfig = {
       method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     };
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       alert("Removed from 'Seen It'!");
       setSeenIt(!seenIt);
-    }   else {throw new Error("Request failed");}
+    } else {
+      throw new Error("Request failed");
+    }
   };
-
 
   const handleAddClick = async (event) => {
     if (added) {
@@ -121,7 +132,7 @@ function ShowDetail() {
       account_id: 0,
     };
 
-    const url = "http://localhost:8000/api/watch_later";
+    const url = `${ACCOUNTS_API}/api/watch_later`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -140,7 +151,7 @@ function ShowDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
       show.id
     )}`;
     const fetchConfig = {
@@ -165,7 +176,6 @@ function ShowDetail() {
     fetchCreditsData();
     fetchProvidersData();
   }, [id]);
-
 
   return (
     <div

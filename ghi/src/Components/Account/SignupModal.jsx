@@ -36,7 +36,8 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
       disabled: false,
     };
 
-    register(userData, "http://localhost:8000/api/accounts/");
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+    register(userData, `${ACCOUNTS_API}/api/accounts`);
     // e.target.reset();
     onCloseSignup();
     navigate("/");
@@ -71,10 +72,24 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
             />
 
             <FormLabel htmlFor="username">Username</FormLabel>
-            <Input onChange={(e) => setUsername(e.target.value)} variant="filled" type="text" id="username" name="username" placeholder="Username" />
+            <Input
+              onChange={(e) => setUsername(e.target.value)}
+              variant="filled"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+            />
 
             <FormLabel htmlFor="email">Email</FormLabel>
-            <Input onChange={(e) => setEmail(e.target.value)} variant="filled" type="email" id="email" name="email" placeholder="Email" />
+            <Input
+              onChange={(e) => setEmail(e.target.value)}
+              variant="filled"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+            />
 
             <FormLabel htmlFor="date_of_birth">Date of Birth</FormLabel>
             <Input

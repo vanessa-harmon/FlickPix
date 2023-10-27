@@ -4,7 +4,6 @@ from queries.seen_it import SeenItQueries
 from authenticator import authenticator
 
 
-
 client = TestClient(app)
 
 
@@ -25,7 +24,7 @@ class FakeSeenItQueries:
             "backdrop_img": "string",
             "poster_img": "string",
             "account_id": 0
-            }
+        }
         return fake_seen_it_data
 
 

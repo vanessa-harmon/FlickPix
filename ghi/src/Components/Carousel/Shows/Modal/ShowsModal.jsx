@@ -21,6 +21,8 @@ function ShowModal({ show, isOpen, onClose }) {
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
@@ -31,7 +33,7 @@ function ShowModal({ show, isOpen, onClose }) {
   }
 
   const fetchCreditsData = async () => {
-    const creditsUrl = `http://localhost:8000/shows/credits?series_id=${show.id}`;
+    const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${show.id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
@@ -41,13 +43,16 @@ function ShowModal({ show, isOpen, onClose }) {
 
   //Seen It
   const handleSeenItClick = async () => {
-    if (seenIt) {await deleteFromSeenIt();}
-      else {await addToSeenIt();}
+    if (seenIt) {
+      await deleteFromSeenIt();
+    } else {
+      await addToSeenIt();
+    }
     setSeenIt(!seenIt);
   };
 
   const addToSeenIt = async () => {
-    const url = "http://localhost:8000/api/seen_it";
+    const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: show.original_name,
       tmdb_id: show.id,
@@ -73,22 +78,25 @@ function ShowModal({ show, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(show.original_name)}`;
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
+      show.original_name
+    )}`;
     const fetchConfig = {
       method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     };
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       alert("Removed from 'Seen It'!");
       setSeenIt(!seenIt);
-    }   else {throw new Error("Request failed");}
+    } else {
+      throw new Error("Request failed");
+    }
   };
-
 
   //Watch Later
   const handleAddClick = async (event) => {
@@ -111,7 +119,7 @@ function ShowModal({ show, isOpen, onClose }) {
       account_id: 0,
     };
 
-    const url = "http://localhost:8000/api/watch_later";
+    const url = `${ACCOUNTS_API}/api/watch_later`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -130,7 +138,7 @@ function ShowModal({ show, isOpen, onClose }) {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
       show.id
     )}`;
     const fetchConfig = {

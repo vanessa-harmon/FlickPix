@@ -39,7 +39,7 @@
 //       avatar: avatar,
 //     };
 
-//     const url = "http://localhost:8000/api/profile/";
+//     const url = "${ACCOUNTS_API}/api/profile/";
 //     const fetchConfig = {
 //       method: "POST",
 //       body: JSON.stringify(userData),

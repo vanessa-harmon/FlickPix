@@ -10,7 +10,7 @@ FlickPix - Movie and tv show recommendation website
 
 ## Functionality
 
-- Acess a vast collection of movies and TV shows from  reliable third-party API.
+- Acess a vast collection of movies and TV shows from reliable third-party API.
 - Watch-Later List: Add shows and movies to your watch-later list.
 - Seen-It List: Keep track of the shows and movies you've watched.
 - Utilize the "Seen-It List" data to generate personalized recommendations based on your viewing history.
@@ -45,35 +45,40 @@ Aimed at show/movie enjoyers and binge watchers who want recommendations based o
 ## Onboarding
 
 - To use the application the way it was intended make sure to follow the steps below.
-install dependencies via `npm install`
-1. Sign up for an account on https://www.themoviedb.org/si
-2. Fork and clone the repo
-3. Get Get your API Read Access Token from the settings/api page and paste it within the api/keys.py
-  TMDB_API_KEY = "Bearer 'ENTER YOUR TOKEN'"
-4. CD into the new project directory
-5. run `docker volume create flickpix`
-6. run `docker volume create pg-admin`
-7. Run `docker compose build`
-8. Run `docker compose up`
 
-## Tech Stack: Specify technologies, libraries, and frameworks. :books:
+1. Sign up for an account on https://www.themoviedb.org/
+2. Fork and clone the repo
+3. Create a signing key within the .env file
+   SIGNING_KEY='Your unique key'
+4. Get Get your API Read Access Token from the settings/api page and paste it within the .env file
+   TMDB_API_KEY=Bearer 'ENTER YOUR TOKEN'
+5. CD into the new project directory
+6. install dependencies via `npm install`
+7. run `docker volume create flickpix`
+8. run `docker volume create pg-admin`
+9. Run `docker compose build`
+10. Run `docker compose up`
+
+## Tech Stack :books:
 
 - React
 - FastAPI
 - PostgreSQL
 - Docker
+- RESTful APIs
 
-## Documentation: Attach DB schemas, wireframes, and API contracts. :clipboard:
+## Documentation :clipboard:
 
--E.g.: point to the documents dir
-![IMAGE_DESCRIPTION](https://imgur.com/a/HqxsfXe)
+![Excalidraw](docs/FlickPix%20Excalidraw.png)
 
+- https://excalidraw.com/#json=x1jCbFZfzLjxUU7piWUql,Q4nWxzqKx2Kw1pIMJF_SEA
 
-## Issue Tracking: Link to your Linear or JIRA board for bug tracking.
+## Issue Tracking
 
 -E.g. - links or screenshoots, could be included in the doc’s dir
+![Asana](docs\Issues Board - Asana.png)
 
-## Testing: Describe unit tests. :white_check_mark:
+## Testing :white_check_mark:
 
 - Ade Adesanoye : Tested get seen it list
 - Andrew Garcia : Tested create item for seen it list
