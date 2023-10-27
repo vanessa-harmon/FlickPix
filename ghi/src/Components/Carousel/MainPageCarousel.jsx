@@ -35,7 +35,7 @@ function PopularCarousel() {
 
   useEffect(() => {
     fetchPopular();
-  }, []);
+  });
 
   return (
     <div className="carousel-container1">
