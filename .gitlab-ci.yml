@@ -52,6 +52,7 @@ build-front-end-job:
     REACT_APP_API_HOST: https://jun-1-et-flickpixapi.mod3projects.com
   script:
     - cd ghi
+    - npm cache clean --force
     - npm install
     - npm run build
     - cp build/index.html build/404.html
