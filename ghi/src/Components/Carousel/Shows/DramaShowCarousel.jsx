@@ -42,7 +42,7 @@ function DramaShowCarousel() {
 
   useEffect(() => {
     fetchDramaShow();
-  }, []);
+  });
 
   return (
     <div>

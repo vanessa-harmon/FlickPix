@@ -42,7 +42,7 @@ function DocumentaryShowCarousel() {
 
   useEffect(() => {
     fetchDocumentaryShow();
-  }, []);
+  });
 
   return (
     <div>

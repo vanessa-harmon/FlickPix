@@ -42,7 +42,7 @@ function SciFiShowCarousel() {
 
   useEffect(() => {
     fetchSciFiShow();
-  }, []);
+  });
 
   return (
     <div>

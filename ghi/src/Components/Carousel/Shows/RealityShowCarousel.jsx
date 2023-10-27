@@ -42,7 +42,7 @@ function RealityShowCarousel() {
 
   useEffect(() => {
     fetchRealityShow();
-  }, []);
+  });
 
   return (
     <div>

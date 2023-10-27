@@ -42,7 +42,7 @@ function SoapOperaShowCarousel() {
 
   useEffect(() => {
     fetchSoapOperaShow();
-  }, []);
+  });
 
   return (
     <div>
