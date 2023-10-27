@@ -1,4 +1,4 @@
-body {
+.body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(1500px, 1fr));
   background-color: #00132D !important;
