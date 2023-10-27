@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -10,7 +8,6 @@ import ShowDetail from "./Pages/ShowDetail.jsx";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
-import SearchBar from "./Components/SearchBar/SearchBar.jsx";
 import SeenIt from "./Pages/SeenIt.jsx";
 import WatchLater from "./Pages/WatchLater.jsx";
 import MainPage from "./Pages/MainPage.jsx";
@@ -44,7 +41,6 @@ function App() {
 
   return (
     <div>
-      {/* <AuthProvider> */}
       <BrowserRouter basename={basename}>
         <AuthProvider>
           <Nav />
@@ -52,7 +48,6 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
-            {/* <Construct info={launchInfo} /> */}
             <Route
               path="/search-results"
               element={<SearchResultsPage movies={movies} />}
@@ -64,7 +59,6 @@ function App() {
           </Routes>
         </AuthProvider>
       </BrowserRouter>
-      {/* </AuthProvider> */}
     </div>
   );
 }
