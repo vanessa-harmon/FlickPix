@@ -20,8 +20,10 @@ function Randomizer({ id, mediaType }) {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
   const navigate = useNavigate();
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const handleClick = async (event) => {
-    const randomUrl = "http://localhost:8000/movies/random";
+    const randomUrl = `${ACCOUNTS_API}/movies/random`;
     const response = await fetch(randomUrl);
     if (response.ok) {
       const data = await response.json();

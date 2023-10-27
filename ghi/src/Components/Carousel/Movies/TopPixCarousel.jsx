@@ -7,13 +7,13 @@ import MovieModal from "./Modal/MovieModal";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 
 function TopPixCarousel() {
-  const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [seenIt, setSeenIt] = useState([]);
   const [watchLater, setWatchLater] = useState([]);
   const [combined, setCombined] = useState([]);
   const [recommended, setRecommended] = useState([]);
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -26,7 +26,7 @@ function TopPixCarousel() {
   };
 
   const fetchSeenIt = async () => {
-    const response = await fetch("http://localhost:8000/api/seen_it", {
+    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
       credentials: "include",
     });
     if (response.ok) {
@@ -36,7 +36,7 @@ function TopPixCarousel() {
   };
 
   const fetchWatchLater = async () => {
-    const response = await fetch("http://localhost:8000/api/watch_later", {
+    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
       credentials: "include",
     });
 
@@ -69,7 +69,7 @@ function TopPixCarousel() {
   const recommendations = [];
 
   const fetchRecommended = async (tmdbId) => {
-    let url = `http://localhost:8000/movies/similar?movie_id=${tmdbId}`;
+    let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
     const response = await fetch(url);
 
     if (response.ok) {

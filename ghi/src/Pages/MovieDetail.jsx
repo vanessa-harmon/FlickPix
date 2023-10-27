@@ -15,6 +15,8 @@ function MovieDetail() {
   const [added, setAdded] = useState(false);
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
@@ -26,10 +28,9 @@ function MovieDetail() {
     }
   }
 
-
   const fetchData = async () => {
     try {
-      const url = `http://localhost:8000/movies/details/?movie_id=${id}`;
+      const url = `${ACCOUNTS_API}/movies/details/?movie_id=${id}`;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
@@ -41,7 +42,7 @@ function MovieDetail() {
   };
 
   const fetchCreditsData = async () => {
-    const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${id}`;
+    const creditsUrl = `${ACCOUNTS_API}/movies/credits?movie_id=${id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
@@ -50,7 +51,7 @@ function MovieDetail() {
   };
 
   const fetchProvidersData = async () => {
-    const providersUrl = `http://localhost:8000/movies/providers?movie_id=${id}`;
+    const providersUrl = `${ACCOUNTS_API}/movies/providers?movie_id=${id}`;
     const response = await fetch(providersUrl);
     if (response.ok) {
       const data = await response.json();
@@ -59,11 +60,14 @@ function MovieDetail() {
   };
 
   //Seen It
-    const handleSeenItClick = async () => {
-        if (seenIt) {await deleteFromSeenIt();}
-            else {await addToSeenIt();}
-        setSeenIt(!seenIt);
-    };
+  const handleSeenItClick = async () => {
+    if (seenIt) {
+      await deleteFromSeenIt();
+    } else {
+      await addToSeenIt();
+    }
+    setSeenIt(!seenIt);
+  };
 
   const addToSeenIt = async () => {
     const data = {
@@ -76,7 +80,7 @@ function MovieDetail() {
       account_id: 0,
     };
 
-    const url = "http://localhost:8000/api/seen_it";
+    const url = `${ACCOUNTS_API}/api/seen_it`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -84,27 +88,34 @@ function MovieDetail() {
       credentials: "include",
     };
 
-        const response = await fetch(url, fetchConfig);
-        if (response.ok) {alert("Added to 'Seen It'!");}
-            else {throw new Error("Request failed");}
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Added to 'Seen It'!");
+    } else {
+      throw new Error("Request failed");
+    }
+  };
+
+  const deleteFromSeenIt = async () => {
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
+      movie.title
+    )}`;
+    const fetchConfig = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     };
 
-    const deleteFromSeenIt = async () => {
-        const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(movie.title)}`;
-        const fetchConfig = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        };
-
-        const response = await fetch(url, fetchConfig);
-        if (response.ok) {
-            alert("Removed from 'Seen It'!");
-            setSeenIt(!seenIt);
-        }   else {throw new Error("Request failed");}
-    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      alert("Removed from 'Seen It'!");
+      setSeenIt(!seenIt);
+    } else {
+      throw new Error("Request failed");
+    }
+  };
 
   const handleAddClick = async (event) => {
     if (added) {
@@ -126,7 +137,7 @@ function MovieDetail() {
       account_id: 0,
     };
 
-    const url = "http://localhost:8000/api/watch_later";
+    const url = `${ACCOUNTS_API}/api/watch_later`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -145,7 +156,7 @@ function MovieDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
       movie.id
     )}`;
     const fetchConfig = {

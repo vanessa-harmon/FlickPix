@@ -9,8 +9,10 @@ function WatchLater() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
   const [isLoading, setIsLoading] = useState(true);
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/watch_later", {
+    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
       credentials: "include",
     });
 
@@ -22,7 +24,7 @@ function WatchLater() {
 
   const handleDeleteClick = async (tmdbId) => {
     console.log("CLICKED DELETE ON: ", tmdbId);
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${tmdbId}`;
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${tmdbId}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -44,7 +46,7 @@ function WatchLater() {
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  }, []);
+  });
 
   return (
     <div>
@@ -59,7 +61,11 @@ function WatchLater() {
           {watchLater.items.map((media) => (
             <Col key={media.title}>
               <Card className="watchlater-card" style={{ width: "18rem" }}>
-                <Card.Img className="watchlater-img" variant="top" src={imgUrlPrefix + media.poster_img} />
+                <Card.Img
+                  className="watchlater-img"
+                  variant="top"
+                  src={imgUrlPrefix + media.poster_img}
+                />
                 <Card.Body className="watchlater-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>

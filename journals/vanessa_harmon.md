@@ -46,10 +46,30 @@ I coded the watch-later component and Ade coded the seen-it
 component. Added the watch-later/seen-it buttons to the
 show/movie detail page so user could add to their list when
 viewing a specific show/movie. Chris helped as well, it getting
-the add buttons to work. I finsihed up the CSS for the detail
+the add buttons to work. I finished up the CSS for the detail
 pages. I added a "more.." button to the randomizer that will guide
 user to the detail page.
 
 A major-aha moment was reviewing the data returned when adding
 to the watch-later list. Working with Chris we realized the
 character limitations preventing a show/movie from being added.
+
+
+## October 27, 2023
+
+This week, I worked on:
+
+* As a group, we worked on unit testing and deployment. I began working
+on the README for our project.
+
+Unit test were really challenging. I went back and read the learn
+and watched the lecture in hopes to come back to my team with some knowledge
+as we were all uneasy going into unit testing. Ade and I began working on the
+one test and then we had the whole group working together to try and figure it
+out. A couple SEIRs came in to help, as well as both instructors at different
+points. After rough drafting the readme, I had the team review and we discussed
+what else needed to be added.
+
+A major a-ha moment was when Dalonte was assiting with
+unit test and had us changed the format of our authenticator we finally were able
+to get the test to run.

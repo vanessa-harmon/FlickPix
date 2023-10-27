@@ -21,6 +21,8 @@ function MovieModal({ movie, isOpen, onClose }) {
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const filteredActors = credits.cast.filter(
     (actor) => actor.known_for_department === "Acting"
   );
@@ -31,7 +33,7 @@ function MovieModal({ movie, isOpen, onClose }) {
   }
 
   const fetchCreditsData = async () => {
-    const creditsUrl = `http://localhost:8000/movies/credits?movie_id=${movie.id}`;
+    const creditsUrl = `${ACCOUNTS_API}/movies/credits?movie_id=${movie.id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
@@ -39,15 +41,18 @@ function MovieModal({ movie, isOpen, onClose }) {
     }
   };
 
-    //Seen It
+  //Seen It
   const handleSeenItClick = async () => {
-    if (seenIt) {await deleteFromSeenIt();}
-      else {await addToSeenIt();}
+    if (seenIt) {
+      await deleteFromSeenIt();
+    } else {
+      await addToSeenIt();
+    }
     setSeenIt(!seenIt);
   };
 
   const addToSeenIt = async () => {
-    const url = "http://localhost:8000/api/seen_it";
+    const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: movie.title,
       tmdb_id: movie.id,
@@ -74,7 +79,7 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?tmdb_id=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/seen_it?tmdb_id=${encodeURIComponent(
       movie.id
     )}`;
     const fetchConfig = {
@@ -114,8 +119,7 @@ function MovieModal({ movie, isOpen, onClose }) {
       account_id: 0,
     };
 
-
-    const url = "http://localhost:8000/api/watch_later";
+    const url = `${ACCOUNTS_API}/api/watch_later`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -134,7 +138,7 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `http://localhost:8000/api/watch_later?tmdb_id=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
       movie.id
     )}`;
     const fetchConfig = {

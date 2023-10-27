@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import Nav from "./Components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import MainPage from "./Pages/MainPage.jsx";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MovieDetail from "./Pages/MovieDetail.jsx";
 import ShowDetail from "./Pages/ShowDetail.jsx";
-// import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import MoviePage from "./Pages/MoviePage.jsx";
 import ShowsPage from "./Pages/ShowsPage.jsx";
 import SearchResultsPage from "./Pages/SearchResults.jsx";
-import SearchBar from "./Components/SearchBar/SearchBar.jsx";
 import SeenIt from "./Pages/SeenIt.jsx";
 import WatchLater from "./Pages/WatchLater.jsx";
 import MainPage from "./Pages/MainPage.jsx";
@@ -41,26 +36,29 @@ function App() {
     getData();
   }, []);
 
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+
   return (
     <div>
-      {/* <AuthProvider> */}
-      <BrowserRouter>
-        <AuthProvider baseUrl={"http://localhost:8000"}>
+      <BrowserRouter basename={basename}>
+        <AuthProvider>
           <Nav />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
-            {/* <Construct info={launchInfo} /> */}
-            <Route path="/search-results" element={<SearchResultsPage movies={movies} />} />
+            <Route
+              path="/search-results"
+              element={<SearchResultsPage movies={movies} />}
+            />
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/seen-it" element={<SeenIt />} />
             <Route path="/watch-later" element={<WatchLater />} />
-        </Routes>
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
-      {/* </AuthProvider> */}
     </div>
   );
 }

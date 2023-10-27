@@ -9,8 +9,10 @@ function SeenIt() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
   const [isLoading, setIsLoading] = useState(true);
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/seen_it", {
+    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
       credentials: "include",
     });
 
@@ -22,7 +24,7 @@ function SeenIt() {
 
   const handleDeleteClick = async (tmdbId) => {
     console.log("CLICKED DELETE ON: ", tmdbId);
-    const url = `http://localhost:8000/api/seen_it?tmdb_id=${tmdbId}`;
+    const url = `${ACCOUNTS_API}/api/seen_it?tmdb_id=${tmdbId}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {

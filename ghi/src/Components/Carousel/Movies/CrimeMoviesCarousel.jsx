@@ -12,6 +12,8 @@ function CrimeMoviesCarousel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const genreId = 80;
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const openModal = (movie) => {
     setSelectedMovie(movie);
     onOpen();
@@ -23,7 +25,9 @@ function CrimeMoviesCarousel() {
   };
 
   const fetchCrimeMovies = async () => {
-    const response = await fetch(`http://localhost:8000/movies/genre?genre_id=${genreId}`);
+    const response = await fetch(
+      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+    );
 
     if (response.ok) {
       const data = await response.json();
@@ -40,14 +44,33 @@ function CrimeMoviesCarousel() {
 
   return (
     <div>
-      <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
+      <Carousel
+        centerMode={true}
+        infinite={true}
+        responsive={responsive}
+        containerClass="carousel-container"
+      >
         {crimeMovies.map((movie, id) => (
-          <div key={id} className="custom-carousel-item" onClick={() => openModal(movie)}>
-            <img src={imgUrlPrefix + movie.poster_path} alt={movie.title} className="carousel-img" />
+          <div
+            key={id}
+            className="custom-carousel-item"
+            onClick={() => openModal(movie)}
+          >
+            <img
+              src={imgUrlPrefix + movie.poster_path}
+              alt={movie.title}
+              className="carousel-img"
+            />
           </div>
         ))}
       </Carousel>
-      {selectedMovie && <MovieModal movie={selectedMovie} isOpen={isOpen} onClose={closeModal} />}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          isOpen={isOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }
