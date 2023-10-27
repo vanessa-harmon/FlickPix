@@ -54,6 +54,7 @@ build-front-end-job:
     - cd ghi
     - npm cache clean --force
     - npm install
+    - npx update-browserslist-db@latest
     - npm run build
     - cp build/index.html build/404.html
   artifacts:
