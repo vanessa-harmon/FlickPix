@@ -24,6 +24,8 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [isHovered, setIsHovered] = useState(false);
 
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
   const type = item.media_type;
   console.log("Type:", type);
 
@@ -44,7 +46,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   const fetchTrailers = async (item_type, item_id) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/trailer/videos/${item_type}/${item_id}`
+        `${ACCOUNTS_API}/trailer/videos/${item_type}/${item_id}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -67,8 +69,8 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   const fetchCreditsData = async () => {
     const creditsUrl =
       type === "movie"
-        ? `http://localhost:8000/movies/credits?movie_id=${item.id}`
-        : `http://localhost:8000/shows/credits?series_id=${item.id}`;
+        ? `${ACCOUNTS_API}/movies/credits?movie_id=${item.id}`
+        : `${ACCOUNTS_API}/shows/credits?series_id=${item.id}`;
     const response = await fetch(creditsUrl);
     if (response.ok) {
       const data = await response.json();
@@ -86,7 +88,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   };
 
   const addToSeenIt = async () => {
-    const url = "http://localhost:8000/api/seen_it";
+    const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: item.title,
       tmdb_id: item.id,
@@ -113,7 +115,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `http://localhost:8000/api/seen_it?title=${encodeURIComponent(
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
       item.title
     )}`;
     const fetchConfig = {
@@ -148,7 +150,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
     };
     console.log("data:", data);
 
-    const url = "http://localhost:8000/api/watch_later";
+    const url = `${ACCOUNTS_API}/api/watch_later`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),

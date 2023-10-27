@@ -13,6 +13,7 @@ function TopPixShows() {
   const [watchLater, setWatchLater] = useState([]);
   const [combined, setCombined] = useState([]);
   const [recommended, setRecommended] = useState([]);
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
     setSelectedShow(show); // Rename movie to show
@@ -25,7 +26,7 @@ function TopPixShows() {
   };
 
   const fetchSeenIt = async () => {
-    const response = await fetch("http://localhost:8000/api/seen_it", {
+    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
       credentials: "include",
     });
     if (response.ok) {
@@ -35,7 +36,7 @@ function TopPixShows() {
   };
 
   const fetchWatchLater = async () => {
-    const response = await fetch("http://localhost:8000/api/watch_later", {
+    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
       credentials: "include",
     });
 
@@ -68,7 +69,7 @@ function TopPixShows() {
   const recommendations = [];
 
   const fetchRecommended = async (tmdbId) => {
-    let url = `http://localhost:8000/shows/similar?series_id=${tmdbId}`;
+    let url = `${ACCOUNTS_API}/shows/similar?series_id=${tmdbId}`;
     const response = await fetch(url);
 
     if (response.ok) {

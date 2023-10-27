@@ -9,9 +9,10 @@ import { Link } from "react-router-dom";
 function ShowRecommendationsCarousel() {
   const { id } = useParams();
   const [showRecommendations, setShowRecommendations] = useState([]);
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const fetchRecommendations = async (id) => {
-    const url = `http://localhost:8000/shows/recommendations/?series_id=${id}`;
+    const url = `${ACCOUNTS_API}/shows/recommendations/?series_id=${id}`;
     const response = await fetch(url);
 
     if (response.ok) {
