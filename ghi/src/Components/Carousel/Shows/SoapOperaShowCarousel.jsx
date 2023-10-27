@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "../Movies/TrendingMoviesCarousel.css";
 import MovieModal from "../Movies/Modal/MovieModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function SoapOperaShowCarousel() {
   const [soapOperaShow, setSoapOperaShow] = useState([]);
@@ -42,7 +42,7 @@ function SoapOperaShowCarousel() {
 
   useEffect(() => {
     fetchSoapOperaShow();
-  }, []);
+  });
 
   return (
     <div>

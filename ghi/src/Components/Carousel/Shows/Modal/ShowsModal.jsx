@@ -160,7 +160,7 @@ function ShowModal({ show, isOpen, onClose }) {
 
   useEffect(() => {
     fetchCreditsData();
-  }, []);
+  });
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
