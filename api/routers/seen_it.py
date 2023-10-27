@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, Request, HTTPException, status, Query
+from fastapi import APIRouter, Depends, Response, Request, HTTPException, status
 from queries.seen_it import SeenItQueries
 from models.seen_it import SeenItIn, SeenItOut
 from authenticator import authenticator
