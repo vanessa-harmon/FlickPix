@@ -6,7 +6,6 @@ import "./TrendingMoviesCarousel.css";
 import MovieModal from "./Modal/MovieModal";
 import { useDisclosure } from "@chakra-ui/react";
 
-
 function DramaMoviesCarousel() {
   const [dramaMovies, setDramaMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -38,9 +37,9 @@ function DramaMoviesCarousel() {
 
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
-    useEffect(() => {
-        fetchDramaMovies();
-    });
+  useEffect(() => {
+    fetchDramaMovies();
+  }, []);
 
   return (
     <div>

@@ -175,7 +175,7 @@ function ShowDetail() {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
-  });
+  }, []);
 
   return (
     <div

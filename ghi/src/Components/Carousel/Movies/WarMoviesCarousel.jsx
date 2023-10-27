@@ -39,7 +39,7 @@ function WarMoviesCarousel() {
 
   useEffect(() => {
     fetchWarMovies();
-  });
+  }, []);
 
   return (
     <div>

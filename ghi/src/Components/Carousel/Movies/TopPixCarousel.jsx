@@ -100,9 +100,12 @@ function TopPixCarousel() {
   };
 
   const flattenedMovies = flattenRecommended(recommended);
+
   const selectedTopPicks = flattenedMovies.filter(
-    (movie) => movie.poster_path && movie.original_language === "en"
+    (movie) => movie?.poster_path && movie.original_language === "en"
   );
+
+  console.log("TOP Pick", selectedTopPicks);
 
   const maxMovies = Math.min(20, selectedTopPicks.length);
   const randIdx = Math.floor(

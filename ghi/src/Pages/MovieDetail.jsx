@@ -180,7 +180,7 @@ function MovieDetail() {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
-  });
+  }, []);
 
   return (
     <div

@@ -42,7 +42,7 @@ function AnimationShowCarousel() {
 
   useEffect(() => {
     fetchAnimationShow();
-  });
+  }, []);
 
   return (
     <div>

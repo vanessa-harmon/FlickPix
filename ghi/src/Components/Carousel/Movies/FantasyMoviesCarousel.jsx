@@ -6,7 +6,6 @@ import "./TrendingMoviesCarousel.css";
 import MovieModal from "./Modal/MovieModal";
 import { useDisclosure } from "@chakra-ui/react";
 
-
 function FantasyMoviesCarousel() {
   const [fantasyMovies, setFantasyMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -38,9 +37,9 @@ function FantasyMoviesCarousel() {
 
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
-    useEffect(() => {
-        fetchFantasyMovies();
-    });
+  useEffect(() => {
+    fetchFantasyMovies();
+  }, []);
 
   return (
     <div>

@@ -171,12 +171,12 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
       }
     }
     fetchTrailerUrl();
-  });
+  }, [item.media_type, item.id]);
   // [item.media_type, item.id]
 
   useEffect(() => {
     fetchCreditsData();
-  });
+  }, []);
 
   console.log("Type:", type);
   console.log("Item ID:", item.id);

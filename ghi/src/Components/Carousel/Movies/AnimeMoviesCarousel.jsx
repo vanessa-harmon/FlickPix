@@ -39,7 +39,7 @@ function AnimeMoviesCarousel() {
 
   useEffect(() => {
     fetchAnimeMovies();
-  });
+  }, []);
 
   return (
     <div>

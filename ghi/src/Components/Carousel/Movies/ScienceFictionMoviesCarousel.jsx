@@ -39,7 +39,7 @@ function ScienceFictionMoviesCarousel() {
 
   useEffect(() => {
     fetchScienceFictionMovies();
-  });
+  }, []);
 
   return (
     <div>

@@ -39,7 +39,7 @@ function NewShowsCarousel() {
 
   useEffect(() => {
     fetchNewShows();
-  });
+  }, []);
 
   return (
     <div>

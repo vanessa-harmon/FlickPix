@@ -42,7 +42,7 @@ function ComedyShowCarousel() {
 
   useEffect(() => {
     fetchComedyShow();
-  });
+  }, []);
 
   return (
     <div>

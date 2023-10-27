@@ -36,7 +36,7 @@ function TrendingMoviesCarousel() {
 
   useEffect(() => {
     fetchTrendingMovies();
-  });
+  }, []);
 
   return (
     <div>

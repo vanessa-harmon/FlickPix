@@ -39,7 +39,7 @@ function DocumentaryMoviesCarousel() {
 
   useEffect(() => {
     fetchDocumentaryMovies();
-  },);
+  }, []);
 
   return (
     <div>

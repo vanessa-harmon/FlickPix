@@ -42,7 +42,7 @@ function CrimeShowCarousel() {
 
   useEffect(() => {
     fetchCrimeShow();
-  });
+  }, []);
 
   return (
     <div>

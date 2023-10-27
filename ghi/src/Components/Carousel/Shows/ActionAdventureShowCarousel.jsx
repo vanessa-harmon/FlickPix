@@ -42,7 +42,7 @@ function ActionAdventureShowCarousel() {
 
   useEffect(() => {
     fetchActionAdventureShow();
-  });
+  }, []);
 
   return (
     <div>

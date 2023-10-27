@@ -39,7 +39,7 @@ function ThrillerMoviesCarousel() {
 
   useEffect(() => {
     fetchThrillerMovies();
-  });
+  }, []);
 
   return (
     <div>

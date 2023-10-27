@@ -39,7 +39,7 @@ function RomanceMoviesCarousel() {
 
   useEffect(() => {
     fetchRomanceMovies();
-  });
+  }, []);
 
   return (
     <div>

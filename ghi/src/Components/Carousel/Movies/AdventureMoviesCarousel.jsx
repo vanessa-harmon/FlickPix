@@ -40,7 +40,7 @@ function AdventureMoviesCarousel() {
 
   useEffect(() => {
     fetchAdventureMovies();
-  });
+  }, []);
 
   return (
     <div>

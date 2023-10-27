@@ -26,7 +26,7 @@ function ShowRecommendationsCarousel() {
 
   useEffect(() => {
     fetchRecommendations(id);
-  });
+  }, [id]);
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);

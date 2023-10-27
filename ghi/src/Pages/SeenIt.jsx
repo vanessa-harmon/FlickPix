@@ -46,7 +46,7 @@ function SeenIt() {
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  });
+  }, []);
 
   return (
     <div className="content-container">
@@ -65,7 +65,10 @@ function SeenIt() {
                 <Card.Body className="seenit-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>
-                  <button className="remove-seenit-btn" onClick={() => handleDeleteClick(media.tmdb_id)}>
+                  <button
+                    className="remove-seenit-btn"
+                    onClick={() => handleDeleteClick(media.tmdb_id)}
+                  >
                     Remove
                   </button>
                 </Card.Body>

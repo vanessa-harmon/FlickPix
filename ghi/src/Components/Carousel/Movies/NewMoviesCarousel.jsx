@@ -34,9 +34,9 @@ function NewMoviesCarousel() {
 
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
-    useEffect(() => {
-        fetchNewMovies();
-    });
+  useEffect(() => {
+    fetchNewMovies();
+  }, []);
 
   return (
     <div>
