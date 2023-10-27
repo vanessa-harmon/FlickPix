@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "../Movies/TrendingMoviesCarousel.css";
 import MovieModal from "../Movies/Modal/MovieModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function WarShowCarousel() {
   const [warShow, setWarShow] = useState([]);
@@ -24,15 +24,11 @@ function WarShowCarousel() {
   };
 
   const fetchWarShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
+    const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
       const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
+      const filteredShows = data.results.filter((show) => show.poster_path !== null);
       const first12Shows = filteredShows.slice(0, 12);
       setWarShow(first12Shows);
     }
@@ -42,37 +38,18 @@ function WarShowCarousel() {
 
   useEffect(() => {
     fetchWarShow();
-  }, []);
+  });
 
   return (
     <div>
-      <Carousel
-        centerMode={true}
-        infinite={true}
-        responsive={responsive}
-        containerClass="carousel-container"
-      >
+      <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
         {warShow.map((show, id) => (
-          <div
-            key={id}
-            className="custom-carousel-item"
-            onClick={() => openModal(show)}
-          >
-            <img
-              src={imgUrlPrefix + show.poster_path}
-              alt={show.title}
-              className="carousel-img"
-            />
+          <div key={id} className="custom-carousel-item" onClick={() => openModal(show)}>
+            <img src={imgUrlPrefix + show.poster_path} alt={show.title} className="carousel-img" />
           </div>
         ))}
       </Carousel>
-      {selectedMovie && (
-        <MovieModal
-          movie={selectedMovie}
-          isOpen={isOpen}
-          onClose={closeModal}
-        />
-      )}
+      {selectedMovie && <MovieModal movie={selectedMovie} isOpen={isOpen} onClose={closeModal} />}
     </div>
   );
 }

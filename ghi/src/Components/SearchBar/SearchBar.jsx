@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, FormControl, Button } from "react-bootstrap";
 import "./SearchBar.css";
 
@@ -20,7 +20,7 @@ function SearchBar() {
       console.log(data);
       setMovies(data.results);
       navigate("/search-results", {
-        state: { movies: data.results, query: query },
+        state: { movies: movies, query: query },
       });
     } catch (e) {
       console.log(e);

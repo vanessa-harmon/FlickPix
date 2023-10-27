@@ -61,18 +61,11 @@ function WatchLater() {
           {watchLater.items.map((media) => (
             <Col key={media.title}>
               <Card className="watchlater-card" style={{ width: "18rem" }}>
-                <Card.Img
-                  className="watchlater-img"
-                  variant="top"
-                  src={imgUrlPrefix + media.poster_img}
-                />
+                <Card.Img className="watchlater-img" variant="top" src={imgUrlPrefix + media.poster_img} />
                 <Card.Body className="watchlater-card-body">
                   <Card.Title>{media.title}</Card.Title>
                   <Card.Text>{media.synopsis}</Card.Text>
-                  <button
-                    className="remove-watchlater-btn"
-                    onClick={() => handleDeleteClick(media.tmdb_id)}
-                  >
+                  <button className="remove-watchlater-btn" onClick={() => handleDeleteClick(media.tmdb_id)}>
                     Remove
                   </button>
                 </Card.Body>

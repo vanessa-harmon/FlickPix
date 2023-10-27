@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "../Movies/TrendingMoviesCarousel.css";
 import ShowModal from "./Modal/ShowsModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function TrendingShowsCarousel() {
   const [trendingShows, setTrendingShows] = useState([]);
@@ -27,9 +27,7 @@ function TrendingShowsCarousel() {
 
     if (response.ok) {
       const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
+      const filteredShows = data.results.filter((show) => show.poster_path !== null);
       const first12Shows = filteredShows.slice(0, 12);
       setTrendingShows(first12Shows);
     }
@@ -39,33 +37,18 @@ function TrendingShowsCarousel() {
 
   useEffect(() => {
     fetchTrendingShows();
-  }, []);
+  });
 
   return (
     <div>
-      <Carousel
-        centerMode={true}
-        infinite={true}
-        responsive={responsive}
-        containerClass="carousel-container"
-      >
+      <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
         {trendingShows.map((show, id) => (
-          <div
-            key={id}
-            className="custom-carousel-item"
-            onClick={() => openModal(show)}
-          >
-            <img
-              src={imgUrlPrefix + show.poster_path}
-              alt={show.title}
-              className="carousel-img"
-            />
+          <div key={id} className="custom-carousel-item" onClick={() => openModal(show)}>
+            <img src={imgUrlPrefix + show.poster_path} alt={show.title} className="carousel-img" />
           </div>
         ))}
       </Carousel>
-      {selectedShow && (
-        <ShowModal show={selectedShow} isOpen={isOpen} onClose={closeModal} />
-      )}
+      {selectedShow && <ShowModal show={selectedShow} isOpen={isOpen} onClose={closeModal} />}
     </div>
   );
 }

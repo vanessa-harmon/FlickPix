@@ -17,7 +17,6 @@ import WesternShowCarousel from "../Components/Carousel/Shows/WesternShowCarouse
 import NewShowsCarousel from "../Components/Carousel/Shows/NewShows";
 import TrendingShowsCarousel from "../Components/Carousel/Shows/TrendingShows";
 import "./MainPage.css";
-import CarouselSlider from "../Components/Carousel/Carousels";
 
 function ShowsPage() {
   return (
