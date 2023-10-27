@@ -39,18 +39,24 @@ function App() {
     getData();
   }, []);
 
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+
   return (
     <div>
       {/* <AuthProvider> */}
-      <BrowserRouter>
-        <AuthProvider baseUrl={"http://localhost:8000"}>
+      <BrowserRouter basename={basename}>
+        <AuthProvider>
           <Nav />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
             {/* <Construct info={launchInfo} /> */}
-            <Route path="/search-results" element={<SearchResultsPage movies={movies} />} />
+            <Route
+              path="/search-results"
+              element={<SearchResultsPage movies={movies} />}
+            />
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/seen-it" element={<SeenIt />} />

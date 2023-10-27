@@ -55,3 +55,15 @@ Next week will work on:
 Working with Vanessa and Ade to implement the delete functionality.
 
 Group will work together on implementing unit tests and deployment.
+
+## Oct 27, 2023
+
+This week I worked on:
+
+Completed the delete functionality for users to delete items from their Watch Later or Seen It list.
+
+Worked on creating the 'Top Pix for You' Carousel that takes movies and shows from the user's watch later and seen it list and passes the information to the TMDB third party API to retrieve a list of similar items based on the user's watch history.
+
+Created unit test that tests the post functionality for a user to add an item to their seen it list.
+
+As a group, we are currently working on project deployment.
