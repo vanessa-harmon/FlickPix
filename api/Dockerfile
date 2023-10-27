@@ -7,14 +7,12 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 COPY main.py main.py
 COPY authenticator.py authenticator.py
-COPY init.sql init.sql
 
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
 COPY queries queries
 COPY routers routers
 COPY models models
-COPY tests tests
 
 RUN python -m pip install -r requirements.txt
 

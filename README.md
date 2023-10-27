@@ -10,7 +10,7 @@ FlickPix - Movie and tv show recommendation website
 
 ## Functionality
 
-- Acess a vast collection of movies and TV shows from  reliable third-party API.
+- Acess a vast collection of movies and TV shows from reliable third-party API.
 - Watch-Later List: Add shows and movies to your watch-later list.
 - Seen-It List: Keep track of the shows and movies you've watched.
 - Utilize the "Seen-It List" data to generate personalized recommendations based on your viewing history.
@@ -49,9 +49,9 @@ Aimed at show/movie enjoyers and binge watchers who want recommendations based o
 1. Sign up for an account on https://www.themoviedb.org/
 2. Fork and clone the repo
 3. Create a signing key within the .env file
-  SIGNING_KEY='Your unique key'
+   SIGNING_KEY='Your unique key'
 4. Get Get your API Read Access Token from the settings/api page and paste it within the .env file
-  TMDB_API_KEY=Bearer 'ENTER YOUR TOKEN'
+   TMDB_API_KEY=Bearer 'ENTER YOUR TOKEN'
 5. CD into the new project directory
 6. install dependencies via `npm install`
 7. run `docker volume create flickpix`
@@ -73,12 +73,10 @@ Aimed at show/movie enjoyers and binge watchers who want recommendations based o
 
 - https://excalidraw.com/#json=x1jCbFZfzLjxUU7piWUql,Q4nWxzqKx2Kw1pIMJF_SEA
 
-
-
-
 ## Issue Tracking
 
 -E.g. - links or screenshoots, could be included in the doc’s dir
+![Asana](docs\Issues Board - Asana.png)
 
 ## Testing :white_check_mark:
 
