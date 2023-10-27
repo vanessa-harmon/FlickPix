@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "../Movies/TrendingMoviesCarousel.css";
 import ShowModal from "./Modal/ShowsModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function CrimeShowCarousel() {
   const [crimeShow, setCrimeShow] = useState([]);
@@ -42,7 +42,7 @@ function CrimeShowCarousel() {
 
   useEffect(() => {
     fetchCrimeShow();
-  }, []);
+  });
 
   return (
     <div>

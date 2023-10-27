@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "./TrendingMoviesCarousel.css";
 import MovieModal from "./Modal/MovieModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function TopPixCarousel() {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -51,7 +51,7 @@ function TopPixCarousel() {
   useEffect(() => {
     fetchSeenIt();
     fetchWatchLater();
-  }, []);
+  });
 
   useEffect(() => {
     if (seenIt.items?.length > 0 || watchLater.items?.length > 0) {
@@ -91,7 +91,7 @@ function TopPixCarousel() {
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, [combined]);
+  });
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();
