@@ -70,12 +70,16 @@ function ShowDetail() {
     const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
       poster_img: show.poster_path,
       account_id: 0,
     };
+
+    console.log("DATA: ", data);
+
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
