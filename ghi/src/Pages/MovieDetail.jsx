@@ -180,7 +180,7 @@ function MovieDetail() {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
-  }, [id]);
+  }, []);
 
   return (
     <div
@@ -190,7 +190,7 @@ function MovieDetail() {
       }}
     >
       <div className="movie-poster">
-        <img src={imgUrlPrefix + movie.poster_path} />
+        <img src={imgUrlPrefix + movie.poster_path} alt="movie poster" />
       </div>
       <div className="movie-details">
         <h1>
@@ -204,6 +204,7 @@ function MovieDetail() {
             onClick={handleSeenItClick}
             isActive={seenIt}
             isRound={true}
+            alt="iconimg"
           />
           <IconButton
             icon={<MdOutlineAddToQueue />}

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(1500px, 1fr));
   background-color: #00132D !important;
+  color: white;
   padding-top: 20px;
   padding-right: 20px;
   padding-bottom: 20px;

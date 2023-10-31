@@ -46,7 +46,7 @@ function WatchLater() {
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  });
+  }, []);
 
   return (
     <div>

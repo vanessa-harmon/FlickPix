@@ -42,7 +42,7 @@ function KidsShowCarousel() {
 
   useEffect(() => {
     fetchKidsShow();
-  });
+  }, []);
 
   return (
     <div>

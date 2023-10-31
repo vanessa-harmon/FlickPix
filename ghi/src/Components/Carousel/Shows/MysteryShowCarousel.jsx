@@ -42,7 +42,7 @@ function MysteryShowCarousel() {
 
   useEffect(() => {
     fetchMysteryShow();
-  });
+  }, []);
 
   return (
     <div>

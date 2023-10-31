@@ -70,12 +70,16 @@ function ShowDetail() {
     const url = `${ACCOUNTS_API}/api/seen_it`;
     const data = {
       title: show.original_name,
+      tmdb_id: show.id,
       synopsis: show.overview,
       actors: actors,
       backdrop_img: show.backdrop_path,
       poster_img: show.poster_path,
       account_id: 0,
     };
+
+    console.log("DATA: ", data);
+
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -175,7 +179,7 @@ function ShowDetail() {
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
-  }, [id]);
+  }, []);
 
   return (
     <div
@@ -185,7 +189,7 @@ function ShowDetail() {
       }}
     >
       <div className="show-poster">
-        <img src={imgUrlPrefix + show.poster_path} />
+        <img src={imgUrlPrefix + show.poster_path} alt="show detail" />
       </div>
       <div className="show-details">
         <h1>
@@ -199,6 +203,7 @@ function ShowDetail() {
             onClick={handleSeenItClick}
             isActive={seenIt}
             isRound={true}
+            alt="iconbutton"
           />
           <IconButton
             icon={<MdOutlineAddToQueue />}

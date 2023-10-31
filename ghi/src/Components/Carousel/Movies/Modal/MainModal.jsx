@@ -22,7 +22,6 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   const [seenIt, setSeenIt] = useState(false);
   const [added, setAdded] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
@@ -38,10 +37,6 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   for (let actor of filteredActors.slice(0, 15)) {
     actors = actors + actor["name"] + ", ";
   }
-
-  const handleImageHover = (hovered) => {
-    setIsHovered(hovered);
-  };
 
   const fetchTrailers = async (item_type, item_id) => {
     try {
@@ -177,6 +172,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
     }
     fetchTrailerUrl();
   }, [item.media_type, item.id]);
+  // [item.media_type, item.id]
 
   useEffect(() => {
     fetchCreditsData();

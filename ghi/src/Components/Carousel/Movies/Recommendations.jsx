@@ -27,6 +27,7 @@ function MovieRecommendationsCarousel() {
   useEffect(() => {
     fetchRecommendations(id);
   }, [id]);
+  // [id]
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);

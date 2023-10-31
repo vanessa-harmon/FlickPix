@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Randomizer.css";
 import {
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -11,7 +10,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Randomizer({ id, mediaType }) {
@@ -53,8 +51,6 @@ function Randomizer({ id, mediaType }) {
   useEffect(() => {
     handleClick();
   }, []);
-
-  const trailer_url = "https://www.youtube.com/embed/DhlaBO-SwVE";
 
   useEffect(() => {}, [random]);
 
