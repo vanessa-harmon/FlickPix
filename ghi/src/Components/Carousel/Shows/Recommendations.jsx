@@ -11,7 +11,10 @@ function ShowRecommendationsCarousel() {
   const [showRecommendations, setShowRecommendations] = useState([]);
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const fetchRecommendations = async (id) => {
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchRecommendations = async (id) => {
     const url = `${ACCOUNTS_API}/shows/recommendations/?series_id=${id}`;
     const response = await fetch(url);
 
@@ -21,12 +24,8 @@ function ShowRecommendationsCarousel() {
       setShowRecommendations(first12Movies);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchRecommendations(id);
-  });
+  }, [ACCOUNTS_API]);
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);

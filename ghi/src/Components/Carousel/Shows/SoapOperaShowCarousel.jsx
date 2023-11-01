@@ -10,7 +10,6 @@ function SoapOperaShowCarousel() {
   const [soapOperaShow, setSoapOperaShow] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10766;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,10 +22,12 @@ function SoapOperaShowCarousel() {
     onClose();
   };
 
-  const fetchSoapOperaShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchSoapOperaShow = async () => {
+    const genreId = 10766;
+    const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -37,12 +38,8 @@ function SoapOperaShowCarousel() {
       setSoapOperaShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchSoapOperaShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

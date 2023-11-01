@@ -22,7 +22,10 @@ function TrendingShowsCarousel() {
     onClose();
   };
 
-  const fetchTrendingShows = async () => {
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchTrendingShows = async () => {
     const response = await fetch(`${ACCOUNTS_API}/shows/trending`);
 
     if (response.ok) {
@@ -32,12 +35,8 @@ function TrendingShowsCarousel() {
       setTrendingShows(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchTrendingShows();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

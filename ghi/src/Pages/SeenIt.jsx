@@ -11,16 +11,6 @@ function SeenIt() {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const fetchData = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setSeenIt(data);
-    }
-  };
 
   const handleDeleteClick = async (tmdbId) => {
     console.log("CLICKED DELETE ON: ", tmdbId);
@@ -43,10 +33,20 @@ function SeenIt() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setSeenIt(data);
+    }
+  };
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div className="content-container">

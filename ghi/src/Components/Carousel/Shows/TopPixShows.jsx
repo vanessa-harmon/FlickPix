@@ -25,7 +25,10 @@ function TopPixShows() {
     onClose();
   };
 
-  const fetchSeenIt = async () => {
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchSeenIt = async () => {
     const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
       credentials: "include",
     });
@@ -46,12 +49,9 @@ function TopPixShows() {
     }
   };
 
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchSeenIt();
     fetchWatchLater();
-  });
+  }, [ACCOUNTS_API]);
 
   useEffect(() => {
     if (seenIt.items?.length > 0 || watchLater.items?.length > 0) {
@@ -78,6 +78,7 @@ function TopPixShows() {
     }
   };
 
+  useEffect(() => {
   const addRecommendations = async () => {
     const recommendationsData = [];
     for (const item of combined) {
@@ -86,12 +87,10 @@ function TopPixShows() {
     }
     setRecommended(recommendationsData);
   };
-
-  useEffect(() => {
     if (combined.length > 0) {
       addRecommendations();
     }
-  });
+  }, []);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();

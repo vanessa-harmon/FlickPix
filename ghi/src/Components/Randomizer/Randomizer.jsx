@@ -12,18 +12,6 @@ function Randomizer({ id, mediaType }) {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const handleClick = async (event) => {
-    const randomUrl = `${ACCOUNTS_API}/movies/random`;
-    const response = await fetch(randomUrl);
-    if (response.ok) {
-      const data = await response.json();
-      if (data.poster_path !== null) {
-        setRandom(data);
-      } else {
-        handleClick();
-      }
-    }
-  };
 
   const handleMoreClick = () => {
     let route;
@@ -41,8 +29,20 @@ function Randomizer({ id, mediaType }) {
   };
 
   useEffect(() => {
+    const handleClick = async (event) => {
+    const randomUrl = `${ACCOUNTS_API}/movies/random`;
+    const response = await fetch(randomUrl);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.poster_path !== null) {
+        setRandom(data);
+      } else {
+        handleClick();
+      }
+    }
+  };
     handleClick();
-  });
+  }, [ACCOUNTS_API]);
 
   useEffect(() => {}, [random]);
 

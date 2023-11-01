@@ -10,7 +10,6 @@ function SciFiShowCarousel() {
   const [sciFiShow, setSciFiShow] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10765;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,10 +22,12 @@ function SciFiShowCarousel() {
     onClose();
   };
 
-  const fetchSciFiShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchSciFiShow = async () => {
+    const genreId = 10765;
+    const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -37,12 +38,8 @@ function SciFiShowCarousel() {
       setSciFiShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchSciFiShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

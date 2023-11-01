@@ -10,7 +10,6 @@ function TalkShowCarousel() {
   const [talkShow, setTalkShow] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10767;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,7 +22,11 @@ function TalkShowCarousel() {
     onClose();
   };
 
-  const fetchTalkShow = async () => {
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchTalkShow = async () => {
+    const genreId = 10767;
     const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
@@ -33,12 +36,8 @@ function TalkShowCarousel() {
       setTalkShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchTalkShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

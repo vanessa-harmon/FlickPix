@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./WatchLater.css";
+import { Accordion } from "@chakra-ui/react";
 
 function WatchLater() {
   const [watchLater, setWatchLater] = useState([]);
@@ -10,17 +11,6 @@ function WatchLater() {
   const [isLoading, setIsLoading] = useState(true);
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-
-  const fetchData = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
 
   const handleDeleteClick = async (tmdbId) => {
     console.log("CLICKED DELETE ON: ", tmdbId);
@@ -43,10 +33,20 @@ function WatchLater() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setWatchLater(data);
+    }
+  };
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

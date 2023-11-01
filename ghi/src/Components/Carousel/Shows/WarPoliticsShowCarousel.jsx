@@ -10,7 +10,6 @@ function WarShowCarousel() {
   const [warShow, setWarShow] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10768;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,7 +22,12 @@ function WarShowCarousel() {
     onClose();
   };
 
-  const fetchWarShow = async () => {
+
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchWarShow = async () => {
+    const genreId = 10768;
     const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
@@ -33,12 +37,8 @@ function WarShowCarousel() {
       setWarShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchWarShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

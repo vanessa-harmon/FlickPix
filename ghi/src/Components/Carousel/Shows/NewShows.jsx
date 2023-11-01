@@ -22,8 +22,11 @@ function NewShowsCarousel() {
     onClose();
   };
 
-  const fetchNewShows = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/shows/latest`);
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchNewShows = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/shows/latest`);
 
     if (response.ok) {
       const data = await response.json();
@@ -34,12 +37,8 @@ function NewShowsCarousel() {
       setNewShows(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchNewShows();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

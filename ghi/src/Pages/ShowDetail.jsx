@@ -23,37 +23,6 @@ function ShowDetail() {
     actors = actors + actor["name"] + ", ";
   }
 
-  const fetchData = async () => {
-    try {
-      const url = `${ACCOUNTS_API}/shows/details?series_id=${id}`;
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setShow(data);
-      }
-    } catch (error) {
-      console.error("Error fetching show details:", error);
-    }
-  };
-
-  const fetchCreditsData = async () => {
-    const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${id}`;
-    const response = await fetch(creditsUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setCredits(data);
-    }
-  };
-
-  const fetchProvidersData = async () => {
-    const providersUrl = `${ACCOUNTS_API}/shows/providers?series_id=${id}`;
-    const response = await fetch(providersUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setProviders(data);
-    }
-  };
-
   //Seen It
   const handleSeenItClick = async () => {
     if (seenIt) {
@@ -166,10 +135,40 @@ function ShowDetail() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+    try {
+      const url = `${ACCOUNTS_API}/shows/details?series_id=${id}`;
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setShow(data);
+      }
+    } catch (error) {
+      console.error("Error fetching show details:", error);
+    }
+  };
+
+  const fetchCreditsData = async () => {
+    const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${id}`;
+    const response = await fetch(creditsUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setCredits(data);
+    }
+  };
+
+  const fetchProvidersData = async () => {
+    const providersUrl = `${ACCOUNTS_API}/shows/providers?series_id=${id}`;
+    const response = await fetch(providersUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setProviders(data);
+    }
+  };
     fetchData();
     fetchCreditsData();
     fetchProvidersData();
-  });
+  }, [ACCOUNTS_API, id]);
 
   return (
     <div

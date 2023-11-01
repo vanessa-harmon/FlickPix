@@ -10,7 +10,6 @@ function RealityShowCarousel() {
   const [realityShow, setRealityShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10764;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -23,10 +22,12 @@ function RealityShowCarousel() {
     onClose();
   };
 
-  const fetchRealityShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchRealityShow = async () => {
+    const genreId = 10764;
+    const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -37,12 +38,8 @@ function RealityShowCarousel() {
       setRealityShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchRealityShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

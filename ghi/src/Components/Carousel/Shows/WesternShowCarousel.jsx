@@ -10,7 +10,6 @@ function WesternShowCarousel() {
   const [westernShow, setWesternShow] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 37;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,7 +22,11 @@ function WesternShowCarousel() {
     onClose();
   };
 
-  const fetchWesternShow = async () => {
+  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
+
+  useEffect(() => {
+    const fetchWesternShow = async () => {
+    const genreId = 37;
     const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
 
     if (response.ok) {
@@ -33,12 +36,8 @@ function WesternShowCarousel() {
       setWesternShow(first12Shows);
     }
   };
-
-  const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  useEffect(() => {
     fetchWesternShow();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>
