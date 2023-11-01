@@ -51,7 +51,7 @@ function TopPixCarousel() {
   useEffect(() => {
     fetchSeenIt();
     fetchWatchLater();
-  });
+  }, []);
 
   useEffect(() => {
     if (seenIt.items?.length > 0 || watchLater.items?.length > 0) {
@@ -90,7 +90,7 @@ function TopPixCarousel() {
     if (combined.length > 0) {
       addRecommendations();
     }
-  });
+  }, [combined]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();

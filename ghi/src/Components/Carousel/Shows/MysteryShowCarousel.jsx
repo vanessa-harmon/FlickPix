@@ -10,7 +10,6 @@ function MysteryShowCarousel() {
   const [mysteryShow, setMysteryShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 9648;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -23,26 +22,26 @@ function MysteryShowCarousel() {
     onClose();
   };
 
-  const fetchMysteryShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
-      const first12Shows = filteredShows.slice(0, 12);
-      setMysteryShow(first12Shows);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchMysteryShow = async () => {
+      const genreId = 9648;
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setMysteryShow(first12Shows);
+      }
+    };
     fetchMysteryShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

@@ -22,21 +22,20 @@ function TrendingMoviesCarousel() {
     onClose();
   };
 
-  const fetchTrendingMovies = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/movies/trending`);
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setTrendingMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchTrendingMovies = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/movies/trending`);
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setTrendingMovies(first12Movies);
+      }
+    };
     fetchTrendingMovies();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>
