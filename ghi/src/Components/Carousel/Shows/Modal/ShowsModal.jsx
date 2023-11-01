@@ -32,15 +32,6 @@ function ShowModal({ show, isOpen, onClose }) {
     actors = actors + actor["name"] + ", ";
   }
 
-  const fetchCreditsData = async () => {
-    const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${show.id}`;
-    const response = await fetch(creditsUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setCredits(data);
-    }
-  };
-
   //Seen It
   const handleSeenItClick = async () => {
     if (seenIt) {
@@ -159,6 +150,14 @@ function ShowModal({ show, isOpen, onClose }) {
   };
 
   useEffect(() => {
+    const fetchCreditsData = async () => {
+      const creditsUrl = `${ACCOUNTS_API}/shows/credits?series_id=${show.id}`;
+      const response = await fetch(creditsUrl);
+      if (response.ok) {
+        const data = await response.json();
+        setCredits(data);
+      }
+    };
     fetchCreditsData();
   }, []);
 

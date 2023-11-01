@@ -23,24 +23,23 @@ function DocumentaryShowCarousel() {
     onClose();
   };
 
-  const fetchDocumentaryShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
-      const first12Shows = filteredShows.slice(0, 12);
-      setDocumentaryShow(first12Shows);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchDocumentaryShow = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setDocumentaryShow(first12Shows);
+      }
+    };
     fetchDocumentaryShow();
   }, []);
 
