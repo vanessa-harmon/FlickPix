@@ -48,6 +48,7 @@ class AccountQueries():
                         record = {}
                         for i, column in enumerate(cur.description):
                             record[column.name] = row[i]
+                    print("LOGIN: ", record)
                     return AccountOutWithPassword(**record)
                 except Exception:
                     return {
@@ -80,4 +81,5 @@ class AccountQueries():
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
+                print("RECORD: ", record)
                 return AccountOutWithPassword(**record)

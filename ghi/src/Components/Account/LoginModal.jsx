@@ -42,7 +42,12 @@ function LoginModal({ isOpenLogin, onCloseLogin }) {
         <ModalBody pb={6}>
           <FormControl isRequired onSubmit={handleLoginSubmit} mt={4}>
             <FormLabel htmlFor="username">Username</FormLabel>
-            <Input name="username" type="text" onChange={(e) => setUsernameLogin(e.target.value)} placeholder="Username" />
+            <Input
+              name="username"
+              type="text"
+              onChange={(e) => setUsernameLogin(e.target.value)}
+              placeholder="Username"
+            />
             <FormHelperText>Your username is your email.</FormHelperText>
 
             <FormLabel htmlFor="password">Password</FormLabel>

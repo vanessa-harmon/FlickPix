@@ -15,7 +15,6 @@ import MainPage from "./Pages/MainPage.jsx";
 function App() {
   const [launchInfo, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
-  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -26,11 +25,11 @@ function App() {
       let data = await response.json();
 
       if (response.ok) {
-        console.log("got launch data!");
         setLaunchInfo(data.launch_details);
+        console.log("got launch data!", launchInfo);
       } else {
-        console.log("drat! something happened");
         setError(data.message);
+        console.log("drat! something happened", error);
       }
     }
     getData();
@@ -38,20 +37,18 @@ function App() {
 
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   return (
     <div>
       <BrowserRouter basename={basename}>
-        <AuthProvider>
+        <AuthProvider baseUrl={ACCOUNTS_API}>
           <Nav />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tv-shows" element={<ShowsPage />} />
-            <Route
-              path="/search-results"
-              element={<SearchResultsPage movies={movies} />}
-            />
+            <Route path="/search-results" element={<SearchResultsPage />} />
             <Route path="/movies/:id" element={<MovieDetail />} />
             <Route path="/tv-shows/:id" element={<ShowDetail />} />
             <Route path="/seen-it" element={<SeenIt />} />
