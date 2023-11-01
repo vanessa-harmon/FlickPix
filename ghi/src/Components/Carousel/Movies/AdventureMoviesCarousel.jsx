@@ -22,24 +22,11 @@ function AdventureMoviesCarousel() {
     onClose();
   };
 
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-
-  const fetchAdventureMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setAdventureMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
     const fetchAdventureMovies = async () => {
+      const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
       );

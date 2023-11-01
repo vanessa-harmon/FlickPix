@@ -11,7 +11,6 @@ function DramaMoviesCarousel() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const genreId = 18;
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -27,6 +26,7 @@ function DramaMoviesCarousel() {
 
   useEffect(() => {
     const fetchDramaMovies = async () => {
+      const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
       );

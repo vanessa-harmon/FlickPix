@@ -11,7 +11,6 @@ function DocumentaryMoviesCarousel() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const genreId = 99;
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -26,6 +25,7 @@ function DocumentaryMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchDocumentaryMovies = async () => {
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
