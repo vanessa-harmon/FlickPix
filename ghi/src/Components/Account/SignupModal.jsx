@@ -36,8 +36,8 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
       disabled: false,
     };
 
-    // const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-    register(userData, "http://localhost:8000/api/accounts/");
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+    register(userData, `${ACCOUNTS_API}/api/accounts/`);
     // e.target.reset();
     onCloseSignup();
     navigate("/");
