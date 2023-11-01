@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Randomizer.css";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -50,17 +58,27 @@ function Randomizer({ id, mediaType }) {
     <>
       <div className="shuffle-container">
         <button onClick={onOpen} onClickCapture={handleClick}>
-          <img src="shuffle.png" alt="Shuffle Button" className="shuffle-button" />
+          <img
+            src="shuffle.png"
+            alt="Shuffle Button"
+            className="shuffle-button"
+          />
         </button>
       </div>
       <div className="modal-shuffle-container">
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent className="random-modal">
-            <ModalHeader className="random-header">{random.name || random.title}</ModalHeader>
+            <ModalHeader className="random-header">
+              {random.name || random.title}
+            </ModalHeader>
             <ModalCloseButton className="modal-close" />
             <ModalBody className="random-body">
-              <img src={imgUrlPrefix + random.poster_path} alt={random.name || random.title} className="movie-image" />
+              <img
+                src={imgUrlPrefix + random.poster_path}
+                alt={random.name || random.title}
+                className="movie-image"
+              />
               <p>{random.overview}</p>
               <p>Rating: {random.vote_average}</p>
             </ModalBody>
@@ -73,7 +91,11 @@ function Randomizer({ id, mediaType }) {
                 Close
               </button>
               <button onClick={onOpen} onClickCapture={handleClick}>
-                <img src="shuffle.png" alt="Shuffle Button" className="modal-shuffle-button" />
+                <img
+                  src="shuffle.png"
+                  alt="Shuffle Button"
+                  className="modal-shuffle-button"
+                />
               </button>
             </ModalFooter>
           </ModalContent>

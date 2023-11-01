@@ -6,12 +6,10 @@ import "./TrendingMoviesCarousel.css";
 import MovieModal from "./Modal/MovieModal";
 import { useDisclosure } from "@chakra-ui/react";
 
-
 function MysteryMoviesCarousel() {
   const [mysteryMovies, setMysteryMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 9648;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -24,23 +22,23 @@ function MysteryMoviesCarousel() {
     onClose();
   };
 
-  const fetchMysteryMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setMysteryMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
-    useEffect(() => {
-        fetchMysteryMovies();
-    });
+  useEffect(() => {
+    const genreId = 9648;
+    const fetchMysteryMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setMysteryMovies(first12Movies);
+      }
+    };
+    fetchMysteryMovies();
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

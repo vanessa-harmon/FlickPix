@@ -11,23 +11,21 @@ function MovieRecommendationsCarousel() {
   const [movieRecommendations, setMovieRecommendations] = useState([]);
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const fetchRecommendations = async (id) => {
-    const url = `${ACCOUNTS_API}/movies/recommendations?movie_id=${id}`;
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setMovieRecommendations(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchRecommendations = async (id) => {
+      const url = `${ACCOUNTS_API}/movies/recommendations?movie_id=${id}`;
+      const response = await fetch(url);
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setMovieRecommendations(first12Movies);
+      }
+    };
     fetchRecommendations(id);
-  });
-  // [id]
+  }, [id, ACCOUNTS_API]);
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);

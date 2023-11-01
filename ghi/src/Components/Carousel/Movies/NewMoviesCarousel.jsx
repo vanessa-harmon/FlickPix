@@ -22,21 +22,20 @@ function NewMoviesCarousel() {
     onClose();
   };
 
-  const fetchNewMovies = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/movies/latest`);
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setNewMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
-    useEffect(() => {
-        fetchNewMovies();
-    });
+  useEffect(() => {
+    const fetchNewMovies = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/movies/latest`);
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setNewMovies(first12Movies);
+      }
+    };
+    fetchNewMovies();
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

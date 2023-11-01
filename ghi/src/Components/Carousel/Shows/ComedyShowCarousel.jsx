@@ -4,13 +4,12 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "../Movies/TrendingMoviesCarousel.css";
 import ShowModal from "./Modal/ShowsModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function ComedyShowCarousel() {
   const [comedyShow, setComedyShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 35;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -23,26 +22,26 @@ function ComedyShowCarousel() {
     onClose();
   };
 
-  const fetchComedyShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
-      const first12Shows = filteredShows.slice(0, 12);
-      setComedyShow(first12Shows);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchComedyShow = async () => {
+      const genreId = 35;
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setComedyShow(first12Shows);
+      }
+    };
     fetchComedyShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

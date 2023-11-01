@@ -31,7 +31,9 @@ function WesternShowCarousel() {
 
     if (response.ok) {
       const data = await response.json();
-      const filteredShows = data.results.filter((show) => show.poster_path !== null);
+      const filteredShows = data.results.filter(
+        (show) => show.poster_path !== null
+      );
       const first12Shows = filteredShows.slice(0, 12);
       setWesternShow(first12Shows);
     }
@@ -41,14 +43,33 @@ function WesternShowCarousel() {
 
   return (
     <div>
-      <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
+      <Carousel
+        centerMode={true}
+        infinite={true}
+        responsive={responsive}
+        containerClass="carousel-container"
+      >
         {westernShow.map((show, id) => (
-          <div key={id} className="custom-carousel-item" onClick={() => openModal(show)}>
-            <img src={imgUrlPrefix + show.poster_path} alt={show.title} className="carousel-img" />
+          <div
+            key={id}
+            className="custom-carousel-item"
+            onClick={() => openModal(show)}
+          >
+            <img
+              src={imgUrlPrefix + show.poster_path}
+              alt={show.title}
+              className="carousel-img"
+            />
           </div>
         ))}
       </Carousel>
-      {selectedMovie && <MovieModal movie={selectedMovie} isOpen={isOpen} onClose={closeModal} />}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          isOpen={isOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { responsive } from "../CarouselData";
 import { useEffect, useState } from "react";
 import "./TrendingMoviesCarousel.css";
 import MovieModal from "./Modal/MovieModal";
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 function TopPixCarousel() {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -25,33 +25,32 @@ function TopPixCarousel() {
     onClose();
   };
 
-  const fetchSeenIt = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setSeenIt(data);
-    }
-  };
-
-  const fetchWatchLater = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchSeenIt = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSeenIt(data);
+      }
+    };
+
+    const fetchWatchLater = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setWatchLater(data);
+      }
+    };
     fetchSeenIt();
     fetchWatchLater();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   useEffect(() => {
     if (seenIt.items?.length > 0 || watchLater.items?.length > 0) {
@@ -68,30 +67,28 @@ function TopPixCarousel() {
 
   const recommendations = [];
 
-  const fetchRecommended = async (tmdbId) => {
-    let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      recommendations.push(data);
-    }
-  };
-
-  const addRecommendations = async () => {
-    const recommendationsData = [];
-    for (const item of combined) {
-      await fetchRecommended(item.tmdb_id);
-      recommendationsData.push(recommendations);
-    }
-    setRecommended(recommendationsData);
-  };
-
   useEffect(() => {
+    const fetchRecommended = async (tmdbId) => {
+      let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
+      const response = await fetch(url);
+
+      if (response.ok) {
+        const data = await response.json();
+        recommendations.push(data);
+      }
+    };
+    const addRecommendations = async () => {
+      const recommendationsData = [];
+      for (const item of combined) {
+        await fetchRecommended(item.tmdb_id);
+        recommendationsData.push(recommendations);
+      }
+      setRecommended(recommendationsData);
+    };
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, [combined]);
+  }, [combined, ACCOUNTS_API]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();
@@ -100,9 +97,12 @@ function TopPixCarousel() {
   };
 
   const flattenedMovies = flattenRecommended(recommended);
+
   const selectedTopPicks = flattenedMovies.filter(
-    (movie) => movie.poster_path && movie.original_language === "en"
+    (movie) => movie?.poster_path && movie.original_language === "en"
   );
+
+  console.log("TOP Pick", selectedTopPicks);
 
   const maxMovies = Math.min(20, selectedTopPicks.length);
   const randIdx = Math.floor(

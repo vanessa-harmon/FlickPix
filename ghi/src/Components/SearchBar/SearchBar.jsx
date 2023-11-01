@@ -20,7 +20,7 @@ function SearchBar() {
       console.log(data);
       setMovies(data.results);
       navigate("/search-results", {
-        state: { movies: movies, query: query },
+        state: { movies: data.results, query: query },
       });
     } catch (e) {
       console.log(e);

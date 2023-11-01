@@ -26,18 +26,20 @@ function MysteryShowCarousel() {
 
   useEffect(() => {
     const fetchMysteryShow = async () => {
-    const genreId = 9648;
-    const response = await fetch(`${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`);
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
+      const genreId = 9648;
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
-      const first12Shows = filteredShows.slice(0, 12);
-      setMysteryShow(first12Shows);
-    }
-  };
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setMysteryShow(first12Shows);
+      }
+    };
     fetchMysteryShow();
   }, [ACCOUNTS_API]);
 

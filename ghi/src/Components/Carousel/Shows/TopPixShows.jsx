@@ -90,7 +90,7 @@ function TopPixShows() {
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, []);
+  }, [combined]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();
@@ -99,10 +99,14 @@ function TopPixShows() {
   };
 
   const flattenedShows = flattenRecommended(recommended);
-  const selectedTopPicks = flattenedShows.filter((show) => show?.poster_path && show.original_language === "en");
+  const selectedTopPicks = flattenedShows.filter(
+    (show) => show?.poster_path && show.original_language === "en"
+  );
 
   const maxShows = Math.min(20, selectedTopPicks.length);
-  const randIdx = Math.floor(Math.random() * (selectedTopPicks.length - maxShows + 1));
+  const randIdx = Math.floor(
+    Math.random() * (selectedTopPicks.length - maxShows + 1)
+  );
   const topPicksCarousel = selectedTopPicks.slice(randIdx, randIdx + maxShows);
 
   const addItemsComponent = () => (
@@ -119,18 +123,41 @@ function TopPixShows() {
 
   const TopPixComponent = () => (
     <div>
-      <Carousel centerMode={true} infinite={true} responsive={responsive} containerClass="carousel-container">
+      <Carousel
+        centerMode={true}
+        infinite={true}
+        responsive={responsive}
+        containerClass="carousel-container"
+      >
         {topPicksCarousel.map((movie, id) => (
-          <div key={id} className="custom-carousel-item" onClick={() => openModal(movie)}>
-            <img src={imgUrlPrefix + movie.poster_path} alt={movie.title} className="carousel-img" />
+          <div
+            key={id}
+            className="custom-carousel-item"
+            onClick={() => openModal(movie)}
+          >
+            <img
+              src={imgUrlPrefix + movie.poster_path}
+              alt={movie.title}
+              className="carousel-img"
+            />
           </div>
         ))}
       </Carousel>
-      {selectedShow && <ShowModal show={selectedShow} isOpen={isOpen} onClose={closeModal} />}
+      {selectedShow && (
+        <ShowModal show={selectedShow} isOpen={isOpen} onClose={closeModal} />
+      )}
     </div>
   );
 
-  return <>{topPicksCarousel.length === 0 ? addItemsComponent() : <TopPixComponent />}</>;
+  return (
+    <>
+      {topPicksCarousel.length === 0 ? (
+        addItemsComponent()
+      ) : (
+        <TopPixComponent />
+      )}
+    </>
+  );
 }
 
 export default TopPixShows;

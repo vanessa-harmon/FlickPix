@@ -17,7 +17,9 @@ function MovieDetail() {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-  const filteredActors = credits.cast.filter((actor) => actor.known_for_department === "Acting");
+  const filteredActors = credits.cast.filter(
+    (actor) => actor.known_for_department === "Acting"
+  );
 
   let actors = "";
   if (filteredActors.length > 0) {
@@ -64,7 +66,9 @@ function MovieDetail() {
   };
 
   const deleteFromSeenIt = async () => {
-    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(movie.title)}`;
+    const url = `${ACCOUNTS_API}/api/seen_it?title=${encodeURIComponent(
+      movie.title
+    )}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -121,7 +125,9 @@ function MovieDetail() {
   };
 
   const deleteFromWatchLater = async () => {
-    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(movie.id)}`;
+    const url = `${ACCOUNTS_API}/api/watch_later?tmdb_id=${encodeURIComponent(
+      movie.id
+    )}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {
@@ -183,11 +189,12 @@ function MovieDetail() {
       }}
     >
       <div className="movie-poster">
-        <img src={imgUrlPrefix + movie.poster_path} />
+        <img src={imgUrlPrefix + movie.poster_path} alt="movie poster" />
       </div>
       <div className="movie-details">
         <h1>
-          {movie.original_title} ({movie.release_date && movie.release_date.slice(0, 4)})
+          {movie.original_title} (
+          {movie.release_date && movie.release_date.slice(0, 4)})
           <IconButton
             icon={<MdOutlineLibraryAddCheck />}
             colorScheme={seenIt ? "green" : "green"}
@@ -215,13 +222,21 @@ function MovieDetail() {
             day: "2-digit",
           })}
           {" • "}
-          {movie.genres && <span>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</span>}
+          {movie.genres && (
+            <span>
+              Genres: {movie.genres.map((genre) => genre.name).join(", ")}
+            </span>
+          )}
           {" • "}
           {movie.runtime} minutes
         </h6>
         <h6>
-          <div class="circle">
-            <span class="percentage">{movie.vote_average ? (movie.vote_average * 10).toFixed(0) + "%" : "NR"}</span>
+          <div className="circle">
+            <span className="percentage">
+              {movie.vote_average
+                ? (movie.vote_average * 10).toFixed(0) + "%"
+                : "NR"}
+            </span>
           </div>
         </h6>
         <p>Overview: {movie.overview} </p>
@@ -233,7 +248,11 @@ function MovieDetail() {
               {actor.name}
             </span>
           ))}{" "}
-          <Link to={`https://www.imdb.com/title/${movie.imdb_id}`} target="_blank" className="imbd-link">
+          <Link
+            to={`https://www.imdb.com/title/${movie.imdb_id}`}
+            target="_blank"
+            className="imbd-link"
+          >
             For more info
           </Link>
         </p>
