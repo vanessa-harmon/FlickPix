@@ -10,7 +10,6 @@ function KidsShowCarousel() {
   const [kidsShow, setKidsShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10762;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -23,26 +22,26 @@ function KidsShowCarousel() {
     onClose();
   };
 
-  const fetchKidsShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
-      const first12Shows = filteredShows.slice(0, 12);
-      setKidsShow(first12Shows);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchKidsShow = async () => {
+      const genreId = 10762;
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setKidsShow(first12Shows);
+      }
+    };
     fetchKidsShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

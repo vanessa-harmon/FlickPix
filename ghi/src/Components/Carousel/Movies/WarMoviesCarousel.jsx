@@ -10,7 +10,6 @@ function WarMoviesCarousel() {
   const [warMovies, setWarMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10752;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -23,23 +22,23 @@ function WarMoviesCarousel() {
     onClose();
   };
 
-  const fetchWarMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setWarMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchWarMovies = async () => {
+      const genreId = 10752;
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setWarMovies(first12Movies);
+      }
+    };
     fetchWarMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

@@ -21,21 +21,7 @@ function PopularCarousel() {
     onClose();
   };
 
-  // const fetchPopular = async () => {
-  //   const response = await fetch(`${ACCOUNTS_API}/popular/all`);
-
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const first5 = data.results.slice(0, 5);
-  //     setPopularItems(first5);
-  //   }
-  // };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
-
-  // useEffect(() => {
-  //   fetchPopular();
-  // }, []);
 
   useEffect(() => {
     const fetchPopular = async () => {

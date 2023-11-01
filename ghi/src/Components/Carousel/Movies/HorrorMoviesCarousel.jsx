@@ -38,6 +38,17 @@ function HorrorMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchHorrorMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setHorrorMovies(first12Movies);
+      }
+    };
     fetchHorrorMovies();
   }, []);
 

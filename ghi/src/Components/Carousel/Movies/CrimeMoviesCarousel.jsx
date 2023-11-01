@@ -12,8 +12,6 @@ function CrimeMoviesCarousel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const genreId = 80;
 
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-
   const openModal = (movie) => {
     setSelectedMovie(movie);
     onOpen();
@@ -24,21 +22,21 @@ function CrimeMoviesCarousel() {
     onClose();
   };
 
-  const fetchCrimeMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setCrimeMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchCrimeMovies = async () => {
+      const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setCrimeMovies(first12Movies);
+      }
+    };
     fetchCrimeMovies();
   }, []);
 

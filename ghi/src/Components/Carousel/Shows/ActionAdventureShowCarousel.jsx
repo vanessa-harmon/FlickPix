@@ -10,7 +10,6 @@ function ActionAdventureShowCarousel() {
   const [actionAdventureShow, setActionAdventureShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null); // Rename selectedMovie to selectedShow
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10759;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -23,26 +22,26 @@ function ActionAdventureShowCarousel() {
     onClose();
   };
 
-  const fetchActionAdventureShow = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const filteredShows = data.results.filter(
-        (show) => show.poster_path !== null
-      );
-      const first12Shows = filteredShows.slice(0, 12);
-      setActionAdventureShow(first12Shows);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchActionAdventureShow = async () => {
+      const genreId = 10759;
+      const response = await fetch(
+        `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const filteredShows = data.results.filter(
+          (show) => show.poster_path !== null
+        );
+        const first12Shows = filteredShows.slice(0, 12);
+        setActionAdventureShow(first12Shows);
+      }
+    };
     fetchActionAdventureShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

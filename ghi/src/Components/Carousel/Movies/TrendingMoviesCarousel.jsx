@@ -24,7 +24,6 @@ function TrendingMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
-    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchTrendingMovies = async () => {
       const response = await fetch(`${ACCOUNTS_API}/movies/trending`);
 
