@@ -88,7 +88,7 @@ function TopPixCarousel() {
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, [combined, ACCOUNTS_API, recommendations]);
+  }, [combined]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();
