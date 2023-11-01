@@ -38,6 +38,17 @@ function AnimeMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchAnimeMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setAnimeMovies(first12Movies);
+      }
+    };
     fetchAnimeMovies();
   }, []);
 

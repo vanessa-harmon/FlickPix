@@ -24,21 +24,20 @@ function ComedyMoviesCarousel() {
     onClose();
   };
 
-  const fetchComedyMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setComedyMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchComedyMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setComedyMovies(first12Movies);
+      }
+    };
     fetchComedyMovies();
   }, []);
 
