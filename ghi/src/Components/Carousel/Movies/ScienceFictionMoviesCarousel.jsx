@@ -10,6 +10,7 @@ function ScienceFictionMoviesCarousel() {
   const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -25,7 +26,6 @@ function ScienceFictionMoviesCarousel() {
 
   useEffect(() => {
     const genreId = 878;
-    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchScienceFictionMovies = async () => {
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`

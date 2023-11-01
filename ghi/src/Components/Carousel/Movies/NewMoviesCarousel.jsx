@@ -10,6 +10,7 @@ function NewMoviesCarousel() {
   const [newMovies, setNewMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -24,7 +25,6 @@ function NewMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
-    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchNewMovies = async () => {
       const response = await fetch(`${ACCOUNTS_API}/movies/latest`);
 

@@ -10,6 +10,7 @@ function ThrillerMoviesCarousel() {
   const [thrillerMovies, setThrillerMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -25,7 +26,6 @@ function ThrillerMoviesCarousel() {
 
   useEffect(() => {
     const genreId = 53;
-    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchThrillerMovies = async () => {
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`

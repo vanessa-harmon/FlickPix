@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 function MovieRecommendationsCarousel() {
   const { id } = useParams();
   const [movieRecommendations, setMovieRecommendations] = useState([]);
+  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
-    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchRecommendations = async (id) => {
       const url = `${ACCOUNTS_API}/movies/recommendations?movie_id=${id}`;
       const response = await fetch(url);
