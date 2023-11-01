@@ -209,7 +209,7 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
       }
     };
     fetchCreditsData();
-  }, [ACCOUNTS_API]);
+  }, [ACCOUNTS_API, item.id, type]);
 
   console.log("Type:", type);
   console.log("Item ID:", item.id);

@@ -159,7 +159,7 @@ function MovieModal({ movie, isOpen, onClose }) {
       }
     };
     fetchCreditsData();
-  }, [ACCOUNTS_API]);
+  }, [ACCOUNTS_API, movie.id]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

@@ -15,17 +15,17 @@ function ShowRecommendationsCarousel() {
 
   useEffect(() => {
     const fetchRecommendations = async (id) => {
-    const url = `${ACCOUNTS_API}/shows/recommendations/?series_id=${id}`;
-    const response = await fetch(url);
+      const url = `${ACCOUNTS_API}/shows/recommendations/?series_id=${id}`;
+      const response = await fetch(url);
 
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setShowRecommendations(first12Movies);
-    }
-  };
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setShowRecommendations(first12Movies);
+      }
+    };
     fetchRecommendations(id);
-  }, [ACCOUNTS_API]);
+  }, [ACCOUNTS_API, id]);
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);

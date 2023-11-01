@@ -34,7 +34,7 @@ function PopularCarousel() {
       }
     };
     fetchPopular();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div className="carousel-container1">

@@ -38,7 +38,7 @@ function FantasyMoviesCarousel() {
       }
     };
     fetchFantasyMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

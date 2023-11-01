@@ -29,25 +29,25 @@ function TopPixShows() {
 
   useEffect(() => {
     const fetchSeenIt = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setSeenIt(data);
-    }
-  };
+      const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSeenIt(data);
+      }
+    };
 
-  const fetchWatchLater = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
+    const fetchWatchLater = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+        credentials: "include",
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
+      if (response.ok) {
+        const data = await response.json();
+        setWatchLater(data);
+      }
+    };
 
     fetchSeenIt();
     fetchWatchLater();
@@ -79,18 +79,19 @@ function TopPixShows() {
   };
 
   useEffect(() => {
-  const addRecommendations = async () => {
-    const recommendationsData = [];
-    for (const item of combined) {
-      await fetchRecommended(item.tmdb_id);
-      recommendationsData.push(recommendations);
-    }
-    setRecommended(recommendationsData);
-  };
+    const addRecommendations = async () => {
+      const recommendationsData = [];
+      for (const item of combined) {
+        await fetchRecommended(item.tmdb_id);
+        recommendationsData.push(recommendations);
+      }
+      setRecommended(recommendationsData);
+    };
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, [combined]);
+    fetchRecommended();
+  }, [combined, recommendations]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();

@@ -23,18 +23,6 @@ function HorrorMoviesCarousel() {
     onClose();
   };
 
-  const fetchHorrorMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setHorrorMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
@@ -50,7 +38,7 @@ function HorrorMoviesCarousel() {
       }
     };
     fetchHorrorMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>
