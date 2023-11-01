@@ -32,8 +32,7 @@ function WatchLater() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
     const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
       credentials: "include",
     });
@@ -43,6 +42,8 @@ function WatchLater() {
       setWatchLater(data);
     }
   };
+
+  useEffect(() => {
     fetchData().finally(() => {
       setIsLoading(false);
     });

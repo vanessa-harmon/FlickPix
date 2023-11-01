@@ -20,7 +20,6 @@ function Randomizer({ id, mediaType }) {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-
   const handleMoreClick = () => {
     let route;
 
@@ -36,8 +35,7 @@ function Randomizer({ id, mediaType }) {
     }
   };
 
-  useEffect(() => {
-    const handleClick = async (event) => {
+  const handleClick = async (event) => {
     const randomUrl = `${ACCOUNTS_API}/movies/random`;
     const response = await fetch(randomUrl);
     if (response.ok) {
@@ -49,6 +47,8 @@ function Randomizer({ id, mediaType }) {
       }
     }
   };
+
+  useEffect(() => {
     handleClick();
   }, [ACCOUNTS_API]);
 

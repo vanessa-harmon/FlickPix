@@ -11,7 +11,6 @@ function SeenIt() {
 
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
-
   const handleDeleteClick = async (tmdbId) => {
     console.log("CLICKED DELETE ON: ", tmdbId);
     const url = `${ACCOUNTS_API}/api/seen_it?tmdb_id=${tmdbId}`;
@@ -32,8 +31,7 @@ function SeenIt() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
     const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
       credentials: "include",
     });
@@ -43,6 +41,8 @@ function SeenIt() {
       setSeenIt(data);
     }
   };
+
+  useEffect(() => {
     fetchData().finally(() => {
       setIsLoading(false);
     });
