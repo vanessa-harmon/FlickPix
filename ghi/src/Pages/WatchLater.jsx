@@ -22,6 +22,17 @@ function WatchLater() {
       credentials: "include",
     };
 
+    const fetchData = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setWatchLater(data);
+      }
+    };
+
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       console.log("Item was deleted from Watch Later");
@@ -31,22 +42,11 @@ function WatchLater() {
     }
   };
 
-  const fetchData = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
-
   useEffect(() => {
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  }, [ACCOUNTS_API]);
+  }, []);
 
   return (
     <div>
