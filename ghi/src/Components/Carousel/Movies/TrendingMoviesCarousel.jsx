@@ -10,7 +10,6 @@ function TrendingMoviesCarousel() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -22,21 +21,21 @@ function TrendingMoviesCarousel() {
     onClose();
   };
 
-  const fetchTrendingMovies = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/movies/trending`);
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setTrendingMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+    const fetchTrendingMovies = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/movies/trending`);
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setTrendingMovies(first12Movies);
+      }
+    };
     fetchTrendingMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

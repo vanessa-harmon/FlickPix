@@ -10,8 +10,6 @@ function ScienceFictionMoviesCarousel() {
   const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 878;
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -23,23 +21,24 @@ function ScienceFictionMoviesCarousel() {
     onClose();
   };
 
-  const fetchScienceFictionMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setScienceFictionMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const genreId = 878;
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+    const fetchScienceFictionMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setScienceFictionMovies(first12Movies);
+      }
+    };
     fetchScienceFictionMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

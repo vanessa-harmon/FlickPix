@@ -229,8 +229,8 @@ function ShowDetail() {
           )}
         </h6>
         <h6>
-          <div class="circle">
-            <span class="percentage">
+          <div className="circle">
+            <span className="percentage">
               {show.vote_average
                 ? (show.vote_average * 10).toFixed(0) + "%"
                 : "NR"}

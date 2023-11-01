@@ -232,8 +232,8 @@ function MovieDetail() {
           {movie.runtime} minutes
         </h6>
         <h6>
-          <div class="circle">
-            <span class="percentage">
+          <div className="circle">
+            <span className="percentage">
               {movie.vote_average
                 ? (movie.vote_average * 10).toFixed(0) + "%"
                 : "NR"}

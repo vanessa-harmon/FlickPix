@@ -25,33 +25,32 @@ function TopPixCarousel() {
     onClose();
   };
 
-  const fetchSeenIt = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setSeenIt(data);
-    }
-  };
-
-  const fetchWatchLater = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const fetchSeenIt = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/seen_it`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSeenIt(data);
+      }
+    };
+
+    const fetchWatchLater = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setWatchLater(data);
+      }
+    };
     fetchSeenIt();
     fetchWatchLater();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   useEffect(() => {
     if (seenIt.items?.length > 0 || watchLater.items?.length > 0) {
@@ -68,17 +67,16 @@ function TopPixCarousel() {
 
   const recommendations = [];
 
-  const fetchRecommended = async (tmdbId) => {
-    let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      recommendations.push(data);
-    }
-  };
-
   useEffect(() => {
+    const fetchRecommended = async (tmdbId) => {
+      let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
+      const response = await fetch(url);
+
+      if (response.ok) {
+        const data = await response.json();
+        recommendations.push(data);
+      }
+    };
     const addRecommendations = async () => {
       const recommendationsData = [];
       for (const item of combined) {
@@ -90,7 +88,7 @@ function TopPixCarousel() {
     if (combined.length > 0) {
       addRecommendations();
     }
-  }, [combined]);
+  }, [combined, ACCOUNTS_API]);
 
   const flattenRecommended = (recommended) => {
     const flattened = recommended.flat();
