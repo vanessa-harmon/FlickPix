@@ -31,28 +31,18 @@ function WatchLater() {
     }
   };
 
-  // const fetchData = async () => {
-  //   const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-  //     credentials: "include",
-  //   });
+  const fetchData = async () => {
+    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+      credentials: "include",
+    });
 
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     setWatchLater(data);
-  //   }
-  // };
+    if (response.ok) {
+      const data = await response.json();
+      setWatchLater(data);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setWatchLater(data);
-      }
-    };
     fetchData().finally(() => {
       setIsLoading(false);
     });
