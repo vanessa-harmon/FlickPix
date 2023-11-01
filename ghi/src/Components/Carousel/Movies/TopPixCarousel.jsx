@@ -78,16 +78,15 @@ function TopPixCarousel() {
     }
   };
 
-  const addRecommendations = async () => {
-    const recommendationsData = [];
-    for (const item of combined) {
-      await fetchRecommended(item.tmdb_id);
-      recommendationsData.push(recommendations);
-    }
-    setRecommended(recommendationsData);
-  };
-
   useEffect(() => {
+    const addRecommendations = async () => {
+      const recommendationsData = [];
+      for (const item of combined) {
+        await fetchRecommended(item.tmdb_id);
+        recommendationsData.push(recommendations);
+      }
+      setRecommended(recommendationsData);
+    };
     if (combined.length > 0) {
       addRecommendations();
     }
