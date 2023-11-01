@@ -10,7 +10,6 @@ function WarMoviesCarousel() {
   const [warMovies, setWarMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10752;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -27,6 +26,7 @@ function WarMoviesCarousel() {
 
   useEffect(() => {
     const fetchWarMovies = async () => {
+      const genreId = 10752;
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
       );
@@ -38,7 +38,7 @@ function WarMoviesCarousel() {
       }
     };
     fetchWarMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

@@ -10,7 +10,6 @@ function DramaShowCarousel() {
   const [dramaShow, setDramaShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 18;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function DramaShowCarousel() {
 
   useEffect(() => {
     const fetchDramaShow = async () => {
+      const genreId = 18;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function DramaShowCarousel() {
       }
     };
     fetchDramaShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

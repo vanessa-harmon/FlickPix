@@ -10,7 +10,6 @@ function CrimeShowCarousel() {
   const [crimeShow, setCrimeShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 80;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function CrimeShowCarousel() {
 
   useEffect(() => {
     const fetchCrimeShow = async () => {
+      const genreId = 80;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function CrimeShowCarousel() {
       }
     };
     fetchCrimeShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

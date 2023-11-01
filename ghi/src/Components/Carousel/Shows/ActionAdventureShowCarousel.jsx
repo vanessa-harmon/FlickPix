@@ -10,7 +10,6 @@ function ActionAdventureShowCarousel() {
   const [actionAdventureShow, setActionAdventureShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null); // Rename selectedMovie to selectedShow
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10759;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function ActionAdventureShowCarousel() {
 
   useEffect(() => {
     const fetchActionAdventureShow = async () => {
+      const genreId = 10759;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function ActionAdventureShowCarousel() {
       }
     };
     fetchActionAdventureShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

@@ -35,7 +35,7 @@ function TrendingMoviesCarousel() {
       }
     };
     fetchTrendingMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

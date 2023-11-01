@@ -10,7 +10,6 @@ function DocumentaryShowCarousel() {
   const [documentaryShow, setDocumentaryShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 99;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function DocumentaryShowCarousel() {
 
   useEffect(() => {
     const fetchDocumentaryShow = async () => {
+      const genreId = 99;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function DocumentaryShowCarousel() {
       }
     };
     fetchDocumentaryShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

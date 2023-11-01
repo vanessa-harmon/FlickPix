@@ -159,7 +159,7 @@ function ShowModal({ show, isOpen, onClose }) {
       }
     };
     fetchCreditsData();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

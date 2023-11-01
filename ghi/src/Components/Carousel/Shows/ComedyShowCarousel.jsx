@@ -10,7 +10,6 @@ function ComedyShowCarousel() {
   const [comedyShow, setComedyShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 35;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function ComedyShowCarousel() {
 
   useEffect(() => {
     const fetchComedyShow = async () => {
+      const genreId = 35;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function ComedyShowCarousel() {
       }
     };
     fetchComedyShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

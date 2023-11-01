@@ -10,7 +10,6 @@ function KidsShowCarousel() {
   const [kidsShow, setKidsShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10762;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function KidsShowCarousel() {
 
   useEffect(() => {
     const fetchKidsShow = async () => {
+      const genreId = 10762;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function KidsShowCarousel() {
       }
     };
     fetchKidsShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

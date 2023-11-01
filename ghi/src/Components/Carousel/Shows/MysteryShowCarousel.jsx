@@ -10,7 +10,6 @@ function MysteryShowCarousel() {
   const [mysteryShow, setMysteryShow] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 9648;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (show) => {
@@ -27,6 +26,7 @@ function MysteryShowCarousel() {
 
   useEffect(() => {
     const fetchMysteryShow = async () => {
+      const genreId = 9648;
       const response = await fetch(
         `${ACCOUNTS_API}/shows/genre?genre_id=${genreId}`
       );
@@ -41,7 +41,7 @@ function MysteryShowCarousel() {
       }
     };
     fetchMysteryShow();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>
