@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./WatchLater.css";
-import { Accordion } from "@chakra-ui/react";
 
 function WatchLater() {
   const [watchLater, setWatchLater] = useState([]);
@@ -32,18 +31,28 @@ function WatchLater() {
     }
   };
 
-  const fetchData = async () => {
-    const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
-      credentials: "include",
-    });
+  // const fetchData = async () => {
+  //   const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+  //     credentials: "include",
+  //   });
 
-    if (response.ok) {
-      const data = await response.json();
-      setWatchLater(data);
-    }
-  };
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setWatchLater(data);
+  //   }
+  // };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${ACCOUNTS_API}/api/watch_later`, {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setWatchLater(data);
+      }
+    };
     fetchData().finally(() => {
       setIsLoading(false);
     });

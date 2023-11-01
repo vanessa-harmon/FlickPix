@@ -67,16 +67,21 @@ function TopPixCarousel() {
 
   const recommendations = [];
 
-  useEffect(() => {
-    const fetchRecommended = async (tmdbId) => {
-      let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
-      const response = await fetch(url);
+  const fetchRecommended = async (tmdbId) => {
+    let url = `${ACCOUNTS_API}/movies/similar?movie_id=${tmdbId}`;
+    const response = await fetch(url);
 
-      if (response.ok) {
-        const data = await response.json();
-        recommendations.push(data);
-      }
-    };
+    if (response.ok) {
+      const data = await response.json();
+      recommendations.push(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecommended();
+  }, []);
+
+  useEffect(() => {
     const addRecommendations = async () => {
       const recommendationsData = [];
       for (const item of combined) {
