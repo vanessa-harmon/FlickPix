@@ -10,7 +10,6 @@ function TrendingMoviesCarousel() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
     setSelectedMovie(movie);

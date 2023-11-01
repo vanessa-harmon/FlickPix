@@ -32,15 +32,6 @@ function MovieModal({ movie, isOpen, onClose }) {
     actors = actors + actor["name"] + ", ";
   }
 
-  const fetchCreditsData = async () => {
-    const creditsUrl = `${ACCOUNTS_API}/movies/credits?movie_id=${movie.id}`;
-    const response = await fetch(creditsUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setCredits(data);
-    }
-  };
-
   //Seen It
   const handleSeenItClick = async () => {
     if (seenIt) {
@@ -159,8 +150,16 @@ function MovieModal({ movie, isOpen, onClose }) {
   };
 
   useEffect(() => {
+    const fetchCreditsData = async () => {
+      const creditsUrl = `${ACCOUNTS_API}/movies/credits?movie_id=${movie.id}`;
+      const response = await fetch(creditsUrl);
+      if (response.ok) {
+        const data = await response.json();
+        setCredits(data);
+      }
+    };
     fetchCreditsData();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

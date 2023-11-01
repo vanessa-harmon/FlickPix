@@ -10,8 +10,7 @@ function RomanceMoviesCarousel() {
   const [romanceMovies, setRomanceMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10749;
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -23,23 +22,24 @@ function RomanceMoviesCarousel() {
     onClose();
   };
 
-  const fetchRomanceMovies = async () => {
-    const response = await fetch(
-      `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      const first12Movies = data.results.slice(0, 12);
-      setRomanceMovies(first12Movies);
-    }
-  };
-
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
+    const genreId = 10749;
+    const fetchRomanceMovies = async () => {
+      const response = await fetch(
+        `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const first12Movies = data.results.slice(0, 12);
+        setRomanceMovies(first12Movies);
+      }
+    };
     fetchRomanceMovies();
-  });
+  }, [ACCOUNTS_API]);
 
   return (
     <div>

@@ -38,40 +38,40 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
     actors = actors + actor["name"] + ", ";
   }
 
-  const fetchTrailers = async (item_type, item_id) => {
-    try {
-      const response = await fetch(
-        `${ACCOUNTS_API}/trailer/videos/${item_type}/${item_id}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        console.log("API Response:", data);
+  // const fetchTrailers = async (item_type, item_id) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${ACCOUNTS_API}/trailer/videos/${item_type}/${item_id}`
+  //     );
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log("API Response:", data);
 
-        const trailerKey = data.videos[0].key;
-        console.log("Video Key:", trailerKey);
+  //       const trailerKey = data.videos[0].key;
+  //       console.log("Video Key:", trailerKey);
 
-        if (trailerKey) {
-          const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`;
-          return trailerUrl;
-        }
-      }
-    } catch (error) {
-      console.error("Failed to fetch trailer:", error);
-    }
-    return null;
-  };
+  //       if (trailerKey) {
+  //         const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`;
+  //         return trailerUrl;
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch trailer:", error);
+  //   }
+  //   return null;
+  // };
 
-  const fetchCreditsData = async () => {
-    const creditsUrl =
-      type === "movie"
-        ? `${ACCOUNTS_API}/movies/credits?movie_id=${item.id}`
-        : `${ACCOUNTS_API}/shows/credits?series_id=${item.id}`;
-    const response = await fetch(creditsUrl);
-    if (response.ok) {
-      const data = await response.json();
-      setCredits(data);
-    }
-  };
+  // const fetchCreditsData = async () => {
+  //   const creditsUrl =
+  //     type === "movie"
+  //       ? `${ACCOUNTS_API}/movies/credits?movie_id=${item.id}`
+  //       : `${ACCOUNTS_API}/shows/credits?series_id=${item.id}`;
+  //   const response = await fetch(creditsUrl);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setCredits(data);
+  //   }
+  // };
 
   const handleSeenItClick = async () => {
     if (seenIt) {
@@ -164,6 +164,28 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
   };
 
   useEffect(() => {
+    const fetchTrailers = async (item_type, item_id) => {
+      try {
+        const response = await fetch(
+          `${ACCOUNTS_API}/trailer/videos/${item_type}/${item_id}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("API Response:", data);
+
+          const trailerKey = data.videos[0].key;
+          console.log("Video Key:", trailerKey);
+
+          if (trailerKey) {
+            const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`;
+            return trailerUrl;
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch trailer:", error);
+      }
+      return null;
+    };
     async function fetchTrailerUrl() {
       const url = await fetchTrailers(item.media_type, item.id);
       if (url) {
@@ -171,12 +193,23 @@ function MovieOrShowModal({ item, isOpen, onClose }) {
       }
     }
     fetchTrailerUrl();
-  }, [item.media_type, item.id]);
+  }, [item.media_type, item.id, ACCOUNTS_API]);
   // [item.media_type, item.id]
 
   useEffect(() => {
+    const fetchCreditsData = async () => {
+      const creditsUrl =
+        type === "movie"
+          ? `${ACCOUNTS_API}/movies/credits?movie_id=${item.id}`
+          : `${ACCOUNTS_API}/shows/credits?series_id=${item.id}`;
+      const response = await fetch(creditsUrl);
+      if (response.ok) {
+        const data = await response.json();
+        setCredits(data);
+      }
+    };
     fetchCreditsData();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   console.log("Type:", type);
   console.log("Item ID:", item.id);
