@@ -12,8 +12,6 @@ function ComedyMoviesCarousel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const genreId = 35;
 
-  const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-
   const openModal = (movie) => {
     setSelectedMovie(movie);
     onOpen();
@@ -27,6 +25,7 @@ function ComedyMoviesCarousel() {
   const imgUrlPrefix = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
+    const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
     const fetchComedyMovies = async () => {
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`

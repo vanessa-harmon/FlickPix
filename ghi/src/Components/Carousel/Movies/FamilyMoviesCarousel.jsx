@@ -10,7 +10,6 @@ function FamilyMoviesCarousel() {
   const [familyMovies, setFamilyMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const genreId = 10751;
   const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
 
   const openModal = (movie) => {
@@ -27,6 +26,7 @@ function FamilyMoviesCarousel() {
 
   useEffect(() => {
     const fetchFamilyMovies = async () => {
+      const genreId = 10751;
       const response = await fetch(
         `${ACCOUNTS_API}/movies/genre?genre_id=${genreId}`
       );
@@ -38,7 +38,7 @@ function FamilyMoviesCarousel() {
       }
     };
     fetchFamilyMovies();
-  }, []);
+  }, [ACCOUNTS_API]);
 
   return (
     <div>
