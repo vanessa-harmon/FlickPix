@@ -36,13 +36,13 @@ function App() {
     getData();
   }, []);
 
-  const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, "");
+  // const domain = /https:\/\/[^/]+/;
+  // const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
     <div>
-      <BrowserRouter basename={basename}>
-        <AuthProvider>
+      <BrowserRouter>
+        <AuthProvider baseUrl={"http://localhost:8000"}>
           <Nav />
           <Routes>
             <Route path="/" element={<MainPage />} />
