@@ -46,6 +46,7 @@ function WatchLater() {
     fetchData().finally(() => {
       setIsLoading(false);
     });
+    // eslint-disable-next-line
   }, []);
 
   return (
