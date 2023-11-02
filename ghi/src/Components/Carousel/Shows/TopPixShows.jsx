@@ -111,6 +111,7 @@ function TopPixShows() {
     Math.random() * (selectedTopPicks.length - maxShows + 1)
   );
   const topPicksCarousel = selectedTopPicks.slice(randIdx, randIdx + maxShows);
+  console.log("TOP PICKS CAROUSEL: ", topPicksCarousel);
 
   const addItemsComponent = () => (
     <div className="add-item-container">
