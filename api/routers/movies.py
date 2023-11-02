@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 import requests
 import os
 import json
@@ -11,13 +11,14 @@ TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
 
 
 @router.get('/trending')
-async def trending_movie_list():
+async def trending_movie_list(query: str = Query(..., description="Trending")):
     url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US&region=United%20States"
     headers = {
         "accept": "applications/json",
         "Authorization": {TMDB_API_KEY}
     }
     params = {
+        "query": query,
         "api_key": TMDB_API_KEY
     }
     response = requests.get(url, params=params, headers=headers)
