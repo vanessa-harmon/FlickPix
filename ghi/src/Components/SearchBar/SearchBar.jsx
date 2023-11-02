@@ -4,7 +4,6 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import "./SearchBar.css";
 
 function SearchBar() {
-  const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -18,7 +17,6 @@ function SearchBar() {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      setMovies(data.results);
       navigate("/search-results", {
         state: { movies: data.results, query: query },
       });

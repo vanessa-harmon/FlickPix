@@ -46,7 +46,8 @@ function SeenIt() {
     fetchData().finally(() => {
       setIsLoading(false);
     });
-  }, [ACCOUNTS_API]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="content-container">

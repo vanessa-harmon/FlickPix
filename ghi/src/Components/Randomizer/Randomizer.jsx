@@ -50,7 +50,8 @@ function Randomizer({ id, mediaType }) {
 
   useEffect(() => {
     handleClick();
-  }, [ACCOUNTS_API]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {}, [random]);
 
