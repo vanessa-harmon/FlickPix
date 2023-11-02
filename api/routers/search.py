@@ -14,7 +14,7 @@ def search(query: str = Query(..., description="Search query")):
     url = "https://api.themoviedb.org/3/search/multi"
     headers = {
         "accept": "application/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     params = {
         "query": query,

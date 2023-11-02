@@ -14,7 +14,7 @@ def trending_show_list():
     url = "https://api.themoviedb.org/3/trending/tv/day?language=en-US"
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -27,7 +27,7 @@ def popular_show_list():
     url = "https://api.themoviedb.org/3/tv/popular?language=en"
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -40,7 +40,7 @@ def latest_show_list():
     url = "https://api.themoviedb.org/3/tv/airing_today?language=en-US"
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -53,7 +53,7 @@ def show_details(series_id: int):
     url = f'https://api.themoviedb.org/3/tv/{series_id}?language=en-US'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -66,7 +66,7 @@ def show_recommendations(series_id: int):
     url = f'https://api.themoviedb.org/3/tv/{series_id}/recommendations?language=en-US'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -79,7 +79,7 @@ def show_providers(series_id: int):
     url = f'https://api.themoviedb.org/3/tv/{series_id}/watch/providers'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -92,7 +92,7 @@ def show_genres(genre_id: int):
     url = f'https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&sort_by=popularity.desc&with_genres={genre_id}&with_origin_country=US'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -105,7 +105,7 @@ def show_credits(series_id: int):
     url = f'https://api.themoviedb.org/3/tv/{series_id}/credits?language=en-US'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
@@ -118,7 +118,7 @@ async def similar_shows(series_id: int):
     url = f'https://api.themoviedb.org/3/tv/{series_id}/similar?language=en-US&page=1'
     headers = {
         "accept": "applications/json",
-        "Authorization": f'Bearer {TMDB_API_KEY}'
+        "Authorization": {TMDB_API_KEY}
     }
     response = requests.get(url, headers=headers)
     return (
