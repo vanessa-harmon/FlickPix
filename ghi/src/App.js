@@ -33,6 +33,7 @@ function App() {
   }
   useCallback(() => {
     getData();
+    // eslint-disable-next-line
   }, [error, launchInfo]);
 
   const domain = /https:\/\/[^/]+/;

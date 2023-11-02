@@ -50,6 +50,7 @@ function TopPixCarousel() {
     };
     fetchSeenIt();
     fetchWatchLater();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -129,7 +130,7 @@ function TopPixCarousel() {
   const TopPixComponent = () => (
     <div>
       <Carousel
-        centerMode={true}
+        // centerMode={true}
         infinite={true}
         responsive={responsive}
         containerClass="carousel-container"

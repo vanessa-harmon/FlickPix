@@ -51,6 +51,7 @@ function TopPixShows() {
 
     fetchSeenIt();
     fetchWatchLater();
+    // eslint-disable-next-line
   }, [ACCOUNTS_API]);
 
   useEffect(() => {
@@ -91,6 +92,7 @@ function TopPixShows() {
       addRecommendations();
     }
     fetchRecommended();
+    // eslint-disable-next-line
   }, [combined]);
 
   const flattenRecommended = (recommended) => {
