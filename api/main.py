@@ -16,7 +16,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        os.environ.get("CORS_HOST", None),
+        os.environ.get("CORS_HOST", 'https://module3-project-gamma-wsquad-8aa31316f67d1c734e42d5ae3c6e40d226.gitlab.io'),
         'https://module3-project-gamma-wsquad-8aa31316f67d1c734e42d5ae3c6e40d226.gitlab.io',
         'https://wsquad.gitlab.io'
     ],
