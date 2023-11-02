@@ -12,14 +12,16 @@ app.include_router(watch_later.router, tags=['watch_later'])
 app.include_router(seen_it.router, tags=['seen_it'])
 # app.include_router(profile.router, tags=['profile'])
 
+origins = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", "https://wsquad.gitlab.io/module3-project-gamma"),
+    "https://module3-project-gamma-wsquad-8aa31316f67d1c734e42d5ae3c6e40d226.gitlab.io",
+    "https://wsquad.gitlab.io"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        os.environ.get("CORS_HOST", 'https://module3-project-gamma-wsquad-8aa31316f67d1c734e42d5ae3c6e40d226.gitlab.io'),
-        'https://module3-project-gamma-wsquad-8aa31316f67d1c734e42d5ae3c6e40d226.gitlab.io',
-        'https://wsquad.gitlab.io'
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
