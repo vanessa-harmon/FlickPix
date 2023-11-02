@@ -37,7 +37,7 @@ function SignupModal({ isOpenSignup, onCloseSignup }) {
     };
 
     const ACCOUNTS_API = process.env.REACT_APP_API_HOST;
-    register(userData, `${ACCOUNTS_API}/api/accounts/`);
+    register(userData, `${ACCOUNTS_API}/api/accounts`);
     // e.target.reset();
     onCloseSignup();
     navigate("/");

@@ -14,7 +14,7 @@ def show_detail(serie_id: int):
 
     headers = {
         "accept": "application/json",
-        "Authorization": TMDB_API_KEY
+        "Authorization": f'Bearer {TMDB_API_KEY}'
     }
 
     response = requests.get(url, headers=headers)
@@ -42,7 +42,7 @@ def show_providers(serie_id: int):
     url = f'https://api.themoviedb.org/3/tv/{serie_id}/watch/providers'
     headers = {
         "accept": "applications/json",
-        "Authorization": TMDB_API_KEY
+        "Authorization": f'Bearer {TMDB_API_KEY}'
     }
     response = requests.get(url, headers=headers)
     providers_data = json.loads(response.content)
@@ -60,7 +60,7 @@ def show_cast(serie_id: int):
     url = f'https://api.themoviedb.org/3/tv/{serie_id}/credits'
     headers = {
         "accept": "application/json",
-        "Authorization": TMDB_API_KEY
+        "Authorization": f'Bearer {TMDB_API_KEY}'
     }
     response = requests.get(url, headers=headers)
     cast_data = json.loads(response.content)

@@ -13,7 +13,7 @@ def get_videos(item_type: str, item_id: int):
 
     headers = {
         "accept": "applications/json",
-        "Authorization": TMDB_API_KEY
+        "Authorization": f'Bearer {TMDB_API_KEY}'
     }
     response = requests.get(tmdb_url, headers=headers)
 
