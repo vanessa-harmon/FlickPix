@@ -17,7 +17,10 @@ async def trending_movie_list():
         "accept": "applications/json",
         "Authorization": {TMDB_API_KEY}
     }
-    response = requests.get(url, headers=headers)
+    params = {
+        "api_key": TMDB_API_KEY
+    }
+    response = requests.get(url, params=params, headers=headers)
     movie_info = json.loads(response.content)
     return (
         movie_info
